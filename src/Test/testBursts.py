@@ -7,9 +7,6 @@ from SistemaDeProcedimientos.bursts import Bursts
 from SistemaDeProgramas.instructions import *
 from SistemaDeProgramas.program import Program
 
-
-
-
 class tester(unittest.TestCase):
     def setUp(self):
         self._programTestOne=Program("so.exe", [CPU(2), CPU(1)], 1)

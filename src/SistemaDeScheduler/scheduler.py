@@ -21,10 +21,7 @@ class Scheduler:
         pass
 
 
-
-
-
-class SchedulerFIFO(Scheduler):
+class SchedulerFCFS(Scheduler):
     def __init__(self):
         self._ready = QueueFIFO()
 
@@ -44,18 +41,18 @@ class SchedulerFIFO(Scheduler):
         return self._ready.notIsEmpty()
 
 
-class SchedulerPriorityPreventive(Scheduler):
-    def __init__(self, pcbTable):
+class SchedulerPriorityPreemptive(Scheduler):
+    def __init__(self, pcbTable, aging):
         self._priority = {1: QueuePriority(), 2: QueuePriority(), 3: QueuePriority()}
         self._accountant = 0
-        self._time=2
+        self._aging = aging
         self._PCBTable = pcbTable
 
 
     def add(self, pid, priority, burst):
-        waitingTime=self._accountant + self._time
+        waitingTime=self._accountant + self._aging
         self._priority.get(priority).add(pid,waitingTime)
-        self._accountant += 1
+        #self._accountant += 1
 
 
     def pop(self):
@@ -66,7 +63,7 @@ class SchedulerPriorityPreventive(Scheduler):
                return valor.pop()
 
     def maxPriority(self, priority, priorityDelPCBEnCPU):
-        if priority <= priorityDelPCBEnCPU:
+        if priority < priorityDelPCBEnCPU:
             return True
         else:
             return False
@@ -77,10 +74,8 @@ class SchedulerPriorityPreventive(Scheduler):
     def isTimeOut(self, waitingTime):
         return  self._accountant >= waitingTime
 
-    def insert(self, priority, index, tuple):
-        cola = self._priority.get(priority)
-        cola.insert(index, tuple)
-
+    def get_aging(self):
+        return self._aging
 
     def timeOut(self):
         for key, valor in self._priority.items():
@@ -102,15 +97,11 @@ class SchedulerRoundRobin(Scheduler):
     def __init__(self):
         self._ready = QueueFIFO()
 
-
-
     def add(self, pid, priority, burst):
         self._ready.add(pid)
 
-
     def pop(self):
         return self._ready.pop()
-
 
     def lenReady(self):
         return self._ready.lenItems()
@@ -129,7 +120,6 @@ class SchedulerSJF(Scheduler):
     def __init__(self):
         self._ready = QueueSJF()
         self._burstInCPU = None
-
 
     def add(self, pid, priority, burst):
         self._ready.add(pid,burst)
@@ -156,3 +146,66 @@ class SchedulerSJF(Scheduler):
         self._burstInCPU=burstInCPU
 
 
+class SchedulerSJFNonPreemptive(Scheduler):
+    def __init__(self):
+        self._ready = QueueSJF()
+        self._burstInCPU = None
+
+    def add(self, pid, priority, burst):
+        self._ready.add(pid,burst)
+
+    def pop(self):
+        return self._ready.pop()
+
+    def lenReady(self):
+        return self._ready.lenItems()
+
+    def notIsEmpty(self):
+        return self._ready.notIsEmpty()
+
+    def isMinBurst(self,IncomingBurst):
+        if  IncomingBurst < self._burstInCPU:
+            return True
+        else:
+            return False
+
+    def set_burstPCBInCPU(self,burstInCPU):
+        self._burstInCPU=burstInCPU
+
+
+class SchedulerPriorityNonPreemptive(Scheduler):
+    def __init__(self, pcbTable, aging):
+        self._priority = {1: QueuePriority(), 2: QueuePriority(), 3: QueuePriority()}
+        self._accountant = 0
+        self._time = aging
+        self._PCBTable = pcbTable
+
+    def add(self, pid, priority, burst):
+        waitingTime=self._accountant + self._time
+        self._priority.get(priority).add(pid,waitingTime)
+
+    def pop(self):
+        self._accountant += 1
+        self.timeOut()
+        for key, valor in self._priority.items():
+            if valor.notIsEmpty():
+               return valor.pop()
+
+    def isTimeOut(self, waitingTime):
+        return  self._accountant >= waitingTime
+
+    def timeOut(self):
+        for key, valor in self._priority.items():
+            if valor.notIsEmpty():
+                if key != 1 and self.isTimeOut(valor.get_WaitingTimeForTheHead()):
+                    priority = key - 1
+                    pid = valor.pop()
+                    self.add(pid, priority,None)
+                    pcb = self._PCBTable.lookUpPCB(pid)
+                    pcb.set_priority(priority)
+
+    def notIsEmpty(self):
+        for key, valor in self._priority.items():
+            if (valor.notIsEmpty()):
+                return True
+        return False

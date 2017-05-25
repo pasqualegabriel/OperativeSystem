@@ -39,5 +39,6 @@ class Program:
     @staticmethod
     def isProgram():
         return True
+
     def __repr__(self):
         return "Program({name}, {instructions})".format(name=self._name, instructions=self._instructions)

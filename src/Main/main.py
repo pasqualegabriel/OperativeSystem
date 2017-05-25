@@ -17,16 +17,17 @@ if __name__ == '__main__':
     logger.setLevel(logging.DEBUG)
     logger.info('Starting emulator')
 
-    p1 = Program("SO.exe", [CPU(4), IO_1(1), CPU(1)],3)
-    p2 = Program("Word.exe", [CPU(3),IO_1(1),CPU(5)],1)
-    p3 = Program("PC.exe", [CPU(2)],1)
-    p4 = Program("Text.exe", [CPU(10),IO(1)],3)
+    p1 = Program("SO.exe", [IO(2)],2)
+    p2 = Program("Word.exe", [CPU(4)],1)
+    p3 = Program("PC.exe", [CPU(3)],3)
+    p4 = Program("Text.exe", [CPU(5)],1)
+
     ls = [p1,p2,"aa",p3,p4]
 
     d = Disco()
     d.add_files(ls)
 
-    lsp = ["SO.exe","Word.exe","PC.exe","Text.exe",]
+    lsp = ["SO.exe","Word.exe","PC.exe","Text.exe"]
 
     k = Kernel(d)
     k.execPrograms(lsp, logger)

@@ -4,8 +4,11 @@ class Bursts:
     def __init__(self,program):
         self._counterOne=0
         self._lent = 0
+        self._head = None
         self._items=self.toCalculateBurst(program)
 
+    # Devuelve la lista de rafagas del programa sin la primer rafaga
+    # Guardando la primer rafaga en el colaborador interno self._head
     def toCalculateBurst(self, program):
         burst=0
         items=[]
@@ -26,7 +29,6 @@ class Bursts:
         return items
 
     def get(self,pc):
-
         if  self.toDiscountOne(pc) >= self._head and len(self._items)!=0:
             newBurst=self._items.pop(0)
             self._head=newBurst

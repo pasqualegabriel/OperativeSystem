@@ -13,10 +13,10 @@ class New:
         self._pcbTable = pcbTable
 
     def execute(self, program):
-        pcb = PCB(self._nexPid,program)
-        pcb.set_bd(self._loader.get_bd)
-        self._loader.cargarInMemory(program)
-        pcb.set_limit(self._loader.get_limit)
+        if not self._loader.thereIsSpaceInMemoryFor(program.longitud()):
+            return
+        pcb = PCB(self._nexPid, program)
+        self._loader.cargarInMemory(pcb, program)
         pcb.set_priority(program.get_priority())
         self._pcbTable.addPCB(pcb)
         self.mayorPriority(pcb)
@@ -58,20 +58,22 @@ class New:
 
 
 class Kill:
-    def __init__(self, loader, dispatcher, scheduler, pcbTable):
+    def __init__(self, loader, dispatcher, scheduler, pcbTable, timer):
         self._loader = loader
         self._dispatcher = dispatcher
         self._pcbTable = pcbTable
         self._scheduler = scheduler
+        self._timer = timer
 
     def execute(self, p):
         pid = self._dispatcher.get_PidActual()
         pcb = self._pcbTable.lookUpPCB(pid)
         pcb.set_status("terminated")
         self._dispatcher.pcOsioso()
-        self._loader.liberarMemoria(pcb.get_bd(), pcb.get_limit())
+        self._loader.liberarMemoria(pcb.get_bd(), pcb.get_limit(), pcb.get_pid())
         self._pcbTable.removePCB(pid)
         self.contextSwitch()
+        self._timer.set_timer()
 
     def contextSwitch(self):
         if self._scheduler.notIsEmpty():
@@ -84,12 +86,12 @@ class Kill:
 
 
 class IoIn:
-    def __init__(self, loader, dispatcher, pcbTable, deviceManager, scheduler):
-        self._loader = loader
+    def __init__(self, dispatcher, pcbTable, deviceManager, scheduler, timer):
         self._dispatcher = dispatcher
         self._pcbTable = pcbTable
         self._deviceManager = deviceManager
         self._scheduler = scheduler
+        self._timer = timer
 
     def execute(self, p):
         pidEnCPU = self._dispatcher.get_PidActual()
@@ -98,6 +100,7 @@ class IoIn:
         pcbEnCPU.set_status("waiting")
         self._deviceManager.add(pidEnCPU)
         self.contextSwitch()
+        self._timer.set_timer()
 
     def contextSwitch(self):
         if self._scheduler.notIsEmpty():
@@ -110,14 +113,11 @@ class IoIn:
 
 
 
-class IoEnd:
-    def __init__(self, loader, dispatcher, deviceManager, scheduler, pcbTable, ):
-        self._loader = loader
+class IoOut:
+    def __init__(self, dispatcher, scheduler, pcbTable):
         self._dispatcher = dispatcher
-        self._deviceManager = deviceManager
         self._pcbTable = pcbTable
         self._scheduler = scheduler
-
 
     def execute(self, pid):
         pcb = self._pcbTable.lookUpPCB(pid)
@@ -160,14 +160,11 @@ class IoEnd:
 
 
 class TimeOut:
-    def __init__(self, loader, dispatcher, deviceManager, scheduler, pcbTable):
-        self._loader = loader
+    def __init__(self, dispatcher, scheduler, pcbTable, timer):
         self._dispatcher = dispatcher
         self._pcbTable = pcbTable
-        self._deviceManager = deviceManager
         self._scheduler = scheduler
-
-
+        self._timer = timer
 
     def execute(self, p):
         pidEnCPU = self._dispatcher.get_PidActual()
@@ -181,3 +178,19 @@ class TimeOut:
         if self._scheduler.isSchedulerSJF():
             self._scheduler.set_burstPCBInCPU(pcbParaAdd.get_burst())
         self._dispatcher.load(pcbParaAdd)
+        self._timer.set_timer()
+
+class CompactMemory:
+    def __init__(self, dispatcher, scheduler, pcbTable, memoryManager):
+        self._dispatcher = dispatcher
+        self._pcbTable = pcbTable
+        self._scheduler = scheduler
+        self._memoryManager = memoryManager
+
+    def execute(self, p):
+        pidEnCPU = self._dispatcher.get_PidActual()
+        pcbEnCPU = self._pcbTable.lookUpPCB(pidEnCPU)
+        self._dispatcher.save(pcbEnCPU)
+        self._memoryManager.toCompact()
+        pcb = self._pcbTable.lookUpPCB(pidEnCPU)
+        self._dispatcher.load(pcb)

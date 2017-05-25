@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-s
 
 class Dispatcher:
-    def __init__(self, mmu, cpu,timer):
+    def __init__(self, mmu, cpu, timer):
         self._mmu = mmu
         self._cpu = cpu
         self._timer=timer
@@ -29,7 +29,7 @@ class Dispatcher:
         self._cpu.set_pc(pcb.get_pc())
         self._mmu.set_bd(pcb.get_bd())
         self._mmu.set_limit(pcb.get_limit())
-        self._timer.set_timer()
+        #self._timer.set_timer()
 
     # Proposito: retorna el pid
     # Precondiccion: -

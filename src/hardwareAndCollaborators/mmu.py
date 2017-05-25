@@ -13,8 +13,10 @@ class Mmu:
     # Proposito: retorna la instruccion de dicha posicion en memoria y verifica que no se pase del limite.
     # Precondiccion:debe existir dicha posicion en memoria.
     def fetch(self, pc):
-        # posicion = pc + self._bd #variable estetica
-        return self._memory.get(pc + self._bd)
+        pos = pc + self._bd # variable estetica
+        if pos > self._limit:
+            return
+        return self._memory.get(pos)
 
     # Proposito: retorna el bd
     # Precondiccion: -

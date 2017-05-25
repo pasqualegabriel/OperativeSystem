@@ -1,28 +1,33 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-s
-
-
-
+from SistemaDeProgramas.program import Program  # Para imprimir
+from SistemaDeProgramas.instructions import *  # Para imprimir
 
 class Clock:
-    def __init__(self, cpu, deviceManager,timer,intManager):
+    def __init__(self, cpu, deviceManager, timer):
         self._cpu = cpu
         self._deviceManager = deviceManager
-        self._timer=timer
-        self._intManager=intManager
+        self._timer = timer
+
+        self.kernel = None # Para imprimir
+
+    def set_kernel(self, kernel):  # Para imprimir
+        self.kernel = kernel  # Para imprimir
 
     def runCpu(self, log):
-        cortar=0
+        cortar = 0
         while True:
-            if cortar<50 and not self._timer.fullTimer():
+            if cortar == 7: # Para hacer un new (agregar un nuevo programa) en el medio de una ejecucion
+                p = Program("paint.exe", [CPU(1)], 2) # El programa
+                self.kernel.new(p, log) # Para imprimir
+                p = Program("vlc.exe", [CPU(5)], 2) # El programa
+                self.kernel.new(p, log) # Para imprimir
+
+            if cortar < 100:
                 self._cpu.tick(log)
                 self._deviceManager.tickDM()
-                self._timer.sumar_timer()
-                cortar+=1
-                
-            elif self._timer.fullTimer():
-                self._intManager.handle("TIME_OUT", None)
-              
+                self._timer.tick()
+                cortar += 1
 
             else:
                 break
