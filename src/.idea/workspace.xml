@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Prototipo/Schedulers/bursts.py" line="37" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/Prototipo/memoryManagerPaging.py" line="48" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7df05531-247f-4546-a24c-2bd58495d57d" name="Default" comment="" />
@@ -18,58 +18,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="queues.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/queues.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1200">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deviceManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/deviceManager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="157">
+              <caret line="21" column="59" lean-forward="true" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+              <folding>
+                <element signature="e#47#115#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pcb.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/pcb.py">
+      <file leaf-file-name="kernel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="57">
+              <caret line="35" column="80" lean-forward="false" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="80" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bursts.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/bursts.py">
+      <file leaf-file-name="swap.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/swap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-99">
-              <caret line="34" column="35" lean-forward="true" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+            <state relative-caret-position="266">
+              <caret line="17" column="45" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/__init__.py">
+      <file leaf-file-name="loader.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/loader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interrupciones.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/interrupciones.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="block.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/block.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -78,43 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kernel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py">
+      <file leaf-file-name="intManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/intManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-              <folding>
-                <element signature="e#47#90#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="loader.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/loader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="78" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="memoryManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/memoryManager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="324" column="32" lean-forward="true" selection-start-line="324" selection-start-column="32" selection-end-line="324" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="instructions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/instructions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+            <state relative-caret-position="80">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -133,69 +103,95 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>set_burst</find>
+      <find>setBD</find>
+      <find>getBdP</find>
+      <find>setBDPh</find>
+      <find>setbdPh</find>
+      <find>change</find>
+      <find>freeFrames</find>
+      <find>searchPage</find>
+      <find>as</find>
+      <find>freeSwap</find>
+      <find>freeOneMe</find>
+      <find>pop</find>
+      <find>freeSa</find>
+      <find>pr</find>
+      <find>pri</find>
+      <find>prin</find>
+      <find>ENTROOOO</find>
+      <find>print</find>
+      <find>assign</find>
+      <find>assignFrameSwap</find>
+      <find>thereIsBlockF</find>
+      <find>thereIsSpaceInMemory</find>
+      <find>isPreemptiveAndIsChange</find>
+      <find>xxx</find>
+      <find>get_burs</find>
+      <find>_scheduler</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Test/test1.py" />
-        <option value="$PROJECT_DIR$/SistemaDeProgramas/program.py" />
-        <option value="$PROJECT_DIR$/Test/testLoader.py" />
-        <option value="$PROJECT_DIR$/Test/testMemory.py" />
-        <option value="$PROJECT_DIR$/Test/testMmu.py" />
-        <option value="$PROJECT_DIR$/Test/testPcbTable.py" />
-        <option value="$PROJECT_DIR$/Test/testQueue.py" />
-        <option value="$PROJECT_DIR$/main/kernel.py" />
-        <option value="$PROJECT_DIR$/main/main.py" />
-        <option value="$PROJECT_DIR$/Test/TestShedulerFJS.py" />
-        <option value="$PROJECT_DIR$/SistemaDeScheduler/queueDelSheduler.py" />
-        <option value="$PROJECT_DIR$/SistemaDeScheduler/Tuple.py" />
-        <option value="$PROJECT_DIR$/Test/testQueueFJS.py" />
-        <option value="$PROJECT_DIR$/Test/testPcb.py" />
-        <option value="$PROJECT_DIR$/Test/TestShedulerSJF.py" />
-        <option value="$PROJECT_DIR$/Test/testSchedulerPriority.py" />
-        <option value="$PROJECT_DIR$/SistemaDeInterrupciones/deviceManager.py" />
-        <option value="$PROJECT_DIR$/SistemaClock/timer.py" />
-        <option value="$PROJECT_DIR$/SistemaDeScheduler/scheduler.py" />
-        <option value="$PROJECT_DIR$/SistemaDeProcedimientos/burst.py" />
-        <option value="$PROJECT_DIR$/SistemaDeScheduler/queues.py" />
-        <option value="$PROJECT_DIR$/Test/testRafaga.py" />
-        <option value="$PROJECT_DIR$/Test/testScheduler.py" />
-        <option value="$PROJECT_DIR$/SistemaDeProcedimientos/bursts.py" />
-        <option value="$PROJECT_DIR$/SistemaDeInterrupciones/intManager.py" />
-        <option value="$PROJECT_DIR$/SistemaDeProcedimientos/pcb.py" />
-        <option value="$PROJECT_DIR$/Main/main.py" />
-        <option value="$PROJECT_DIR$/hardwareAndCollaborators/cpu.py" />
-        <option value="$PROJECT_DIR$/hardwareAndCollaborators/memory.py" />
-        <option value="$PROJECT_DIR$/Test/testBursts.py" />
         <option value="$PROJECT_DIR$/Test/testCompactacionDeMemory.py" />
         <option value="$PROJECT_DIR$/hardwareAndCollaborators/loader.py" />
         <option value="$PROJECT_DIR$/Kernel/kernel.py" />
         <option value="$PROJECT_DIR$/SistemaDeInterrupciones/interrupciones.py" />
         <option value="$PROJECT_DIR$/Prototipo/pcbTable.py" />
         <option value="$PROJECT_DIR$/Prototipo/deviceManager.py" />
-        <option value="$PROJECT_DIR$/Prototipo/clock.py" />
         <option value="$PROJECT_DIR$/Prototipo/NewProgram.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/bursts.py" />
         <option value="$PROJECT_DIR$/TestShedulerSJF.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerSJFPreemptive.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriorityPreemptive.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/scheduler.py" />
-        <option value="$PROJECT_DIR$/Prototipo/interrupciones.py" />
-        <option value="$PROJECT_DIR$/Prototipo/pcb.py" />
-        <option value="$PROJECT_DIR$/Prototipo/loader.py" />
-        <option value="$PROJECT_DIR$/Prototipo/memoryManager.py" />
-        <option value="$PROJECT_DIR$/Prototipo/print.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/Prototipo/kernel.py" />
         <option value="$PROJECT_DIR$/Prototipo/instructions.py" />
+        <option value="$PROJECT_DIR$/Prototipo/timer.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Bloque.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memoryManager.py" />
+        <option value="$PROJECT_DIR$/Prototipo/swapManager.py" />
+        <option value="$PROJECT_DIR$/Prototipo/TabletPages.py" />
+        <option value="$PROJECT_DIR$/Prototipo/program.py" />
+        <option value="$PROJECT_DIR$/Prototipo/pcb.py" />
+        <option value="$PROJECT_DIR$/Prototipo/MemoryManagerContinuousAssing.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memory.py" />
+        <option value="$PROJECT_DIR$/Prototipo/mmu.py" />
+        <option value="$PROJECT_DIR$/Prototipo/clock.py" />
+        <option value="$PROJECT_DIR$/TestLoader.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Page.py" />
+        <option value="$PROJECT_DIR$/Prototipo/PageTable.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Swap.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memoryManagerFrame.py" />
+        <option value="$PROJECT_DIR$/Prototipo/dispatcher.py" />
+        <option value="$PROJECT_DIR$/Prototipo/main.2.py" />
+        <option value="$PROJECT_DIR$/Prototipo/main2.py" />
+        <option value="$PROJECT_DIR$/Prototipo/swap.py" />
+        <option value="$PROJECT_DIR$/Prototipo/pageTable.py" />
+        <option value="$PROJECT_DIR$/Prototipo/page.py" />
+        <option value="$PROJECT_DIR$/Prototipo/intManager.py" />
+        <option value="$PROJECT_DIR$/Prototipo/print.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memoryManagerPaging.py" />
+        <option value="$PROJECT_DIR$/Prototipo/loader.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Schedulers/queues.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerRoundRobin.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerFCFS.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerSJF.py" />
+        <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriority.py" />
+        <option value="$PROJECT_DIR$/Prototipo/interrupciones.py" />
+        <option value="$PROJECT_DIR$/Prototipo/kernel.py" />
+        <option value="$PROJECT_DIR$/testLoader.py" />
+        <option value="$PROJECT_DIR$/testShedulerSJF.py" />
+        <option value="$PROJECT_DIR$/testSchedulerPriority.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-3" />
-    <option name="width" value="806" />
-    <option name="height" value="570" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1456" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -245,26 +241,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SistemasOperativos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SistemasOperativos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Prototipo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -299,74 +281,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main (1)">
-    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SistemasOperativos" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests for testCompactacionDeMemory.MyTestCase.testCompactacion" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SistemasOperativos" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;testCompactacionDeMemory.MyTestCase.testCompactacion&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests for testCompactacionDeMemory.MyTestCase" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SistemasOperativos" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;testCompactacionDeMemory.MyTestCase&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method />
-    </configuration>
-    <configuration default="false" name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SistemasOperativos" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests in testSchedulerPriority.py">
+    <configuration default="false" name="Unittests in testPageFaultFIFO.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -377,8 +293,68 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="SistemasOperativos" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestShedulerSJF.MyTestCase.testSchedulerSJF&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testPageFaultFIFO.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in testPcbTable.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SistemasOperativos" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testPcbTable.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in testQueueFJS.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SistemasOperativos" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testQueueFJS.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in testSchedulerPriority.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SistemasOperativos" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testSchedulerPriority.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in testShedulerSJF.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SistemasOperativos" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testShedulerSJF.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -446,19 +422,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.main" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for testCompactacionDeMemory.MyTestCase.testCompactacion" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for testCompactacionDeMemory.MyTestCase" />
-      <item index="3" class="java.lang.String" itemvalue="Python.main (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" />
+      <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in testPageFaultFIFO.py" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in testPcbTable.py" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in testQueueFJS.py" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in testSchedulerPriority.py" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in testShedulerSJF.py" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.main (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" />
-        <item index="2" class="java.lang.String" itemvalue="Python.main" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for testCompactacionDeMemory.MyTestCase.testCompactacion" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for testCompactacionDeMemory.MyTestCase" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in testSchedulerPriority.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in testShedulerSJF.py" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in testQueueFJS.py" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in testPcbTable.py" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in testPageFaultFIFO.py" />
       </list>
     </recent_temporary>
   </component>
@@ -479,35 +455,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 26m 49s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testPageFaultFIFO_py - 2017.06.15 at 21h 38m 31s.xml">
+      <configuration name="Unittests in testPageFaultFIFO.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 28m 22s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testPcbTable_py - 2017.06.15 at 21h 38m 36s.xml">
+      <configuration name="Unittests in testPcbTable.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 28m 31s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testQueueFJS_py - 2017.06.15 at 21h 38m 40s.xml">
+      <configuration name="Unittests in testQueueFJS.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 28m 36s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testSchedulerPriority_py - 2017.06.15 at 21h 38m 45s.xml">
+      <configuration name="Unittests in testSchedulerPriority.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 28m 37s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testSchedulerPriority_py - 2017.06.15 at 21h 39m 26s.xml">
+      <configuration name="Unittests in testSchedulerPriority.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 29m 28s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testSchedulerPriority_py - 2017.06.15 at 21h 39m 51s.xml">
+      <configuration name="Unittests in testSchedulerPriority.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 29m 52s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testSchedulerPriority_py - 2017.06.15 at 21h 40m 12s.xml">
+      <configuration name="Unittests in testSchedulerPriority.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 30m 28s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testSchedulerPriority_py - 2017.06.15 at 21h 41m 21s.xml">
+      <configuration name="Unittests in testSchedulerPriority.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestShedulerSJF_MyTestCase_testSchedulerSJF - 2017.06.08 at 16h 30m 42s.xml">
-      <configuration name="Unittests for TestShedulerSJF.MyTestCase.testSchedulerSJF" configurationId="tests" />
+    <history-entry file="Unittests_in_testShedulerSJF_py - 2017.06.15 at 21h 38m 49s.xml">
+      <configuration name="Unittests in testShedulerSJF.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_testCompactacionDeMemory_MyTestCase_testCompactacion - 2017.05.18 at 20h 41m 22s.xml">
-      <configuration name="Unittests for testCompactacionDeMemory.MyTestCase.testCompactacion" configurationId="tests" />
+    <history-entry file="Unittests_in_testShedulerSJF_py - 2017.06.15 at 21h 39m 14s.xml">
+      <configuration name="Unittests in testShedulerSJF.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -520,19 +496,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="0" width="806" height="570" extended-state="7" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17083333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273196" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46398306" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34986946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3985056" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3985056" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -541,6 +518,26 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28608248" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273196" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3985056" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -561,112 +558,184 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="20" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Test/testScheduler.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeProcedimientos/bursts.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeInterrupciones/intManager.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeScheduler/queues.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeProcedimientos/pcb.py" />
-    <entry file="file://$PROJECT_DIR$/Test/testSchedulerPriority.py" />
-    <entry file="file://$PROJECT_DIR$/Test/testBursts.py" />
-    <entry file="file://$PROJECT_DIR$/Test/testMemoryFirstFit.py" />
-    <entry file="file://$PROJECT_DIR$/hardwareAndCollaborators/memory.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeScheduler/scheduler.py" />
-    <entry file="file://$PROJECT_DIR$/Test/test1.py" />
-    <entry file="file://$PROJECT_DIR$/Test/TestShedulerSJF.py" />
-    <entry file="file://$PROJECT_DIR$/Test/testCompactacionDeMemory.py" />
-    <entry file="file://$PROJECT_DIR$/hardwareAndCollaborators/cpu.py" />
-    <entry file="file://$PROJECT_DIR$/Kernel/kernel.py" />
-    <entry file="file://$PROJECT_DIR$/hardwareAndCollaborators/dispatcher.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeProgramas/instructions.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeProgramas/program.py" />
-    <entry file="file://$PROJECT_DIR$/hardwareAndCollaborators/loader.py" />
-    <entry file="file://$PROJECT_DIR$/SistemaDeInterrupciones/interrupciones.py" />
-    <entry file="file://$PROJECT_DIR$/Main/main.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/dispatcher.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/instructions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="612">
+          <caret line="90" column="14" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/pcbTable.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/program.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="312">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="46" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/page.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/MemoryManagerContinuousAssing.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/swap.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/pageTable.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerFrame.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/main2.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/deviceManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/Tuple.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/logging/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/pcb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="60" column="15" lean-forward="false" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/enum.py" />
+    <entry file="file://$PROJECT_DIR$/Prototipo/clock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/cpu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        <state relative-caret-position="94">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerSJFNonPreemptive.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/pcbTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="413">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="14" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/pageTable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="39" column="20" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/memory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="46" lean-forward="true" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/NewProgram.py" />
-    <entry file="file:///usr/lib/python3.5/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="676" column="0" lean-forward="false" selection-start-line="676" selection-start-column="0" selection-end-line="676" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testBursts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestShedulerSJF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/intManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="379">
+          <caret line="26" column="56" lean-forward="false" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/interrupciones.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/newProgram.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="266">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/print.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        <state relative-caret-position="77">
+          <caret line="65" column="38" lean-forward="false" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/mmu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="61" column="33" lean-forward="true" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/dispatcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerPaging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="113" column="49" lean-forward="true" selection-start-line="113" selection-start-column="49" selection-end-line="113" selection-end-column="49" />
+          <folding>
+            <element signature="e#49#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/intManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="127" column="29" lean-forward="false" selection-start-line="127" selection-start-column="29" selection-end-line="127" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/queues.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="87" column="42" lean-forward="false" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -679,97 +748,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriorityPreemptive.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-196">
-          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriorityNonPreemptive.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-420">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerRoundRobin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+        <state relative-caret-position="114">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/clock.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerFCFS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="18" column="12" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/timer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerSJFPreemptive.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="209">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="e#48#96#0" expanded="true" />
+            <element signature="e#48#97#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/queues.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerSJF.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1200">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="114">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/deviceManager.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulersFactory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+        <state relative-caret-position="57">
+          <caret line="3" column="78" lean-forward="false" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/loader.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/interrupciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="78" selection-end-column="28" />
+        <state relative-caret-position="204">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/pcb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/bursts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="34" column="35" lean-forward="true" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/__init__.py">
+    <entry file="file://$PROJECT_DIR$/testBursts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -777,45 +798,127 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py">
+    <entry file="file://$PROJECT_DIR$/testCompaction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-          <folding>
-            <element signature="e#47#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/program.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-597">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManager.py">
+    <entry file="file://$PROJECT_DIR$/testDeviceManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="324" column="32" lean-forward="true" selection-start-line="324" selection-start-column="32" selection-end-line="324" selection-end-column="32" />
+        <state relative-caret-position="152">
+          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/instructions.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/swap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        <state relative-caret-position="266">
+          <caret line="17" column="45" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testLoader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMemoryFirstFit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testOrderingUsedBlocks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testPageFaultFIFO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testPcbTable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testQueueFJS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testShedulerSJF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="34" column="29" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriority.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="44" column="19" lean-forward="true" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+          <folding>
+            <element signature="e#48#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testSchedulerPriority.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="35" column="80" lean-forward="false" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
-          <folding />
+        <state relative-caret-position="157">
+          <caret line="21" column="59" lean-forward="true" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+          <folding>
+            <element signature="e#47#115#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

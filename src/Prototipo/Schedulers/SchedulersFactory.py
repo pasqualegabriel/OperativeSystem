@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-s
 from Prototipo.Schedulers.SchedulerFCFS import SchedulerFCFS
-from Prototipo.Schedulers.SchedulerPriorityNonPreemptive import SchedulerPriorityNonPreemptive
-from Prototipo.Schedulers.SchedulerPriorityPreemptive import SchedulerPriorityPreemptive
+from Prototipo.Schedulers.SchedulerPriority import SchedulerPriorityPreemptive, SchedulerPriorityNonPreemptive
 from Prototipo.Schedulers.SchedulerRoundRobin import SchedulerRoundRobin
-from Prototipo.Schedulers.SchedulerSJFNonPreemptive import SchedulerSJFNonPreemptive
-from Prototipo.Schedulers.SchedulerSJFPreemptive import SchedulerSJFPreemptive
+from Prototipo.Schedulers.SchedulerSJF import SchedulerSJFPreemptive, SchedulerSJFNonPreemptive
+from Prototipo.timer import Timer
 
 
 class SchedulersFactory:
@@ -31,5 +30,9 @@ class SchedulersFactory:
             self._scheduler = SchedulerSJFNonPreemptive()
         return self._scheduler
 
-    def getQuantum(self):
-        return int(self._quantum)
+
+    def getTimer(self, intManager):
+        if self._id == 4:
+            return Timer(intManager, int(self._quantum))
+        return None
+

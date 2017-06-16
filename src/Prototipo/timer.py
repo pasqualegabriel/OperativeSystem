@@ -1,19 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-s
+from Prototipo.intManager import Irq
+
 
 class Timer:
-    def __init__(self, scheduler, intManager, quantum):
-        self._scheduler = scheduler
+
+    def __init__(self, intManager, quantum):
         self._timer = 1
         self._quantum = quantum
         self._intManager = intManager
 
+
     def tick(self):
-        if not self._scheduler.isSchedulerRoundRobin():
-            return
-        if self.fullTimer() and self._scheduler.notIsEmpty():
-            self._intManager.handle("TIME_OUT", None)
+        if self.fullTimer():
+            self._intManager.handle(Irq.TIME_OUT, None)
+            self.set_timer()
         self._timer += 1
+
 
     def fullTimer(self):
         return self._timer == self._quantum

@@ -40,5 +40,12 @@ class Program:
     def isProgram():
         return True
 
+    def getSubInstructions(self,index,indexLimit):
+        if indexLimit > self.longitud():
+            return self._instructions[index:]
+        else:
+            return self._instructions[index:indexLimit]
+
+
     def __repr__(self):
         return "Program({name}, {instructions})".format(name=self._name, instructions=self._instructions)

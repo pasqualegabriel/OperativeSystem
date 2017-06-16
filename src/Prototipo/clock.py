@@ -16,7 +16,8 @@ class Clock:
             self._newProgram.tick(count, log)
             self._cpu.tick(log)
             self._deviceManager.tick()
-            self._timer.tick()
+            if not self._timer is None:
+                self._timer.tick()
 
             count += 1
             if count > 100:

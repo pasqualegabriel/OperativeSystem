@@ -13,35 +13,33 @@ class Dispatcher:
     def isIdle(self):
         return self._cpu.get_pc() == -1
 
-    # Proposito: Setea el pc del pcb
+    # Proposito:actualiza el Program counter del pcb
     # Precondiccion:-
     def save(self, pcb):
         pcb.set_pc(self._cpu.get_pc())
-        self._current = -1
-        self._cpu.set_pc(-1)
 
-        # Proposito: guarda el pid actual, setea el cpu en 0 su pc, setea el bd y limit en el mmu
 
-    # Precondiccion:que se le mande por parametro el objeto pcb.
+    # Proposito: guarda el pid actual, setea el cpu en 0 su pc, setea el bd y limit en el mmu
+    # Precondiccion:
     def load(self, pcb):
-        self._current = pcb.get_pid()
+        self.setCurrent(pcb.get_pid())
         self._cpu.set_pc(pcb.get_pc())
         self._mmu.setPosition(pcb)
 
     # Proposito: retorna el pid
     # Precondiccion: -
-    def get_PidActual(self):
+    def getPidActual(self):
         return self._current
 
     # Proposito: setea el pc en osiosio
     # Precondiccion:-
-    def pcOsioso(self):
+    def idlePc(self):
         self._cpu.set_pc(-1)
-        self._current = -1
+        self.setCurrent(-1)
 
-    # Proposito: setea el pid 
+    # Proposito: setea el current
     # Precondiccion:-
-    def set_pid(self, pid):
+    def setCurrent(self, pid):
         self._current = pid
 
 

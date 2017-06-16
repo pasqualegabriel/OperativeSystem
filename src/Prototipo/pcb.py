@@ -3,24 +3,32 @@
 
 # Representa el PCB de un sistema, con colaboradores internos pid, status, pc, bd, limit
 # Es el procedimiento que se encarga de guardar el pid
+from Prototipo.page import Page
+from Prototipo.pageTable import PageTable
 from Prototipo.Schedulers.bursts import Bursts
 
 
-class PCB:
-    def __init__(self, pid, ):
-        self._pid = pid
-        self._status = "new"
-        self._pc = 0
-        self._bd = 0
-        self._limit = 0
-        self._priority = None
-        self._burst = None
-        self._name = None
 
-    def set_burstAndPriority(self,program):
+class PCB:
+    def __init__(self, pid):
+        self._pid    = pid
+        self._status = "new"
+        self._pc     = 0
+        self._bd     = 0
+        self._limit  = 0
+        #self._priority = None
+        #self._burst    = None
+        #self._name     = None
+        #self._pageTable = []
+
+    #Proposito:inicializa la prioridad, el burst, el name y
+    #precondicion:
+    def initialize(self, program, requiredPages):
         self._priority = program.get_priority()
         self._burst = Bursts(program)
         self._name = program.name()
+        if None!=requiredPages:
+            self._pageTable=self.createPageTable(requiredPages)
 
     def set_pc(self, pc):
         self._pc = pc
@@ -40,8 +48,11 @@ class PCB:
     def set_bursts(self, burst):
         self._burst = burst
 
-    def setPages(self, pagesFree):
-        self._pages = pagesFree
+    def setPages(self,pages):
+        self._pageTable = pages
+
+    def addPages(self, pagesFree):
+        self._pageTable.append(pagesFree)
 
     def set_bd_limit(self, bd, limit):
         self.set_bd(bd)
@@ -77,5 +88,13 @@ class PCB:
     def get_name(self):
         return self._name
 
-    def getPages(self):
-        return self._pages
+    def getPageTable(self):
+        return self._pageTable
+
+    #Proposito:Inizializa pageTablet
+    #Precondicion:-
+    def createPageTable(self, requiredPages):
+        return PageTable(requiredPages)
+
+    def __repr__(self):
+        return "{pageTable}\n".format(pageTable=self._pageTable)

@@ -12,7 +12,9 @@ class SchedulerSJFPreemptive(Scheduler):
 
     # Proposito:Agrega un pid y su burst a la Queue
     # Precondicion:-
-    def add(self, pid, priority, burst):
+    def add(self, pcb):
+        pid = pcb.get_pid()
+        burst = pcb.get_burst()
         self._ready.add(pid, burst)
 
     # Proposito:retorna el primer pid de la Queue.
@@ -37,8 +39,11 @@ class SchedulerSJFPreemptive(Scheduler):
 
     # Proposito:denota true si el burst que esta entrando es menor al que esta en el cpu.
     # Precondicion:-
-    def isChange(self, pcbINCPU, newPCB):
-        return newPCB.get_burst() < pcbINCPU.get_burst()
+    def isChange(self, pcbInCPU, newPCB):
+        #print("Se comparan se compara la rafaga del pcb en cpu con el q esta entrando para saber quien se queda con el CPU")
+        #print("pcb pid:{a:2d}  burst: {b:2d} ".format(a=pcbInCPU.get_pid(),b=pcbInCPU.get_burst()))
+        #print("pcb pid:{a:2d}  burst: {b:2d} ".format(a=newPCB.get_pid(), b=newPCB.get_burst()))
+        return newPCB.get_burst() < pcbInCPU.get_burst()
 
     # Proposito:setea el campo del bust acual en el cpu
     # Precondicion:-
@@ -47,3 +52,8 @@ class SchedulerSJFPreemptive(Scheduler):
 
     def isPreemptive(self):
         return True
+
+
+class SchedulerSJFNonPreemptive(SchedulerSJFPreemptive):
+    def isPreemptive(self):
+        return False

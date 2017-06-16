@@ -2,11 +2,15 @@
 # -*- coding: utf-8 -*-s
 
 from time import sleep
+from tokenize import String
+
+from Prototipo.intManager import Irq
+
 
 class Cpu:
     def __init__(self, mmu, intManager):
-        self._pc = (-1)
-        self._ir = None
+        self._pc  = (-1)
+        self._ir  = None
         self._mmu = mmu
         self._intManager = intManager
 
@@ -16,20 +20,20 @@ class Cpu:
 
         log.setPidEjecutado() # para imprimir el pid ejecutado
 
-        self._fetch()
+        self._fetch(log)
         self._decode()
         self._execute(log)
 
-    def _fetch(self):
-        self._ir = self._mmu.fetch(self._pc)
+    def _fetch(self, log):
+        self._ir = self._mmu.fetch(self._pc, log)
         self._pc += 1
 
     def _decode(self):
         if (self._ir.isExit()):
-            self._intManager.handle("KILL", None)
+            self._intManager.handle(Irq.KILL, None)
 
         elif (self._ir.isIO()):
-            self._intManager.handle("IO_IN", self._ir.getId())
+            self._intManager.handle(Irq.IO_IN, self._ir)
                 
     def _execute(self, log):
         log.printExecuteCPU(self._ir, self._pc)

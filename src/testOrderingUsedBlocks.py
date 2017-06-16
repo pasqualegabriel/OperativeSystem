@@ -1,14 +1,15 @@
 import unittest
 
+from Prototipo.block import Block
 from Prototipo.intManager import IntManager
 from Prototipo.memory import *
-from Prototipo.memoryManager import MemoryManagerFirstFit, Block
+from Prototipo.memoryManagerContinuousAssignment import MemoryManagerContinuousAssignmentFirstFit
 from Prototipo.pcbTable import PCBTable
 
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        self._mm = MemoryManagerFirstFit(Memory(100), PCBTable(), IntManager(), 4)
+        self._mm = MemoryManagerContinuousAssignmentFirstFit(Memory(100), PCBTable(), IntManager(), 4)
 
         self._block1 = Block(0, 9, 0)
         self._block2 = Block(10, 24, 1)

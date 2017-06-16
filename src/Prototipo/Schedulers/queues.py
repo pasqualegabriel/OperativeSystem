@@ -23,6 +23,9 @@ class Queue:
     def head(self):
         return self._items[0]
 
+    def setQueue(self, items):
+        self._items = items
+
 class QueueFIFO(Queue):
     def add(self,pid):
         self._items.append(pid)
@@ -33,6 +36,30 @@ class QueueFIFO(Queue):
         except:
             raise ValueError("Queue is None")
 
+
+
+class QueueSJF(Queue):
+    def add(self, pid, burst):
+        self._items.append(Tuple(pid, burst))
+        self.ordering()
+
+    def pop(self):
+        try:
+            element = self._items.pop(0)
+            return element.get_primer()
+        except:
+            raise ValueError("Queue is None")
+
+    def ordering(self):
+        for i in range(1, self.lenItems()):
+            for j in range(0, self.lenItems() - i):
+                if self._items[j].get_segundo() > self._items[j + 1].get_segundo():
+                    k = self._items[j + 1]
+                    self._items[j + 1] = self._items[j]
+                    self._items[j] = k
+
+
+'''
 class QueuePriority(Queue):
     def add(self, element, time):
         tuple=Tuple(element,time)
@@ -59,24 +86,4 @@ class QueuePriority(Queue):
 
     def get_WaitingTimeForTheHead(self):
         return self._WaitingTimeForTheHead
-
-
-class QueueSJF(Queue):
-    def add(self, pid, burst):
-        self._items.append(Tuple(pid, burst))
-        self.ordering()
-
-    def pop(self):
-        try:
-            element = self._items.pop(0)
-            return element.get_primer()
-        except:
-            raise ValueError("Queue is None")
-
-    def ordering(self):
-        for i in range(1, self.lenItems()):
-            for j in range(0, self.lenItems() - i):
-                if self._items[j].get_segundo() > self._items[j + 1].get_segundo():
-                    k = self._items[j + 1]
-                    self._items[j + 1] = self._items[j]
-                    self._items[j] = k
+'''

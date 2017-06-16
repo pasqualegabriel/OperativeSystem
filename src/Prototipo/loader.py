@@ -2,15 +2,9 @@
 # -*- coding: utf-8 -*-s
 
 class Loader:
-    def __init__(self, memory, mmu, disco, memoryManager):
-        self._memory = memory
-        self._mmu = mmu
-        self._disco = disco
-        self._memoryManager = memoryManager
-
-
-    # Busca un programa en el disco
-    def search_program(self, name):
+    #Proposito: Busca un programa en el disco
+    #Precondicion:-
+    def searchProgram(self, name):
         for p in self._disco.files():
             try:
                 if (p.isProgram() and p.name() == name):
@@ -18,21 +12,32 @@ class Loader:
             except:
                 pass
 
-    # para imprimir los bloques
-    def getMM(self):
+
+    def getMemoryManager(self):
         return self._memoryManager
 
-    def setPCB(self,pcb, program):
-        pcb.set_burstAndPriority(program)
+    def getSwapManager(self):
+        return self._swap
+
+    #Proposito:inicializa atributos del pcb.
+    #Precondicion:-
+    def setPCB(self,pcb, program,requiredPages):
+        pcb.initialize(program, requiredPages)
 
 
 
 class LoaderBlocks(Loader):
+    def __init__(self, memory, mmu, disco, memoryManager, swap):
+        self._memory = memory
+        self._mmu = mmu
+        self._disco = disco
+        self._memoryManager = memoryManager
+
     # Proposito:
     # Precondicion:-
     def load(self, pcb, nameProgram):
-        program = self.search_program(nameProgram)
-        self.setPCB(pcb, program)
+        program = self.searchProgram(nameProgram)
+        self.setPCB(pcb, program, None)
         if not self._memoryManager.thereIsSpaceInMemoryFor(program.longitud()):
             raise SystemError("Memoria insuficiente")
         block = self._memoryManager.getFreeBlock(pcb.get_pid(), program.longitud())
@@ -49,38 +54,49 @@ class LoaderBlocks(Loader):
 
 
 class LoaderPages(Loader):
+    def __init__(self, memory, mmu, disco, memoryManager, swap):
+        self._memory = memory
+        self._mmu = mmu
+        self._disco = disco
+        self._memoryManager = memoryManager
+        self._swap=swap
+    #Proposito:solicita un marco para un pagina, luego la carga en la memoria, tambien actualiza el pcb.
+    #Precondicion:
     def load(self, pcb, nameProgram):
-        program = self.search_program(nameProgram)
-        self.setPCB(pcb, program)
-        if not self._memoryManager.thereIsSpaceInMemoryFor(program.longitud()):
-            raise SystemError("Insufficient memory")
-        cantPages = self.requiredPages(program.longitud())
-        pcb.setPages(self._memoryManager.returnRequiredPages(cantPages))
-        pages = pcb.getPages()  # lista de paginas a cargar
-        countPages = 0  # contador de paginas
-        indexMemory = pages[countPages].getBd()  # posicion de la memoria segun el bd de la pagina
-        countInstruction = 0  # contador de intrucciones para el cambio de pagina
-        for instruction in program.getLista():
-            if countInstruction == self.getMM().getFrame():
-                countInstruction = 0
-                countPages += 1
-                indexMemory = pages[countPages].getBd()
+        program = self.searchProgram(nameProgram)
+        requiredPages = self.requiredPages(program.longitud())
+        self.setPCB(pcb, program,requiredPages)
 
-            self._memory.set_pos(indexMemory + countInstruction, instruction)
-            countInstruction += 1
-
+    
     # Proposito:Retorna la cantidad de paginas que nesesita el programa
     # Precondicion:-
     def requiredPages(self, sizeProgram):
-        number = divmod(sizeProgram, self.getMM().getFrame())
+        number = divmod(sizeProgram, self.getMemoryManager().sizeFrame())
         requiredPages = number[0]
         if number[1] != 0:
             requiredPages += 1
         return requiredPages
 
-    def freeMemory(self, pcb):
-        self._memoryManager.freeMemory(pcb.getPages())
 
+    #Proposito:Carga las intrucciones en la memoria fisica
+    #Precondicion:-
+    def loadInPhysicalMemory(self, instructions, page):
+        positionInstruction = page.getBDPhysicalMemory()
+        for instruction in instructions:
+            self._memory.set_pos(positionInstruction,instruction)
+            positionInstruction+=1
 
+        #for positionMemory in range(page.getBd() ,page.getBd() + self.getMemoryManager().sizeFrame()):
+        #    self._memory.set_pos(positionMemory, instructions[positionInstruction])
+        #    positionInstruction+=1
+
+    def swapIN(self, bdPhysicalMemory, keySwap):
+        instruction = []
+        for index in range(bdPhysicalMemory, bdPhysicalMemory + self.getMemoryManager().sizeFrame()):
+            instruction.append(self._memory.get(index))
+        self._swap.setPos(keySwap, instruction)
+
+    def swapOut(self, keySwap):
+        return self._swap.get(keySwap)
 
 

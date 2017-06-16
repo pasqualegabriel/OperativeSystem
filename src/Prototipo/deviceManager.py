@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-s
 
 from Prototipo.Schedulers.queues import *
+from Prototipo.intManager import Irq
 
 
 class DeviceManager:
@@ -11,7 +12,7 @@ class DeviceManager:
         self._intManager = intManager
 
     def add(self, pid, idIo):
-        self._waiting.get(idIo).add((pid, (self._counter + idIo + 1)))
+         self._waiting.get(idIo).add((pid, (self._counter + idIo)))
 
     def update(self):
         for ioId, queue in self._waiting.items():
@@ -19,9 +20,17 @@ class DeviceManager:
                 if i[1] <= self._counter:
                     pid = i[0]
                     queue.remove(i)
-                    self._intManager.handle("IO_OUT", pid)
+                    self._intManager.handle(Irq.IO_OUT, pid)
 
     def tick(self):
-        self._counter += 1
         self.update()
+        self._counter += 1
+
+
+
+    def lenQueueWaiting(self):
+        res = 0
+        for ioId, queue in self._waiting.items():
+            res += queue.lenItems()
+        return res
 

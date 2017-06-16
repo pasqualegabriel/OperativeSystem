@@ -1,77 +1,18 @@
 from tabulate import tabulate
 
-class MemoryManagerPaginacion:
-    def __init__(self, memory, frame, PCBTable):
-        self._memory = memory
-        self._frame = frame  #### probamos con 4
-        self._freePages = self.calculateFreePages(self._memory.size())
-        self._pcbTable = PCBTable
-
-    # Proposito: Calcula la cantidad de paginas libres y la retorna
-    # Precondiccion: -
-    def calculateFreePages(self, sizeMemory):
-        result = []
-        count = 0
-        for i in range(0, (sizeMemory // self._frame)):
-            result.append(Page(i * self._frame))
-            count += 1
-        self._cantFreePages = count
-        return result
-
-    # Proposito:
-    # Precondiccion: -
-    def returnRequiredPages(self, requiredPages):
-        pagesFree = []
-        self._cantFreePages = self._cantFreePages - requiredPages
-        for pageFree in range(0, requiredPages):
-            pagesFree.append(self._freePages.pop(0))
-        return pagesFree
-
-    # Proposito: Retorna True si hay espacio en la memoria para el sizeProgram, y False en caso contrario
-    # Precondiccion: -
-    def thereIsSpaceInMemoryFor(self, requiredPages):
-        return self._cantFreePages >= self.requiredPagesForProgram(requiredPages)
-
-    # Proposito:libera paginas ocupadas por un procedimiento en la memoria.
-    # Precondicion:-
-    def freeMemory(self, pages):
-        self._freePages.extend(pages)
-        self._cantFreePages = self._cantFreePages + len(pages)
-
-    def sizeFree(self):
-        return self._cantFreePages
-
-    def isMemoryManagerPaging(self):
-        return True
-
-    # Proposito:Retorna la cantidad de paginas que nesesita el programa
-    # Precondicion:-
-    def requiredPagesForProgram(self, sizeProgram):
-        number = divmod(sizeProgram, self.getFrame())
-        requiredPages = number[0]
-        if number[1] != 0:
-            requiredPages += 1
-        return requiredPages
-
-    def getFrame(self):
-        return self._frame
-
-    def __repr__(self):
-        res = []
-        for i in self._freePages:
-            res.append([i])
-        return tabulate(res, headers=['Paginas libres'], tablefmt='psql')  # pretty print.
+from Prototipo.block import Block
+from Prototipo.intManager import Irq
 
 
-class MemoryManager:
-    def __init__(self, memory, PCBTable, intmanager, moreSpace):
-        self._memory = memory
-        self._free = self._memory.size()
-        self._bl = [Block(0, self._free - 1, -1)]
-        self._bu = []
-        self._pcbTable = PCBTable
-        self._intManager = intmanager
-        self._moreSpace = moreSpace
+class MemoryManagerContinuousAssignment:
+    def __init__(self, memory, pcbTable, intManager, moreSpace):
+        self._memory     = memory
+        self._free       = self._memory.size()
+        self._bl         = [Block(0, self._free - 1, -1)]
+        self._bu         = []
+        self._pcbTable   = pcbTable
+        self._intManager = intManager
+        self._moreSpace  = moreSpace
 
     def isMemoryManagerPaging(self):
         return False
@@ -102,7 +43,7 @@ class MemoryManager:
         Precondicion: -                    """
     def getFreeBlock(self, pid, sizeProgram):
         if not self.thereIsBlockForProgram(sizeProgram):
-            self._intManager.handle("COMPACT_MEMORY", None)
+            self._intManager.handle(Irq.COMPACT_MEMORY, None)
         return self.addProgram(pid, sizeProgram)
 
     """ Proposito: Busca un bloque libre (FirstFit, BestFit, WorstFit),
@@ -251,11 +192,11 @@ class MemoryManager:
         block.set_moreSpace(0)
 
     def __repr__(self):
-        return "{p1}\n{p2}".format(p1=tabulate(enumerate(self._bu), headers=[' ', 'Bloques usados'], tablefmt='psql'),p2=tabulate(enumerate(self._bl), headers=[' ', 'Bloques libres'], tablefmt='psql'))
+        return "{p1}\n{p2}".format(p1=tabulate(enumerate(self._bu), headers=[' ','Used blocks                         '], tablefmt='psql'),p2=tabulate(enumerate(self._bl), headers=[' ', 'Free blocks                         '], tablefmt='psql'))
 
 
 
-class MemoryManagerFirstFit(MemoryManager):
+class MemoryManagerContinuousAssignmentFirstFit(MemoryManagerContinuousAssignment):
     # Proposito:
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
@@ -264,7 +205,7 @@ class MemoryManagerFirstFit(MemoryManager):
                 return block
 
 
-class MemoryManagerBestFit(MemoryManager):
+class MemoryManagerContinuousAssignmentBestFit(MemoryManagerContinuousAssignment):
     # Proposito:
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
@@ -275,7 +216,7 @@ class MemoryManagerBestFit(MemoryManager):
         return blockBest
 
 
-class MemoryManagerWorstFit(MemoryManager):
+class MemoryManagerContinuousAssignmentWorstFit(MemoryManagerContinuousAssignment):
     # Proposito:
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
@@ -284,56 +225,3 @@ class MemoryManagerWorstFit(MemoryManager):
             if block.get_Size() >= sizeProgram and blockWort.get_Size() < block.get_Size():
                 blockWort = block
         return blockWort
-
-
-class Block:
-    def __init__(self, bd, limit, pid):
-        self._bd = bd
-        self._limit = limit
-        self._moreSpace = 0
-        self._pid = pid
-
-    def get_Bd(self):
-        return self._bd
-
-    def get_Limit(self):
-        return self._limit
-
-    def get_Pid(self):
-        return self._pid
-
-    def get_Size(self):
-        return self._limit - self._bd + 1 - self._moreSpace
-
-
-    def set_bd(self, bd):
-        self._bd = bd
-
-    def set_limit(self, limit):
-        self._limit = limit
-
-    def set_pid(self, pid):
-        self._pid = pid
-
-    def set_moreSpace(self, moreSpace):
-        self._moreSpace = moreSpace
-
-    def get_moreSpace(self):
-        return self._moreSpace
-
-    def __repr__(self):
-        if self._moreSpace != 0:
-            return "Bd={bd}, Limit={limit}, Size={size}, Pid={pid}, Ms={ms}".format(bd=self._bd, limit=self._limit, size=self.get_Size(), pid=self._pid, ms=self._moreSpace)
-        else:
-            return "Bd={bd}, Limit={limit}, Size={size}, Pid={pid}".format(bd=self._bd, limit=self._limit, size=self.get_Size(), pid=self._pid)
-
-
-class Page:
-    def __init__(self, bd):
-        self._bd = bd
-
-    def getBd(self):
-        return self._bd
-
-    def __repr__(self):
-        return "Page {p}".format(p=self._bd)
