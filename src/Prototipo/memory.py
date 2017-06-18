@@ -7,16 +7,18 @@ class Memory:
         self._memory = {}
         self._size = size
 
-    # Proposito:seatea el valor<valor> en la posicion<pos> de la memoria
-    # precondiccion: Debe existir pos en la memoria
-    def set_pos(self, position, valor):
-        self._memory[position] = valor
+    # Proposito:En la key<position> setea el value<value>.
+    # precondiccion:-
+    def setPos(self, position, value):
+        self._memory[position] = value
 
-    # Proposito: Retorna la instruccion del pc recibido como argumento.
-    # Precondiccion: Debe existir dicha posicion en la memoria
+    # Proposito:retorna el value que esta guardado en la key<position>
+    # Precondiccion: Debe existir dicha key<position> en la memory.
     def get(self, position):
         return self._memory.get(position)
 
+    #Proposito:Retorna el tamaño de la memoria
+    #Proposito:-
     def size(self):
         return self._size
 
@@ -24,5 +26,7 @@ class Memory:
         res = []
         for k, v in self._memory.items():
             res.append([k, v])
+        if len(res) == 0:
+            return "Physical Memory is Empty"
         return tabulate(res, tablefmt='psql')  # pretty print.
 

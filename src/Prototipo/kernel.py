@@ -13,7 +13,7 @@ from Prototipo.memory import *
 from Prototipo.memoryManagerPaging import *
 from Prototipo.mmu import *
 from Prototipo.pcbTable import PCBTable
-
+from Prototipo.print import *
 
 class Kernel:
     def __init__(self, disco, schedulerFactory):
@@ -34,7 +34,7 @@ class Kernel:
         # PAGINAICON
         self._sizeFrame = 4
         self._pageReplacementAlgorithm = FirstInFirstOutPageReplacementAlgorithm()
-        self._swap = Swap()
+        self._swap = Memory(self._memory.size())
         self._memoryManager = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable, self._swap, self._pageReplacementAlgorithm,self._intmanager)
         self._mmu = MmuPages(self._memory, self._sizeFrame, self._intmanager)
         self._loader = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
@@ -49,18 +49,12 @@ class Kernel:
         self._newPrograms = NewPrograms(self._intmanager)
         self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
 
-
-
-    #Carga todos los programas en la memoria y empieza a correr el clock
-    def execPrograms(self, startPrograms, programs, log):
-        for nameProgram in startPrograms:
-            self._intmanager.handle(Irq.NEW, nameProgram)
-
+    # Carga todos los programas en la memoria y empieza a correr el clock
+    def execPrograms(self, programs, log):
         # Imprime la memoria y el memoryManager, y setea para porteriores impresiones
-        log.initialImpression(startPrograms, self._memoryManager, self._memory, self._dispatcher, self._cpu, self._intmanager, self._pcbTable)
-        self._newPrograms.setPrograms(programs)
+        self._waitTimeAndAverageReturn = WaitTimeAndAverageReturn()
+        log.set(self._memoryManager, self._memory, self._dispatcher, self._intmanager, self._pcbTable, self._scheduler, self._waitTimeAndAverageReturn)
+        self._newPrograms.setPrograms(programs, self._waitTimeAndAverageReturn)
         # Comienza a correr el clock
         self._clock.runCpu(log)
-
-
-
+        log.printWaitTimeAndAverageReturn()

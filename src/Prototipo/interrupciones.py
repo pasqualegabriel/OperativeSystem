@@ -19,16 +19,18 @@ class Interrupcion:
 
 
 class ChangePCBofCPU(Interrupcion):
-    # Proposito:Verifica si el es preventivo y si hay que hacer un cambio de procedimiento en el cpu.
+    # Proposito:actualiza el PRograma conter del pcb en cpu, verifica si es preventivo
+    # y si hay q cabiar de prosedimiento.
     # Precondicion:-
     def isPreemptiveAndIsChange(self, pcb):
+        self._dispatcher.save(self.getPCBInCPU())
         return self._scheduler.isPreemptive() and self._scheduler.isChange(self.getPCBInCPU(), pcb)
 
     # Proposito:Saca el pcb que esta en cpu corriendo el cpu lo actualiza, lo guarda, y carga otro pcb.
     # Precondicion:-
     def changeOfPCBInCPU(self, pcb):
         pcbEnCPU = self.getPCBInCPU()
-        self._dispatcher.save(pcbEnCPU)
+        #self._dispatcher.save(pcbEnCPU)
         pcbEnCPU.set_status("ready")
         self._scheduler.add(pcbEnCPU)
         pcb.set_status("running")
@@ -175,7 +177,7 @@ class PageFault(Interrupcion):
         if pageForPageFault.inSwap():
             bdVirtualMemory = pageForPageFault.getBDVirtualMemory()
             instructions = self._loader.swapOut(bdVirtualMemory)
-            self._memoryManager.moveToFreeSwap(bdVirtualMemory)
+            #self._memoryManager.moveToFreeSwap(bdVirtualMemory)
             bdPyshicalMemory = self._memoryManager.assignFrame(pcbInCpu.get_pid())
             pageForPageFault.setBDPhysicalMemory(bdPyshicalMemory)
             pageForPageFault.change()

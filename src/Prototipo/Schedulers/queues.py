@@ -58,6 +58,11 @@ class QueueSJF(Queue):
                     self._items[j + 1] = self._items[j]
                     self._items[j] = k
 
+    def list(self):
+        res = []
+        for i in self._items:
+            res.append(i.get_primer())
+        return res
 
 '''
 class QueuePriority(Queue):

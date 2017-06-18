@@ -181,7 +181,7 @@ class MemoryManagerContinuousAssignment:
         oldPos = pcb.get_bd()
         for i in range(indexPos, indexPos + size):
             ir = self._memory.get(oldPos)
-            self._memory.set_pos(i, ir)
+            self._memory.setPos(i, ir)
             oldPos += 1
         self.setPCBAndLoader(pcb, indexPos, indexPos + size - 1)
         self.setBlock(block, indexPos, indexPos + size - 1)

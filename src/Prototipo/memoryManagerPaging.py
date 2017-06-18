@@ -94,34 +94,58 @@ class MemoryManagerPaging:
             result.append(Frame(i * self._sizeFrame))
         return result
 
+
+    def freeFramesPhysicalMemory(self):
+        return self._freeFramesPhysicalMemory
+
+    def usedFramesPhysicalMemory(self):
+        return self._usedFramesPhysicalMemory
+
+    def freeFramesSwap(self):
+        return self._freeFramesSwap
+
+    def usedFramesSwap(self):
+        return self._usedFramesSwap
+
+
     # Proposito:libera marcos ocupadas por un por el <pid> en la memoria fisica y swap.
     # Precondicion:-
     def freeMemory(self, pid):
-        pcb = self._pcbTable.lookUpPCB(pid)
-        pageTable = pcb.getPageTable()
-        self.removeUsedPhysicalMemory(pageTable.getPagesPhysical())
-        self.removeUsedSwap(pageTable.getPagesVirtual())
+        self.removeUsedPhysicalMemory(pid)
+        self.removeUsedSwap(pid)
+
+    # mirar bien (SOlo para mi nahuel)
+    #
+    #def changeUsedFramesToFree(self, pid,framesUsed,collectionUsedFrame,collectionFreeFrame,cantFreeFrames):
+    #    for frame in framesUsed:
+    #        frame.setPid(-1)
+    #        frame.setUsed(False)
+    #        collectionUsedFrame.removeFrame(frame)
+    #        collectionFreeFrame.append(frame)
+    #        cantFreeFrames+=1
+
+
 
     # Proposito: libera marcos ocupadas por un procedimiento en la memoria.
     # Precondicion: Deben existir los frame con los bds de <pages> en self._usedFramesPhysicalMemory
-    def removeUsedPhysicalMemory(self, pages):
-        for page in pages:
-            frameUsed = self.getFrameUsed(page.getBDPhysicalMemory())
-            frameUsed.setPid(-1)
-            frameUsed.setUsed(False)
-            self._freeFramesPhysicalMemory.append(frameUsed)
-            self._usedFramesPhysicalMemory.removeFrame(frameUsed)
+    def removeUsedPhysicalMemory(self, pid):
+        frameUsed = self.getFrameUsedMemory(pid)
+        for frame in frameUsed:
+            frame.setPid(-1)
+            frame.setUsed(False)
+            self._usedFramesPhysicalMemory.removeFrame(frame)
+            self._freeFramesPhysicalMemory.append(frame)
             self._cantFreeFramesPhysicalMemory+=1
 
     #Proposito: libera los marcos ocupados por un procedimiento en el swap
     #Precondicion: Deben existir los frame con los bds de <pages> en self._usedFramesSwap
-    def removeUsedSwap(self, pages):
-        for page in pages:
-            frameUsed = self.getFrameUsedSwap(page.getBDVirtualMemory())
-            frameUsed.setPid(-1)
-            frameUsed.setUsed(False)
-            self._freeFramesSwap.append(frameUsed)
-            self._usedFramesSwap.remove(frameUsed)
+    def removeUsedSwap(self, pid):
+        frameUsed = self.getFrameUsedSwap(pid)
+        for frame in frameUsed:
+            frame.setPid(-1)
+            frame.setUsed(False)
+            self._usedFramesSwap.remove(frame)
+            self._freeFramesSwap.append(frame)
             self._cantFreeFramesSwap += 1
 
     #Proposito: Mueve al frame con bd <bdVirtualMemory> de self._usedFramesSwap a self._freeFramesSwap
@@ -149,15 +173,16 @@ class MemoryManagerPaging:
 
     #Proposito: retorna el frame con <bd>
     #Precondicion: debe existir <bd> en self._usedFramesSwap
-    def getFrameUsedSwap(self, bd):
+    def getFrameUsedSwap(self, pid):
+        res=[]
         for frameUsed in self._usedFramesSwap:
-            if frameUsed.getBD() == bd:
-                return frameUsed
-
+            if frameUsed.getPId() == pid:
+                res.append(frameUsed)
+        return  res
     #Proposito: retorna el frame con <bd>
     #Precondicion: debe existir <bd> en self._usedFramesPhysicalMemory
-    def getFrameUsed(self, bd):
-        return self._usedFramesPhysicalMemory.getFrame(bd)
+    def getFrameUsedMemory(self, pid):
+        return self._usedFramesPhysicalMemory.getFrame(pid)
 
     def isMemoryManagerPaging(self):
         return True
@@ -204,10 +229,12 @@ class FirstInFirstOutPageReplacementAlgorithm:
 
     #Proposito: retorna un frame con el <bd>
     #Precondicion: debe existir <bd> en self._usedFrames
-    def getFrame(self, bd):
-        for frameUsed in self._usedFrames.list():
-            if frameUsed.getBD() == bd:
-                return frameUsed
+    def getFrame(self, pid):
+        res=[]
+        for frameUsed in self.getUsedFrames():
+            if frameUsed.getPId() == pid:
+                res.append(frameUsed)
+        return  res
 
     #Proposito:retorna la lista de la queue
     #Proposito:-

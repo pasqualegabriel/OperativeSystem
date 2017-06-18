@@ -40,7 +40,7 @@ class SchedulerSJFPreemptive(Scheduler):
     # Proposito:denota true si el burst que esta entrando es menor al que esta en el cpu.
     # Precondicion:-
     def isChange(self, pcbInCPU, newPCB):
-        #print("Se comparan se compara la rafaga del pcb en cpu con el q esta entrando para saber quien se queda con el CPU")
+        #print("Se compara la rafaga del pcb en cpu con el que esta entrando para saber quien se queda con el CPU")
         #print("pcb pid:{a:2d}  burst: {b:2d} ".format(a=pcbInCPU.get_pid(),b=pcbInCPU.get_burst()))
         #print("pcb pid:{a:2d}  burst: {b:2d} ".format(a=newPCB.get_pid(), b=newPCB.get_burst()))
         return newPCB.get_burst() < pcbInCPU.get_burst()
@@ -49,6 +49,9 @@ class SchedulerSJFPreemptive(Scheduler):
     # Precondicion:-
     def set_burstPCBInCPU(self, burstInCPU):
         self._burstInCPU = burstInCPU
+
+    def list(self):
+        return self._ready.list()
 
     def isPreemptive(self):
         return True

@@ -6,7 +6,7 @@ from Prototipo.Schedulers.scheduler import Scheduler
 
 class SchedulerPriorityPreemptive(Scheduler):
     def __init__(self, pcbTable, aging):
-        self._priority = {1: QueueFIFO(), 2: QueueFIFO(), 3: QueueFIFO()}
+        self._priority = {1: QueueFIFO(), 2: QueueFIFO(), 3: QueueFIFO(), 4: QueueFIFO(), 5: QueueFIFO()}
         self._accountant = 0
         self._aging = aging
         self._PCBTable = pcbTable
@@ -40,6 +40,13 @@ class SchedulerPriorityPreemptive(Scheduler):
             if (valor.notIsEmpty()):
                 return True
         return False
+
+    def list(self):
+        res = []
+        for priority, queue in self._priority.items():
+            for q in queue.list():
+                res.append(q[0])
+        return res
 
     def isPreemptive(self):
         return True

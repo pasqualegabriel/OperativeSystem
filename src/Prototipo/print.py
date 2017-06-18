@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-s
 import logging
 
+from tabulate import tabulate
+
 
 class Print:
     def __init__(self):
@@ -16,22 +18,18 @@ class Print:
         logger.info('Starting emulator')
         self._log = logger
 
-    def initialImpression(self, namesProgram, memoryManager, memory, dispatcher, cpu, intManager, pcbTable):
+    def set(self, memoryManager, memory, dispatcher, intManager, pcbTable, scheduler, waitTimeAndAverageReturn):
         self._memoryManager = memoryManager
         self._memory = memory
         self._dispatcher = dispatcher
         self._intManager = intManager
         self._pidEjecutado = None
         self._pcbTable = pcbTable
-        for np in namesProgram:
-            self.printNameProgram(np)
-        self.printCpu(cpu)
-        self.printMemoryAndMemoryManager()
-        if self._memoryManager.isMemoryManagerPaging():
-            self.printPcbTable()
+        self._scheduler = scheduler
+        self._waitTimeAndAverageReturn = waitTimeAndAverageReturn
 
     def printExecuteCPU(self, ir, pc):
-        self._log.debug("Exec:  {op}  PidExec={pe:2}   PC={npc:2d}   Pid={pid:2d}".format(pe=self.getPidEjecutado(), op=ir, npc=pc, pid=self.getPidActual()))
+        self._log.debug("Exec:  {op}  PidExec={pe:2}   PC={npc:2d}   Pid={pid:2d}   {s}".format(pe=self.getPidEjecutado(), op=ir, npc=pc, pid=self.getPidActual(), s=self._scheduler))
         if ir.isExit():
             self.printMemoryManager()
 
@@ -44,6 +42,7 @@ class Print:
 
     def setPidEjecutado(self):
         self._pidEjecutado = self._dispatcher.getPidActual()
+        self._waitTimeAndAverageReturn.update(self._scheduler.list())
 
     def getPidEjecutado(self):
         return self._pidEjecutado
@@ -70,6 +69,10 @@ class Print:
     def forPrint(self, forPrint):
         self._log.debug("{i}".format(i=forPrint))
 
+    def printWaitTimeAndAverageReturn(self):
+        self._log.debug(self._waitTimeAndAverageReturn)
+        self._log.debug("\nAverageReturn: {result} %".format(result=self._waitTimeAndAverageReturn.calculateAverageReturn()))
+
     def printPcbTable(self):
         for k, v in self._pcbTable.getPcbs().items():
             self._log.debug("PCB Pid={pid}, PageTable:\n{pcbTable}".format(pid=k, pcbTable=v))
@@ -81,5 +84,33 @@ class Print:
             return "\nFree={free}\n{mm}\n".format(free=self._memoryManager.get_Free(), mm=self._memoryManager)
 
 
+class WaitTimeAndAverageReturn:
+    def __init__(self):
+        self._waitingTimes = {}
+        self._cantPrograms = 0
+
+    def addPid(self, pid):
+        self._waitingTimes[pid] = 0
+        self._cantPrograms += 1
+
+    def calculateAverageReturn(self):
+        return self.totalWaitingTimes() / self._cantPrograms
+
+    def update(self, pids):
+        for pid in pids:
+            waitingTimes = self._waitingTimes.get(pid) + 1
+            self._waitingTimes[pid] = waitingTimes
+
+    def totalWaitingTimes(self):
+        res = 0
+        for k, v in self._waitingTimes.items():
+            res += v
+        return res
+
+    def __repr__(self):
+        res = []
+        for k, v in self._waitingTimes.items():
+            res.append([k, v])
+        return tabulate(res, headers=["Pid","WaitTime"], tablefmt='psql')
 
 

@@ -44,7 +44,7 @@ class LoaderBlocks(Loader):
         pcb.set_bd_limit(block.get_Bd(), block.get_Limit())
         pos = pcb.get_bd()
         for i in program.getLista():
-            self._memory.set_pos(pos, i)
+            self._memory.setPos(pos, i)
             pos += 1
 
     # Proposito: Dependiendo el memoryManager libera la memoria que ocupa el pcb.
@@ -83,7 +83,7 @@ class LoaderPages(Loader):
     def loadInPhysicalMemory(self, instructions, page):
         positionInstruction = page.getBDPhysicalMemory()
         for instruction in instructions:
-            self._memory.set_pos(positionInstruction,instruction)
+            self._memory.setPos(positionInstruction, instruction)
             positionInstruction+=1
 
         #for positionMemory in range(page.getBd() ,page.getBd() + self.getMemoryManager().sizeFrame()):

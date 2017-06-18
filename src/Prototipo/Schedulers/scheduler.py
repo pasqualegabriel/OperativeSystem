@@ -20,4 +20,8 @@ class Scheduler:
     def isPreemptive(self):
         return False
 
-
+    def __repr__(self):
+        res = "QueueReady:"
+        for i in self.list():
+            res += " " + str(i)
+        return res
