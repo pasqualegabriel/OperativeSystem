@@ -192,7 +192,7 @@ class MemoryManagerContinuousAssignment:
         block.set_moreSpace(0)
 
     def __repr__(self):
-        return "{p1}\n{p2}".format(p1=tabulate(enumerate(self._bu), headers=[' ','Used blocks                         '], tablefmt='psql'),p2=tabulate(enumerate(self._bl), headers=[' ', 'Free blocks                         '], tablefmt='psql'))
+        return "{p1}\n{p2}".format(p1=tabulate(enumerate(self._bu), headers=[' ','Used blocks                         '], tablefmt='psql'),p2=tabulate(enumerate(self._bl), headers=[' ', 'Free blocks   (free={free:3d})            '.format(free=self._free)], tablefmt='psql'))
 
 
 

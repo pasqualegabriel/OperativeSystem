@@ -27,6 +27,6 @@ class Memory:
         for k, v in self._memory.items():
             res.append([k, v])
         if len(res) == 0:
-            return "Physical Memory is Empty"
+            return "\nPhysical Memory is Empty"
         return tabulate(res, tablefmt='psql')  # pretty print.
 

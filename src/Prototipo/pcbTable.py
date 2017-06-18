@@ -3,8 +3,6 @@
 
 # Representa al PCNTable del sistema, con un colabordor interno map.
 # La PCBTable se encarga de almacenar el pid y el pcb de dicho pid.
-from tabulate import tabulate
-
 
 class PCBTable:
     def __init__(self):

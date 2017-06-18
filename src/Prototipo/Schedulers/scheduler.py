@@ -24,6 +24,8 @@ class Scheduler:
         pass
     def __repr__(self):
         res = "QueueReady:"
+        if len(self.list()) == 0:
+            return res + " -"
         for i in self.list():
             res += " " + str(i)
         return res

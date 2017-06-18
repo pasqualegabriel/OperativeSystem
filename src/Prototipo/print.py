@@ -26,6 +26,7 @@ class Print:
         self._pidEjecutado = None
         self._pcbTable = pcbTable
         self._scheduler = scheduler
+        self._cantPageFault = 0
         self._waitTimeAndAverageReturn = waitTimeAndAverageReturn
 
     def printExecuteCPU(self, ir, pc):
@@ -62,6 +63,7 @@ class Print:
         self._log.debug(cpu)
 
     def printPageFalut(self):
+        self._cantPageFault += 1
         self._log.debug("Page Fault:")
         self._log.debug(self)
         self.printPcbTable()
@@ -72,16 +74,20 @@ class Print:
     def printWaitTimeAndAverageReturn(self):
         self._log.debug(self._waitTimeAndAverageReturn)
         self._log.debug("\nAverageReturn: {result} %".format(result=self._waitTimeAndAverageReturn.calculateAverageReturn()))
+        if self._memoryManager.isMemoryManagerPaging():
+            self._log.debug("\nNumber of page faults: {cpf}".format(cpf=self._cantPageFault))
 
     def printPcbTable(self):
         for k, v in self._pcbTable.getPcbs().items():
-            self._log.debug("PCB Pid={pid}, PageTable:\n{pcbTable}".format(pid=k, pcbTable=v))
+            self._log.debug(v)
+        self._log.debug("")
+
 
     def __repr__(self):
         if self._memoryManager.isMemoryManagerPaging():
-            return "\nMemoryManager_FreeFrames={free}\nSwap_FreeFrames={freeS}\n{mm}\n".format(free=self._memoryManager.sizeFreePhysicalMemory(),freeS=self._memoryManager.sizeFreeSwap() ,mm=self._memoryManager)
+            return "\n{mm}\n".format(free=self._memoryManager.sizeFreePhysicalMemory(),freeS=self._memoryManager.sizeFreeSwap() ,mm=self._memoryManager)
         else:
-            return "\nFree={free}\n{mm}\n".format(free=self._memoryManager.get_Free(), mm=self._memoryManager)
+            return "\n{mm}\n".format(mm=self._memoryManager)
 
 
 class WaitTimeAndAverageReturn:

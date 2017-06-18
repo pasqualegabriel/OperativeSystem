@@ -174,22 +174,23 @@ class PageFault(Interrupcion):
         pcbInCpu = self.getPCBInCPU()
         self._dispatcher.save(pcbInCpu)
         self._dispatcher.idlePc()
+        pc = pcbInCpu.get_pc()
+        pageNumber = pc // self._memoryManager.sizeFrame()
+
         if pageForPageFault.inSwap():
             bdVirtualMemory = pageForPageFault.getBDVirtualMemory()
             instructions = self._loader.swapOut(bdVirtualMemory)
-            #self._memoryManager.moveToFreeSwap(bdVirtualMemory)
-            bdPyshicalMemory = self._memoryManager.assignFrame(pcbInCpu.get_pid())
+            bdPyshicalMemory = self._memoryManager.assignFrame(pcbInCpu.get_pid(), pageNumber)
             pageForPageFault.setBDPhysicalMemory(bdPyshicalMemory)
             pageForPageFault.change()
             self._loader.loadInPhysicalMemory(instructions, pageForPageFault)
 
         else:
-            pc = pcbInCpu.get_pc()
-            bdPyshicalMemory = self._memoryManager.assignFrame(pcbInCpu.get_pid())
+            bdPyshicalMemory = self._memoryManager.assignFrame(pcbInCpu.get_pid(), pageNumber)
             pageForPageFault.setBDPhysicalMemory(bdPyshicalMemory)
             pageForPageFault.setPhysicalMemory(True)
             program = self._loader.searchProgram(pcbInCpu.get_name())
-            instructions = program.getSubInstructions(pc,pc + self._memoryManager.sizeFrame())  ##PARA CREAR LA SUBLISTA QUE VAMOS A CARGAR EN MEMORIA
+            instructions = program.getSubInstructions(pc, pc + self._memoryManager.sizeFrame())  ##PARA CREAR LA SUBLISTA QUE VAMOS A CARGAR EN MEMORIA
             self._loader.loadInPhysicalMemory(instructions, pageForPageFault)
 
         self._dispatcher.load(pcbInCpu)

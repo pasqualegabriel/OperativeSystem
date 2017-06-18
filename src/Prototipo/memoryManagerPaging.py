@@ -3,7 +3,6 @@
 
 from tabulate import tabulate
 
-from Prototipo.Schedulers.Tuple import Tuple
 from Prototipo.Schedulers.queues import QueueFIFO
 from Prototipo.frame import Frame
 from Prototipo.intManager import Irq
@@ -29,14 +28,14 @@ class MemoryManagerPaging:
     # Proposito:Si tiene un marco de la memoria fisica lo retorna en caso q no busca uno del swap en caso
     # que no tenga ninguno de los dos levanta una exepcion
     # Precondiccion: -
-    def assignFrame(self, pid):
+    def assignFrame(self, pid, pageNumber):
         if self.thereIsSpaceInMemory():
 
-            return self.assignFramePhysicalMemory(pid)
+            return self.assignFramePhysicalMemory(pid, pageNumber)
 
         elif self.thereIsSpaceInSwap():
 
-            return self.victimSelection(pid)
+            return self.victimSelection(pid, pageNumber)
 
         else:
 
@@ -45,10 +44,11 @@ class MemoryManagerPaging:
 
     # Proposito:te asigna un marco libre en la memoryPyhisical.
     # Precondicion: hay al menos un frame en self._freeFramesPhysicalMemory
-    def assignFramePhysicalMemory(self, pid):
+    def assignFramePhysicalMemory(self, pid, pageNumber):
         newUsedFrame = self._freeFramesPhysicalMemory.pop(0)
         newUsedFrame.setPid(pid)
-        newUsedFrame.setUsed(True)
+        #newUsedFrame.setUsed(True)
+        newUsedFrame.setPageNumber(pageNumber)
         self._usedFramesPhysicalMemory.add(newUsedFrame)
         self._cantFreeFramesPhysicalMemory -= 1
         return newUsedFrame.getBD()
@@ -59,8 +59,9 @@ class MemoryManagerPaging:
         pcb = self._pcbTable.lookUpPCB(victimFrame.getPId())
         page = pcb.getPageTable().searchPage(victimFrame.getBD())
         newUsedFrame = self._freeFramesSwap.pop(0)
-        newUsedFrame.setUsed(True)
+        #newUsedFrame.setUsed(True)
         newUsedFrame.setPid(victimFrame.getPId())
+        newUsedFrame.setPageNumber(victimFrame.getPageNumber())
         self._usedFramesSwap.append(newUsedFrame)
         page.setBDVirtualMemory(newUsedFrame.getBD())
         self._cantFreeFramesSwap -= 1
@@ -68,10 +69,11 @@ class MemoryManagerPaging:
 
     #Proposito:selecciona un marco usuado y le asigna un nuevo pid.
     #Precondicion: hay al menos un frame en self._freeFramesVirtualMemory
-    def victimSelection(self, pid):
+    def victimSelection(self, pid, pageNumber):
         victimFrame = self._usedFramesPhysicalMemory.getVictim()
         self.assignFrameSwap(victimFrame)
         victimFrame.setPid(pid)
+        victimFrame.setPageNumber(pageNumber)
         self._usedFramesPhysicalMemory.add(victimFrame)
         return victimFrame.getBD()
 
@@ -114,8 +116,6 @@ class MemoryManagerPaging:
         self.removeUsedPhysicalMemory(pid)
         self.removeUsedSwap(pid)
 
-    # mirar bien (SOlo para mi nahuel)
-    #
     #def changeUsedFramesToFree(self, pid,framesUsed,collectionUsedFrame,collectionFreeFrame,cantFreeFrames):
     #    for frame in framesUsed:
     #        frame.setPid(-1)
@@ -124,15 +124,14 @@ class MemoryManagerPaging:
     #        collectionFreeFrame.append(frame)
     #        cantFreeFrames+=1
 
-
-
     # Proposito: libera marcos ocupadas por un procedimiento en la memoria.
     # Precondicion: Deben existir los frame con los bds de <pages> en self._usedFramesPhysicalMemory
     def removeUsedPhysicalMemory(self, pid):
         frameUsed = self.getFrameUsedMemory(pid)
         for frame in frameUsed:
             frame.setPid(-1)
-            frame.setUsed(False)
+            #frame.setUsed(False)
+            frame.setPageNumber(-1)
             self._usedFramesPhysicalMemory.removeFrame(frame)
             self._freeFramesPhysicalMemory.append(frame)
             self._cantFreeFramesPhysicalMemory+=1
@@ -143,20 +142,11 @@ class MemoryManagerPaging:
         frameUsed = self.getFrameUsedSwap(pid)
         for frame in frameUsed:
             frame.setPid(-1)
-            frame.setUsed(False)
+            #frame.setUsed(False)
+            frame.setPageNumber(-1)
             self._usedFramesSwap.remove(frame)
             self._freeFramesSwap.append(frame)
             self._cantFreeFramesSwap += 1
-
-    #Proposito: Mueve al frame con bd <bdVirtualMemory> de self._usedFramesSwap a self._freeFramesSwap
-    #Precondicion: Debe existir el frame con bd <bdVirtualMemory> en self._usedFramesSwap
-    def moveToFreeSwap(self, bdVirtualMemory):
-        frameToFree = self.getFrameUsedSwap(bdVirtualMemory)
-        frameToFree.setPid(-1)
-        frameToFree.setUsed(False)
-        self._freeFramesSwap.append(frameToFree)
-        self._usedFramesSwap.remove(frameToFree)
-        self._cantFreeFramesSwap += 1
 
     #Proposito:Retorna la cantidad de marcos dispobibles de la memoria fisica.
     def sizeFreePhysicalMemory(self):
@@ -210,7 +200,7 @@ class MemoryManagerPaging:
         freeFramesSwap = []
         for ffs in self._freeFramesSwap:
             freeFramesSwap.append([ffs])
-        return "{p1}\n{p2}\n{p3}\n{p4}".format(p1=tabulate(usedFrames, headers=['Used Frames Memory   '], tablefmt='psql'),p2=tabulate(freeFrames, headers=['Free Frames Memory   '], tablefmt='psql'), p3=tabulate(usedFramesSwap, headers=['Used Frames SWAP     '], tablefmt='psql'), p4=tabulate(freeFramesSwap, headers=['Free Frames SWAP     '], tablefmt='psql'))
+        return "{p1}\n{p2}\n{p3}\n{p4}".format(p1=tabulate(usedFrames, headers=['Used Frames Memory           '], tablefmt='psql'),p2=tabulate(freeFrames, headers=['Free Frames Memory ={uff:2d}       '.format(uff=self._cantFreeFramesPhysicalMemory)], tablefmt='psql'), p3=tabulate(usedFramesSwap, headers=['Used Frames Swap             '], tablefmt='psql'), p4=tabulate(freeFramesSwap, headers=['Free Frames Swap ={ufs:2d}         '.format(ufs=self._cantFreeFramesSwap)], tablefmt='psql'))
 
 
 class FirstInFirstOutPageReplacementAlgorithm:
@@ -250,6 +240,8 @@ class FirstInFirstOutPageReplacementAlgorithm:
     #Precondicion:-
     def setQueue(self, queue):
         self._usedFrames.setQueue(queue)
+
+
 
 '''
 # !/usr/bin/env python

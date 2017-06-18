@@ -41,4 +41,4 @@ class Page:
         self.setPhysicalMemory(not self._physicalMemory)
 
     def __repr__(self):
-        return "Page: bdMemory={p:2d}  bdSwap={b:2d}  isInMemory={e:1}  isInSwap={c:1} \n".format(p=self._bdPhysicalMemory,b=self._bdVirtualMemory,e=self._physicalMemory,c=self._swap)
+        return "bdMemory={p:2d}  bdSwap={b:2d}  isInMemory={e:1}  isInSwap={c:1} \n".format(p=self._bdPhysicalMemory,b=self._bdVirtualMemory,e=self._physicalMemory,c=self._swap)

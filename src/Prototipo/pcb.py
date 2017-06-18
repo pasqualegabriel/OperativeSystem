@@ -3,7 +3,8 @@
 
 # Representa el PCB de un sistema, con colaboradores internos pid, status, pc, bd, limit
 # Es el procedimiento que se encarga de guardar el pid
-from Prototipo.page import Page
+from tabulate import tabulate
+
 from Prototipo.pageTable import PageTable
 from Prototipo.Schedulers.bursts import Bursts
 
@@ -97,4 +98,11 @@ class PCB:
         return PageTable(requiredPages)
 
     def __repr__(self):
-        return "{pageTable}\n".format(pageTable=self._pageTable)
+        #return tabulate(enumerate(self._pages), tablefmt='psql')
+        res = []
+        pageNumber = 0
+        for page in self._pageTable.getPages():
+            res.append(["Page: " + str(pageNumber) + "  {p}".format(p=page)])
+            pageNumber += 1
+        return tabulate(res, headers=["PCB  Pid={nro:2d}  Page Table:".format(nro=self._pid)], tablefmt='psql')
+        #return "{pageTable}\n".format(pageTable=self._pageTable)
