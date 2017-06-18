@@ -62,6 +62,8 @@ class MmuPages:
         if page.isInSwapOrDisk():
             self._intmanager.handle(Irq.PAGE_FAULT, page)
             log.printPageFalut()
+        else:
+            self._intmanager.handle(Irq.UPDATE_ReferenceBit,page)
 
         return self._memory.get(page.getBDPhysicalMemory() + pageOffset)
 

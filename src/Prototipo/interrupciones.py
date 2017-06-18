@@ -208,3 +208,12 @@ class InSwap(Interrupcion):
         self._loader.swapIN(pageInSwap.getBDPhysicalMemory(), pageInSwap.getBDVirtualMemory())
         pageInSwap.setBDPhysicalMemory(-1)
         pageInSwap.change()
+
+class UpdateReferenceBit(Interrupcion):
+    def __init__(self,pageReplacementAlgorithm):
+        self._pageReplacementAlgorithm= pageReplacementAlgorithm
+
+
+    def execute(self,page):
+        self._pageReplacementAlgorithm.updateReferenceBit(page.getBDPhysicalMemory())
+

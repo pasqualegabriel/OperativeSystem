@@ -4,31 +4,52 @@
 class Frame:
     def __init__(self, bd):
         self._bd   = bd
-        #self._used = False
         self._pid  = -1
         self._pageNumber = -1
+        self._referenceBit=1
 
+
+    #Proposito:Retorna el bd
+    #Pecondicion:-
     def getBD(self):
         return self._bd
 
-    #def isUsed(self):
-    #    return self._used
-
-    #def setUsed(self, valid):
-    #    self._used = valid
-
+    #Proposito:setea el pid<pid>
+    #Pecondicion:-
     def setPid(self, pid):
         self._pid = pid
 
+    #Proposito:retorna el pid
+    #Pecondicion:--
     def getPId(self):
         return self._pid
 
+    #Proposito:setea el pageNumber<pageNumber>
+    #Pecondicion:-
     def setPageNumber(self, pageNumber):
         self._pageNumber = pageNumber
 
+    #Proposito:retorna el pageNumber
+    #Pecondicion:-
     def getPageNumber(self):
         return self._pageNumber
 
+    #Proposito:retorna referenceBit
+    #Pecondicion:-
+    def getReferenceBit(self):
+        return self._referenceBit
+
+    #Proposito:setea el referenceBit<referenceBit>
+    #Pecondicion:
+    def setReferenceBit(self,referenceBit):
+        self._referenceBit=referenceBit
+
+    def setTimeBit(self,timeBit):
+        self._TimeBit=timeBit
+
+    def getTimeBit(self):
+        return self._TimeBit
+
+
     def __repr__(self):
         return "Pid={pid:2d}   Bd={bd:2d}   pageNumber={pn:2d}".format(pid=self._pid, bd=self._bd, pn=self._pageNumber)
-        #return "Pid={pid:2d}   Bd={bd:2d}   Used={used:1}".format(pid=self._pid, bd=self._bd, used=self._used)

@@ -8,7 +8,7 @@ class IntManager:
     def __init__(self):
         self._irq = {}
 
-    def setInterruptions(self, loader, dispatcher, scheduler, pcbTable, deviceManager, memoryManager, timer):
+    def setInterruptions(self, loader, dispatcher, scheduler, pcbTable, deviceManager, memoryManager, timer,pageReplacementAlgorithm):
         self.register(Irq.NEW, New(loader, dispatcher, scheduler, pcbTable))
         self.register(Irq.IO_IN, IoIn(dispatcher, pcbTable, deviceManager, scheduler, timer))
         self.register(Irq.IO_OUT, IoOut(dispatcher, scheduler, pcbTable))
@@ -17,7 +17,7 @@ class IntManager:
         self.register(Irq.COMPACT_MEMORY, CompactMemory(dispatcher, pcbTable, memoryManager))
         self.register(Irq.PAGE_FAULT, PageFault(loader, scheduler, pcbTable, dispatcher, memoryManager))
         self.register(Irq.IN_SWAP, InSwap(loader, scheduler, pcbTable, dispatcher))
-
+        self.register(Irq.UPDATE_ReferenceBit,UpdateReferenceBit(pageReplacementAlgorithm))
     def register(self, instructionName, routine):
         self._irq[instructionName] = routine
 
@@ -26,15 +26,15 @@ class IntManager:
 
 
 class Irq(Enum):
-    NEW            = 1
-    IO_IN          = 2
-    IO_OUT         = 3
-    KILL           = 4
-    TIME_OUT       = 5
-    COMPACT_MEMORY = 6
-    PAGE_FAULT     = 7
-    IN_SWAP        = 8
-
+    NEW                = 1
+    IO_IN              = 2
+    IO_OUT             = 3
+    KILL               = 4
+    TIME_OUT           = 5
+    COMPACT_MEMORY     = 6
+    PAGE_FAULT         = 7
+    IN_SWAP            = 8
+    UPDATE_ReferenceBit= 9
 
                 
     

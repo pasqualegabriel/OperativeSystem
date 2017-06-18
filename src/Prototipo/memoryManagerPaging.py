@@ -47,7 +47,6 @@ class MemoryManagerPaging:
     def assignFramePhysicalMemory(self, pid, pageNumber):
         newUsedFrame = self._freeFramesPhysicalMemory.pop(0)
         newUsedFrame.setPid(pid)
-        #newUsedFrame.setUsed(True)
         newUsedFrame.setPageNumber(pageNumber)
         self._usedFramesPhysicalMemory.add(newUsedFrame)
         self._cantFreeFramesPhysicalMemory -= 1
@@ -56,10 +55,12 @@ class MemoryManagerPaging:
     # Proposito:te asigna un marco libre del swap.
     # Precondicion: hay al menos un frame en self._freeFramesVirtualMemory
     def assignFrameSwap(self, victimFrame):
-        pcb = self._pcbTable.lookUpPCB(victimFrame.getPId())
+        pidVictimFrame=victimFrame.getPId()
+        pcb = self._pcbTable.lookUpPCB(pidVictimFrame)
         page = pcb.getPageTable().searchPage(victimFrame.getBD())
+        if self.isPageInSwap(page, pidVictimFrame):
+            return
         newUsedFrame = self._freeFramesSwap.pop(0)
-        #newUsedFrame.setUsed(True)
         newUsedFrame.setPid(victimFrame.getPId())
         newUsedFrame.setPageNumber(victimFrame.getPageNumber())
         self._usedFramesSwap.append(newUsedFrame)
@@ -76,6 +77,14 @@ class MemoryManagerPaging:
         victimFrame.setPageNumber(pageNumber)
         self._usedFramesPhysicalMemory.add(victimFrame)
         return victimFrame.getBD()
+
+    #Proposito:Denota true si page<page> con el pid<pid> ya fue cargada en swap.
+    #Precondcion:-
+    def isPageInSwap(self, page, pid):
+        for usedFrame in self._usedFramesSwap:
+            if page.getBDVirtualMemory()==usedFrame.getBD() and pid==usedFrame.getPId():
+                return True
+        return False
 
 
     # Proposito:denota true si hay al menos un marco en la memoria fisica.
@@ -97,17 +106,17 @@ class MemoryManagerPaging:
         return result
 
 
-    def freeFramesPhysicalMemory(self):
-        return self._freeFramesPhysicalMemory
+    #def freeFramesPhysicalMemory(self):
+    #    return self._freeFramesPhysicalMemory
 
-    def usedFramesPhysicalMemory(self):
-        return self._usedFramesPhysicalMemory
+    #def usedFramesPhysicalMemory(self):
+    #    return self._usedFramesPhysicalMemory
 
-    def freeFramesSwap(self):
-        return self._freeFramesSwap
+    #def freeFramesSwap(self):
+    #    return self._freeFramesSwap
 
-    def usedFramesSwap(self):
-        return self._usedFramesSwap
+    #def usedFramesSwap(self):
+    #    return self._usedFramesSwap
 
 
     # Proposito:libera marcos ocupadas por un por el <pid> en la memoria fisica y swap.
@@ -203,10 +212,12 @@ class MemoryManagerPaging:
         return "{p1}\n{p2}\n{p3}\n{p4}".format(p1=tabulate(usedFrames, headers=['Used Frames Memory           '], tablefmt='psql'),p2=tabulate(freeFrames, headers=['Free Frames Memory ={uff:2d}       '.format(uff=self._cantFreeFramesPhysicalMemory)], tablefmt='psql'), p3=tabulate(usedFramesSwap, headers=['Used Frames Swap             '], tablefmt='psql'), p4=tabulate(freeFramesSwap, headers=['Free Frames Swap ={ufs:2d}         '.format(ufs=self._cantFreeFramesSwap)], tablefmt='psql'))
 
 
-class FirstInFirstOutPageReplacementAlgorithm:
-    def __init__(self):
-        self._usedFrames = QueueFIFO()
 
+
+
+
+
+class aaa:
     #Proposito:Agrega un marco a la queue
     #Precondicion:---
     def add(self, frame):
@@ -241,154 +252,95 @@ class FirstInFirstOutPageReplacementAlgorithm:
     def setQueue(self, queue):
         self._usedFrames.setQueue(queue)
 
+    def updateReferenceBit(self,bd):
+        pass
 
-
-'''
-# !/usr/bin/env python
-# -*- coding: utf-8 -*-s
-
-from tabulate import tabulate
-
-from Prototipo.Bloque import Block
-from Prototipo.intManager import Irq
-
-class MemoryManagerFrame:
-    def __init__(self, memory, sizeFrame, PCBTable, cantFramesForPCB, swap):
-        self._memory           = memory
-        self._sizeFrame        = sizeFrame
-        self._cantFreePages    = 0
-        self._freeFrames       = self.calculateFreeFrames(self._memory.size())
-        self._usedFrames       = []
-        self._pcbTable         = PCBTable
-        self._swap             = swap
-        self._bitForReference  = 0
-
-    # Proposito:cede un marco.
-    # Precondiccion: -
-    def returnRequiredPages(self, pid):
-
-        if self.thereIsSpaceInMemoryFor():
-
-            frame = self._freeFrames.pop(0)
-            frame.setPid(pid)
-            frame.setUsed(True)
-            self._usedFrames.append(frame)
-            self._cantFreePages -= 1
-            return frame.getBD()
-
-        elif self._swap.thereIsSpaceInMemory():
-
-            return self.victimSelection(pid)
-
-        else:
-
-            raise SystemError("Insufficient memory")
-
-    # Proposito:Denota true si hay al menos un 1 espacio,caso contrario False
-    # Precondiccion:-
-    def thereIsSpaceInMemoryFor(self):
-        return self._cantFreePages > 0
-
-    # Proposito:retorna los marcos de la memoria.
-    # Precondiccion: -
-    def calculateFreeFrames(self, sizeMemory):
-        result = []
-        for i in range(0, (sizeMemory // self._sizeFrame)):
-            result.append(Frame(i * self._sizeFrame))
-            self._cantFreePages+=1
-        return result
-
-    # Proposito:libera marcos ocupadas por un procedimiento en la memoria.
-    # Precondicion:-
-    def freeMemory(self, pages):
-        for page in pages:
-            frameUsed=self.getFrameUsed(page.getBDPhysicalMemory())
-            frameUsed.setPid(-1)
-            frameUsed.setUsed(False)
-            self._freeFrames.append(frameUsed)
-            self._usedFrames.remove(frameUsed)
-            self._cantFreePages+=1
-
-
-    #Proposito:Retorna la cantidad de paginas disponibles
-    def sizeFree(self):
-        return self._cantFreePages
-
-    #Proposito:Retorna el tamaño del marco
-    #Precondicion:-
-    def sizeFrame(self):
-        return self._sizeFrame
-
-    def getFrameUsed(self,bd):
-        for frameUsed in self._usedFrames:
-            if frameUsed.getBD() == bd:
+    #Proposito:retorna el frame con el bd<bd>
+    #Precondicion:debe existir dicho frame
+    def searchFrame(self,bd):
+        for frameUsed in self.getUsedFrames():
+            if frameUsed.getBD()==bd:
                 return frameUsed
-        raise SystemError("ROMPIO")
 
-    def isMemoryManagerPaging(self):
-        return True
 
-    def getFreeFrames(self):
-        return self._freeFrames
+class FirstInFirstOutPageReplacementAlgorithm(aaa):
+    def __init__(self):
+        self._usedFrames = QueueFIFO()
+    #Proposito: selecciona un marco como victima y la retorna
+    #Precondicion:-
+    def getVictim(self):
+        return self._usedFrames.pop()
 
-    def getSwap(self):
-        return self._swap
 
-    def __repr__(self):
-        usedFrames = []
-        for uf in self._usedFrames:
-            usedFrames.append([uf])
-        freeFrames = []
-        for ff in self._freeFrames:
-            freeFrames.append([ff])
-        return "{p1}\n{p2}".format(p1=tabulate(usedFrames, headers=['Used Frames Memory   '], tablefmt='psql'),p2=tabulate(freeFrames, headers=['Free Frames Memory   '], tablefmt='psql'))
+class SecondChancePageReplacementAlgorithm(aaa):
+    def __init__(self):
+        self._usedFrames = QueueFIFO()
+    #Proposito: selecciona un marco como victima y la retorna
+    #Precondicion:-
+    def getVictim(self):
+        referenceBit=1
+        usedFrame=None
+        while referenceBit!=0:
+            usedFrame=self._usedFrames.pop()
+            if usedFrame.getReferenceBit()==1:
+                usedFrame.setReferenceBit(0)
+                self.add(usedFrame)
+            else:
+                referenceBit=0
+        return usedFrame
 
-class MemoryManagerFrameFIFO(MemoryManagerFrame):
+    #Proposito:actualiza el bit de referencia del frame con el bd<bd>
+    #Precondicion:---
+    def updateReferenceBit(self,bd):
+        self.searchFrame(bd).setReferenceBit(1)
 
-    def victimSelection(self,pid):
-        #self.ordering()
-        if len(self._usedFrames)>0:
-            victimFrame=self._usedFrames.pop(0)
-            pcb=self._pcbTable.lookUpPCB(victimFrame.getPId())
-            page=pcb.getPageTable().searchPage(victimFrame.getBD())
-            page.change()
-            self._swap.assignSpace(page,pcb.get_pid())
-            victimFrame.setPid(pid)
-            self._usedFrames.append(victimFrame)
-            return victimFrame.getBD()
-        else:
-            raise SystemError("ROMPIO EN VICTIMA")
 
-    def ordering(self):
-        for i in range(1, len(self._usedFrames)):
-            for j in range(0, len(self._usedFrames) - i):
-                if self._usedFrames[j].getBD() > self._usedFrames[j + 1].getBD():
-                    k = self._usedFrames[j + 1]
-                    self._usedFrames[j + 1] = self._usedFrames[j]
-                    self._usedFrames[j] = k
+class LeastRecentlyUsedPageReplacementAlgorithm(aaa):
+    def __init__(self):
+        self._usedFrames=[]
+        self._countTimer=0
 
-class Frame:
-    def __init__(self,bd):
-        self._bd=bd
-        self._used=False
-        self._pid=-1
-        self._bitForAlgorithm=False
+    #Proposito:Agrega un marco a la queue
+    #Precondicion:---
+    def add(self, frame):
+        frame.setTimeBit(self._countTimer)
+        self._usedFrames.append(frame)
+        self._countTimer+=1
 
-    def getBD(self):
-        return self._bd
 
-    def isUsed(self):
-        return self._used
+    #Proposito:selecciona una victima y la retorna
+    #Precondicion:la lista de usedFrame debe de haber al menos uno
+    def getVictim(self):
+        minFrame = self._usedFrames[0]
+        lenUsedFrames=len(self._usedFrames)
+        if lenUsedFrames>1:
+            for index in range(1,lenUsedFrames):
+                compare = self._usedFrames[index]
+                if minFrame.getTimeBit()> compare.getTimeBit():
+                    minFrame=compare
 
-    def setUsed(self,valid):
-        self._used=valid
+        self._usedFrames.remove(minFrame)
+        return minFrame
 
-    def setPid(self,pid):
-        self._pid=pid
+    #Proposito: retorna un frame con el <bd>
+    #Precondicion: debe existir <bd> en self._usedFrames
+    def getFrame(self, pid):
+        res=[]
+        for frameUsed in self._usedFrames:
+            if frameUsed.getPId() == pid:
+                res.append(frameUsed)
+        return  res
 
-    def getPId(self):
-        return self._pid
 
-    def __repr__(self):
-        return "Pid={pid:2d}   Bd={bd:2d}   Used={used:1}".format(pid=self._pid, bd=self._bd, used=self._used)
-'''
+    #Proposito:actualiza el bit de tiempo del frame con el bd<bd>
+    #Precondicion:---
+    def updateReferenceBit(self,bd):
+        self.searchFrame(bd).setTimeBit(self._countTimer)
+        self._countTimer+=1
+
+    #Proposito:retorna el frame con el bd<bd>
+    #Precondicion:debe existir dicho frame
+    def searchFrame(self,bd):
+        for frameUsed in self._usedFrames:
+            if frameUsed.getBD()==bd:
+                return frameUsed

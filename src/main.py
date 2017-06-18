@@ -16,6 +16,10 @@ if __name__ == '__main__':
     p1 = Program("Word.exe",  [CPU(1)], 2)
     p2 = Program("paint.exe", [CPU(3)], 1)
     p3 = Program("vlc.exe",   [CPU(4)], 3)
+    #0 = Program("SO.exe", [IO_2(3)], 4)
+    #p1 = Program("Word.exe", [IO_2(1)], 2)
+    #p2 = Program("paint.exe", [IO_2(3)], 1)
+    #p3 = Program("vlc.exe", [IO_2(3)], 3)
     #######################################################
 
     disco = Disco()

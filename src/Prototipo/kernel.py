@@ -35,11 +35,15 @@ class Kernel:
 
         # PAGINAICON
         self._sizeFrame = 4
-        self._pageReplacementAlgorithm = FirstInFirstOutPageReplacementAlgorithm()
-        self._swap = Memory(self._memory.size())
-        self._memoryManager = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable, self._swap, self._pageReplacementAlgorithm,self._intmanager)
-        self._mmu = MmuPages(self._memory, self._sizeFrame, self._intmanager)
-        self._loader = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
+
+        self._pageReplacementAlgorithm  = LeastRecentlyUsedPageReplacementAlgorithm()
+        #self._pageReplacementAlgorithm = SecondChancePageReplacementAlgorithm()
+        #self._pageReplacementAlgorithm = FirstInFirstOutPageReplacementAlgorithm()
+        self._swap                      = Memory(self._memory.size())
+        self._memoryManager             = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable,
+                                          self._swap, self._pageReplacementAlgorithm,self._intmanager)
+        self._mmu                       = MmuPages(self._memory, self._sizeFrame, self._intmanager)
+        self._loader                    = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
 
         ######################################################################################################################################
         #self._scheduler = self._schedulerFactory.getScheduler(self._pcbTable)
@@ -47,7 +51,7 @@ class Kernel:
         self._cpu = Cpu(self._mmu, self._intmanager)
         self._dispatcher = Dispatcher(self._mmu, self._cpu, self._timer)
         self._deviceManager = DeviceManager(self._intmanager)
-        self._intmanager.setInterruptions(self._loader, self._dispatcher, self._scheduler, self._pcbTable, self._deviceManager, self._memoryManager, self._timer)
+        self._intmanager.setInterruptions(self._loader, self._dispatcher, self._scheduler, self._pcbTable, self._deviceManager, self._memoryManager, self._timer,self._pageReplacementAlgorithm)
         self._newPrograms = NewPrograms(self._intmanager)
         self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
 
