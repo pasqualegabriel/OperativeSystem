@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-s
+from Prototipo.Schedulers.SchedulersFactory import *
 from Prototipo.memoryManagerContinuousAssignment import *
 from Prototipo.swap import Swap
 from Prototipo.newProgram import NewPrograms
@@ -16,11 +17,12 @@ from Prototipo.pcbTable import PCBTable
 from Prototipo.print import *
 
 class Kernel:
-    def __init__(self, disco, schedulerFactory):
-        self._schedulerFactory = schedulerFactory
+    def __init__(self, disco):
         self._disco = disco
         self._memory = Memory(8)
         self._pcbTable = PCBTable()
+        self._schedulerFactory = SchedulersFactory(self._pcbTable)
+        self._scheduler=self._schedulerFactory.getScheduler()
         self._intmanager = IntManager()
 
         # ASIGNACION CONTINUA
@@ -40,7 +42,7 @@ class Kernel:
         self._loader = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
 
         ######################################################################################################################################
-        self._scheduler = self._schedulerFactory.getScheduler(self._pcbTable)
+        #self._scheduler = self._schedulerFactory.getScheduler(self._pcbTable)
         self._timer = self._schedulerFactory.getTimer(self._intmanager)
         self._cpu = Cpu(self._mmu, self._intmanager)
         self._dispatcher = Dispatcher(self._mmu, self._cpu, self._timer)

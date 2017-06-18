@@ -25,8 +25,8 @@ if __name__ == '__main__':
 
     programs = [(0, "SO.exe"), (1, "Word.exe"), (2, "paint.exe"), (3, "vlc.exe")]
 
-    schedulersFactory = SchedulersFactory()
-    kernel = Kernel(disco, schedulersFactory)
+    #schedulersFactory = SchedulersFactory()
+    kernel = Kernel(disco)
     kernel.execPrograms(programs, log)
 
     '''
