@@ -105,19 +105,8 @@ class MemoryManagerPaging:
             result.append(Frame(i * self._sizeFrame))
         return result
 
-
-    #def freeFramesPhysicalMemory(self):
-    #    return self._freeFramesPhysicalMemory
-
-    #def usedFramesPhysicalMemory(self):
-    #    return self._usedFramesPhysicalMemory
-
-    #def freeFramesSwap(self):
-    #    return self._freeFramesSwap
-
-    #def usedFramesSwap(self):
-    #    return self._usedFramesSwap
-
+    def getUsedFramesPhysicalMemory(self):
+        return self._usedFramesPhysicalMemory
 
     # Proposito:libera marcos ocupadas por un por el <pid> en la memoria fisica y swap.
     # Precondicion:-
@@ -340,7 +329,7 @@ class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
 
     #Proposito:actualiza el bit de tiempo del frame con el bd<bd>
     #Precondicion:---
-    def updateReferenceBit(self,bd):
+    def updateReferenceBit(self, bd):
         self.searchFrame(bd).setTimeBit(self._countTimer)
         self._countTimer+=1
 

@@ -210,10 +210,10 @@ class InSwap(Interrupcion):
         pageInSwap.change()
 
 class UpdateReferenceBit(Interrupcion):
-    def __init__(self,pageReplacementAlgorithm):
-        self._pageReplacementAlgorithm= pageReplacementAlgorithm
-
+    def __init__(self, memoryManager):
+        self._memoryManager = memoryManager
 
     def execute(self,page):
-        self._pageReplacementAlgorithm.updateReferenceBit(page.getBDPhysicalMemory())
+        pageReplacementAlgorithm = self._memoryManager.getUsedFramesPhysicalMemory()
+        pageReplacementAlgorithm.updateReferenceBit(page.getBDPhysicalMemory())
 
