@@ -63,6 +63,7 @@ class ContextSwitch(Interrupcion):
             pcb.set_status("running")
             self._dispatcher.load(pcb)
 
+
 class New(ChangePCBofCPU):
     def __init__(self, loader, dispatcher, scheduler, pcbTable):
         self._nexPid     = 0
@@ -95,7 +96,7 @@ class Kill(ContextSwitch):
         self._dispatcher.idlePc()
         self.contextSwitch()
         if not self._timer is None:
-            self._timer.set_timer()
+            self._timer.resetTimer()
 
 
 class IoIn(ContextSwitch):
@@ -114,7 +115,7 @@ class IoIn(ContextSwitch):
         self._dispatcher.idlePc()
         self.contextSwitch()
         if not self._timer is None:
-            self._timer.set_timer()
+            self._timer.resetTimer()
 
 class IoOut(ChangePCBofCPU):
     def __init__(self, dispatcher, scheduler, pcbTable):

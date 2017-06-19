@@ -3,7 +3,7 @@ from Prototipo.Schedulers.Tuple import Tuple
 class Queue:
     def __init__(self):
         self._items = []
-        self._len = 0
+        self._len   = 0
 
     def notIsEmpty(self):
         return len(self._items) != 0
@@ -37,7 +37,6 @@ class QueueFIFO(Queue):
             raise ValueError("Queue is None")
 
 
-
 class QueueSJF(Queue):
     def add(self, pid, burst):
         self._items.append(Tuple(pid, burst))
@@ -64,31 +63,4 @@ class QueueSJF(Queue):
             res.append(i.get_primer())
         return res
 
-'''
-class QueuePriority(Queue):
-    def add(self, element, time):
-        tuple=Tuple(element,time)
-        self.set_WaitingTimeForTheHeadInAdd(time)
-        self._items.append(tuple)
 
-    def pop(self):
-        try:
-            element = self._items.pop(0)
-            self.set_WaitingTimeForTheHeadInPop()
-            return element.get_primer()
-        except:
-            raise ValueError("Queue is None")
-
-    def set_WaitingTimeForTheHeadInAdd(self,time):
-        if not self.notIsEmpty():
-            self._WaitingTimeForTheHead = time
-
-    def set_WaitingTimeForTheHeadInPop(self):
-        if self.notIsEmpty():
-            element=self._items.pop(0)
-            self._WaitingTimeForTheHead=element.get_segundo()
-            self.insert(0,element)
-
-    def get_WaitingTimeForTheHead(self):
-        return self._WaitingTimeForTheHead
-'''

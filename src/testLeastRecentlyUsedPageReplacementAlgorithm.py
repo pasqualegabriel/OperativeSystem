@@ -3,8 +3,7 @@
 
 import unittest
 
-from Prototipo.frame import Frame
-from Prototipo.memoryManagerPaging import LeastRecentlyUsedPageReplacementAlgorithm
+from Prototipo.memoryManagerPaging import *
 
 class tester(unittest.TestCase):
     def setUp(self):
@@ -15,9 +14,10 @@ class tester(unittest.TestCase):
         self._frame4 = Frame(4)
         self._frame5 = Frame(5)
         self._algorithmLRU = LeastRecentlyUsedPageReplacementAlgorithm()
+        self._algorithmLRUWithQueue = LeastRecentlyUsedPageReplacementAlgorithmWithQueue()
 
-    def test0001WithThreeFrames(self):
-        # mismo ejemplo del pdf
+    def test0001LeastRecentlyUsedPageReplacementAlgorithmWithThreeFrames(self):
+
         self._algorithmLRU.add(self._frame5)
         self._algorithmLRU.add(self._frame0)
         self._algorithmLRU.add(self._frame1)
@@ -89,6 +89,60 @@ class tester(unittest.TestCase):
         self._algorithmLRU.add(self._frame1)
         # usedFrames: 2 3 1
 
+    def test0002LeastRecentlyUsedPageReplacementAlgorithmWithQueueWithThreeFrames(self):
+
+        self._algorithmLRUWithQueue.add(self._frame5)
+        self._algorithmLRUWithQueue.add(self._frame0)
+        self._algorithmLRUWithQueue.add(self._frame1)
+        # Se lleno la memoria
+        # usedFrames: 5 0 1
+
+        # PageFault: Se agrega el 2 y sale el 5
+        self.assertEqual(5, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame2)
+        # usedFrames: 0 1 2
+
+        # Se accede al 0
+        self._algorithmLRUWithQueue.updateReferenceBit(self._frame0.getBD())
+
+        # PageFault: Se agrega el 3 y sale el 1
+        self.assertEqual(1, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame3)
+        # usedFrames: 0 2 3
+
+        # Se accede al 0
+        self._algorithmLRUWithQueue.updateReferenceBit(self._frame0.getBD())
+
+        # PageFault: Se agrega el 4 y sale el 2
+        self.assertEqual(2, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame4)
+        # usedFrames: 0 3 4
+
+        # PageFault: Se agrega el 2 y sale el 3
+        self.assertEqual(3, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame2)
+        # usedFrames: 0 4 2
+
+        # PageFault: Se agrega el 3 y sale el 0
+        self.assertEqual(0, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame3)
+        # usedFrames: 4 2 3
+
+        # PageFault: Se agrega el 0 y sale el 4
+        self.assertEqual(4, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame0)
+        # usedFrames: 2 3 0
+
+        # Se accede al 3
+        self._algorithmLRUWithQueue.updateReferenceBit(self._frame3.getBD())
+
+        # Se accede al 2
+        self._algorithmLRUWithQueue.updateReferenceBit(self._frame2.getBD())
+
+        # PageFault: Se agrega el 1 y sale el 0
+        self.assertEqual(0, self._algorithmLRUWithQueue.getVictim().getBD())
+        self._algorithmLRUWithQueue.add(self._frame1)
+        # usedFrames: 2 3 1
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-s
 
 class Dispatcher:
-    def __init__(self, mmu, cpu, timer):
+    def __init__(self, mmu, cpu):
         self._mmu = mmu
         self._cpu = cpu
-        self._timer=timer
         self._current = 0
 
     # Proposito: retorna verdadero si el cpu esta en estado inactivo

@@ -24,11 +24,11 @@ class SchedulersFactory:
                           6:SchedulerSJFNonPreemptive()}
 
     def getScheduler(self):
-        scheduler=self._schedulers.get(self._id)
+        scheduler = self._schedulers.get(self._id)
 
-        if scheduler.isSchedulerRoundRobin():
+        if self._id == 4:
 
-            self._quantum=input("Quantum?\n")
+            self._quantum = input("Quantum?\n")
 
         return scheduler
 

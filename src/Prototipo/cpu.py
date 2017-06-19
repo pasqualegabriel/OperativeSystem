@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-s
 
 from time import sleep
-from tokenize import String
-
 from Prototipo.intManager import Irq
-
 
 class Cpu:
     def __init__(self, mmu, intManager):
@@ -29,10 +26,10 @@ class Cpu:
         self._pc += 1
 
     def _decode(self):
-        if (self._ir.isExit()):
+        if self._ir.isExit():
             self._intManager.handle(Irq.KILL, None)
 
-        elif (self._ir.isIO()):
+        elif self._ir.isIO():
             self._intManager.handle(Irq.IO_IN, self._ir)
                 
     def _execute(self, log):

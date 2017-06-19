@@ -114,14 +114,6 @@ class MemoryManagerPaging:
         self.removeUsedPhysicalMemory(pid)
         self.removeUsedSwap(pid)
 
-    #def changeUsedFramesToFree(self, pid,framesUsed,collectionUsedFrame,collectionFreeFrame,cantFreeFrames):
-    #    for frame in framesUsed:
-    #        frame.setPid(-1)
-    #        frame.setUsed(False)
-    #        collectionUsedFrame.removeFrame(frame)
-    #        collectionFreeFrame.append(frame)
-    #        cantFreeFrames+=1
-
     # Proposito: libera marcos ocupadas por un procedimiento en la memoria.
     # Precondicion: Deben existir los frame con los bds de <pages> en self._usedFramesPhysicalMemory
     def removeUsedPhysicalMemory(self, pid):
@@ -202,18 +194,14 @@ class MemoryManagerPaging:
 
 
 class PageReplacementAlgorithm:
-    #Proposito:Agrega un marco a la queue
-    #Precondicion:---
-    def add(self, frame):
-        self._usedFrames.add(frame)
 
     #Proposito:remueve un marco de la queue
     #precondcion: debe existir <frame> en self._usedFrames
     def removeFrame(self, frame):
         self._usedFrames.remove(frame)
 
-    #Proposito: retorna un frame con el <bd>
-    #Precondicion: debe existir <bd> en self._usedFrames
+    #Proposito: retorna los frame con los pid<pid>
+    #Precondicion: -
     def getFrame(self, pid):
         res=[]
         for frameUsed in self.getUsedFrames():
@@ -231,25 +219,28 @@ class PageReplacementAlgorithm:
     def getVictim(self):
         return self._usedFrames.pop()
 
-    #Proposito: setea una lista
-    #Precondicion:-
-    def setQueue(self, queue):
-        self._usedFrames.setQueue(queue)
-
+    # Proposito: Actualiza el frame referenciado
+    # precondcion: debe existir el frame con el bd<bd> en self._usedFrames
     def updateReferenceBit(self,bd):
         pass
 
     #Proposito:retorna el frame con el bd<bd>
     #Precondicion:debe existir dicho frame
-    def searchFrame(self,bd):
+    def searchFrame(self, bd):
         for frameUsed in self.getUsedFrames():
-            if frameUsed.getBD()==bd:
+            if frameUsed.getBD() == bd:
                 return frameUsed
 
 
 class FirstInFirstOutPageReplacementAlgorithm(PageReplacementAlgorithm):
     def __init__(self):
         self._usedFrames = QueueFIFO()
+
+    #Proposito:Agrega un marco a la queue
+    #Precondicion:---
+    def add(self, frame):
+        self._usedFrames.add(frame)
+
     #Proposito: selecciona un marco como victima y la retorna
     #Precondicion:-
     def getVictim(self):
@@ -266,22 +257,18 @@ class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
         frame.setReferenceBit(1)
         self._usedFrames.add(frame)
 
-    #Proposito: selecciona un marco como victima y la retorna
-    #Precondicion:-
+    # Proposito: selecciona un marco como victima y la retorna
+    # Precondicion:-
     def getVictim(self):
         referenceBit=1
         usedFrame=None
-        for frame in self._usedFrames.list():
-            if frame.getReferenceBit()==0:
-                self._usedFrames.remove(frame)
-                return frame
-        while referenceBit!=0:
-            usedFrame=self._usedFrames.pop()
-            if usedFrame.getReferenceBit()==1:
+        while referenceBit != 0:
+            usedFrame = self._usedFrames.pop()
+            if usedFrame.getReferenceBit() == 1:
                 usedFrame.setReferenceBit(0)
                 self._usedFrames.add(usedFrame)
             else:
-                referenceBit=0
+                referenceBit = 0
         return usedFrame
 
     #Proposito:actualiza el bit de referencia del frame con el bd<bd>
@@ -292,8 +279,8 @@ class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
 
 class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
     def __init__(self):
-        self._usedFrames=[]
-        self._countTimer=0
+        self._usedFrames = []
+        self._countTimer = 0
 
     #Proposito:Agrega un marco a la queue
     #Precondicion:---
@@ -302,30 +289,18 @@ class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
         self._usedFrames.append(frame)
         self._countTimer+=1
 
-
     #Proposito:selecciona una victima y la retorna
     #Precondicion:la lista de usedFrame debe de haber al menos uno
     def getVictim(self):
         minFrame = self._usedFrames[0]
-        lenUsedFrames=len(self._usedFrames)
-        if lenUsedFrames>1:
-            for index in range(1,lenUsedFrames):
+        lenUsedFrames = len(self._usedFrames)
+        if lenUsedFrames > 1:
+            for index in range(1, lenUsedFrames):
                 compare = self._usedFrames[index]
-                if minFrame.getTimeBit()> compare.getTimeBit():
-                    minFrame=compare
-
+                if minFrame.getTimeBit() > compare.getTimeBit():
+                    minFrame = compare
         self._usedFrames.remove(minFrame)
         return minFrame
-
-    #Proposito: retorna un frame con el <bd>
-    #Precondicion: debe existir <bd> en self._usedFrames
-    def getFrame(self, pid):
-        res=[]
-        for frameUsed in self._usedFrames:
-            if frameUsed.getPId() == pid:
-                res.append(frameUsed)
-        return  res
-
 
     #Proposito:actualiza el bit de tiempo del frame con el bd<bd>
     #Precondicion:---
@@ -337,3 +312,14 @@ class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
     # Proposito:-
     def getUsedFrames(self):
         return self._usedFrames
+
+
+class LeastRecentlyUsedPageReplacementAlgorithmWithQueue(FirstInFirstOutPageReplacementAlgorithm):
+
+    #Proposito:actualiza el bit de tiempo del frame con el bd<bd>
+    #Precondicion:---
+    def updateReferenceBit(self, bd):
+        frameReferenced = self.searchFrame(bd)
+        self._usedFrames.remove(frameReferenced)
+        self.add(frameReferenced)
+

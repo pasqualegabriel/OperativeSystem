@@ -60,6 +60,7 @@ class LoaderPages(Loader):
         self._disco = disco
         self._memoryManager = memoryManager
         self._swap=swap
+
     #Proposito:solicita un marco para un pagina, luego la carga en la memoria, tambien actualiza el pcb.
     #Precondicion:
     def load(self, pcb, nameProgram):
@@ -84,17 +85,15 @@ class LoaderPages(Loader):
         positionInstruction = page.getBDPhysicalMemory()
         for instruction in instructions:
             self._memory.setPos(positionInstruction, instruction)
-            positionInstruction+=1
+            positionInstruction += 1
 
-        #for positionMemory in range(page.getBd() ,page.getBd() + self.getMemoryManager().sizeFrame()):
-        #    self._memory.set_pos(positionMemory, instructions[positionInstruction])
-        #    positionInstruction+=1
 
     def swapIN(self, bdPhysicalMemory, keySwap):
         instruction = []
         for index in range(bdPhysicalMemory, bdPhysicalMemory + self.getMemoryManager().sizeFrame()):
             instruction.append(self._memory.get(index))
         self._swap.setPos(keySwap, instruction)
+
 
     def swapOut(self, keySwap):
         return self._swap.get(keySwap)
