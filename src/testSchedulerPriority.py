@@ -35,7 +35,7 @@ class MyTestCase(unittest.TestCase):
         self._pcbTable.addPCB(self._PCBProgram2)
         self._pcbTable.addPCB(self._PCBProgram3)
         self._pcbTable.addPCB(self._PCBProgram4)
-        self._aging=3
+        self._aging = 3
         self._shedulerTest=SchedulerPriorityPreemptive(self._pcbTable, self._aging)
 
         # Se agregan los pid, prioridad y los primeros burst de los tres programas

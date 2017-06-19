@@ -38,10 +38,9 @@ class MyTestCase(unittest.TestCase):
 
         self._memory = Memory(64)
         self._pcbTable = PCBTable()
-        self._intmanager = IntManager()
         self._swap = Swap()##hacer que conosca el sizeFrame
-        self._memoryManager = MemoryManagerPaging(self._memory, 4, self._pcbTable, self._swap, FirstInFirstOutPageReplacementAlgorithm(), self._intmanager) # El numero indica el tamanio de un frame
-        self._mmu = MmuPages(self._memory, self._memoryManager.sizeFrame(),self._intmanager)
+        self._memoryManager = MemoryManagerPaging(self._memory, 4, self._pcbTable, self._swap, FirstInFirstOutPageReplacementAlgorithm(), mock.Mock()) # El numero indica el tamanio de un frame
+        self._mmu = MmuPages(self._memory, self._memoryManager.sizeFrame(),mock.Mock())
         self._loader = LoaderPages(self._memory, self._mmu,disco, self._memoryManager, self._swap )
         self._page  =Page()
         self._pageTable=PageTable(2)
@@ -49,7 +48,6 @@ class MyTestCase(unittest.TestCase):
         self._pageTable.getPages()[0].setPhysicalMemory(True)
         self._pageTable.getPages()[1].setBDPhysicalMemory(8)
         self._pageTable.getPages()[1].setPhysicalMemory(True)
-        #self._page.setBDPhysicalMemory(0)
         self._mmu.setPosition2(self._pageTable)
 
         self._loader.loadInPhysicalMemory(p6.instructions(),self._pageTable.getPages()[0])

@@ -5,14 +5,11 @@ from Prototipo.Schedulers.queues import *
 from Prototipo.Schedulers.scheduler import Scheduler
 
 class SchedulerPriorityPreemptive(Scheduler):
-    def __init__(self, pcbTable):
+    def __init__(self, pcbTable, aging):
         self._priority = {1: QueueFIFO(), 2: QueueFIFO(), 3: QueueFIFO(), 4: QueueFIFO(), 5: QueueFIFO()}
         self._accountant = 0
         self._PCBTable = pcbTable
-
-
-    def update(self):
-        self._aging = int(input("Aging?\n"))
+        self._aging = aging
 
     def add(self, pcb):
         tupleWithPidAndWaitingTime = (pcb.get_pid(), self._accountant + self._aging)

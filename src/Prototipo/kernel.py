@@ -22,7 +22,7 @@ class Kernel:
         self._memory = Memory(8)
         self._pcbTable = PCBTable()
         self._schedulerFactory = SchedulersFactory(self._pcbTable)
-        self._scheduler=self._schedulerFactory.getScheduler()
+        self._scheduler = self._schedulerFactory.getScheduler()
         self._intmanager = IntManager()
 
         # ASIGNACION CONTINUA
@@ -35,18 +35,15 @@ class Kernel:
 
         # PAGINAICON
         self._sizeFrame = 4
-
-        self._pageReplacementAlgorithm  = LeastRecentlyUsedPageReplacementAlgorithm()
-        #self._pageReplacementAlgorithm = SecondChancePageReplacementAlgorithm()
+        #self._pageReplacementAlgorithm = LeastRecentlyUsedPageReplacementAlgorithm()
+        self._pageReplacementAlgorithm = SecondChancePageReplacementAlgorithm()
         #self._pageReplacementAlgorithm = FirstInFirstOutPageReplacementAlgorithm()
         self._swap                      = Memory(self._memory.size())
-        self._memoryManager             = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable,
-                                          self._swap, self._pageReplacementAlgorithm,self._intmanager)
+        self._memoryManager             = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable, self._swap, self._pageReplacementAlgorithm,self._intmanager)
         self._mmu                       = MmuPages(self._memory, self._sizeFrame, self._intmanager)
         self._loader                    = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
 
         ######################################################################################################################################
-        #self._scheduler = self._schedulerFactory.getScheduler(self._pcbTable)
         self._timer = self._schedulerFactory.getTimer(self._intmanager)
         self._cpu = Cpu(self._mmu, self._intmanager)
         self._dispatcher = Dispatcher(self._mmu, self._cpu, self._timer)

@@ -27,7 +27,7 @@ class Queue:
         self._items = items
 
 class QueueFIFO(Queue):
-    def add(self,pid):
+    def add(self, pid):
         self._items.append(pid)
 
     def pop(self):

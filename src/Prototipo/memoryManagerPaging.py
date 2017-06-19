@@ -212,12 +212,7 @@ class MemoryManagerPaging:
         return "{p1}\n{p2}\n{p3}\n{p4}".format(p1=tabulate(usedFrames, headers=['Used Frames Memory           '], tablefmt='psql'),p2=tabulate(freeFrames, headers=['Free Frames Memory ={uff:2d}       '.format(uff=self._cantFreeFramesPhysicalMemory)], tablefmt='psql'), p3=tabulate(usedFramesSwap, headers=['Used Frames Swap             '], tablefmt='psql'), p4=tabulate(freeFramesSwap, headers=['Free Frames Swap ={ufs:2d}         '.format(ufs=self._cantFreeFramesSwap)], tablefmt='psql'))
 
 
-
-
-
-
-
-class aaa:
+class PageReplacementAlgorithm:
     #Proposito:Agrega un marco a la queue
     #Precondicion:---
     def add(self, frame):
@@ -263,7 +258,7 @@ class aaa:
                 return frameUsed
 
 
-class FirstInFirstOutPageReplacementAlgorithm(aaa):
+class FirstInFirstOutPageReplacementAlgorithm(PageReplacementAlgorithm):
     def __init__(self):
         self._usedFrames = QueueFIFO()
     #Proposito: selecciona un marco como victima y la retorna
@@ -272,30 +267,41 @@ class FirstInFirstOutPageReplacementAlgorithm(aaa):
         return self._usedFrames.pop()
 
 
-class SecondChancePageReplacementAlgorithm(aaa):
+class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
     def __init__(self):
         self._usedFrames = QueueFIFO()
+
+    # Proposito:Agrega un marco a la queue
+    # Precondicion:---
+    def add(self, frame):
+        frame.setReferenceBit(1)
+        self._usedFrames.add(frame)
+
     #Proposito: selecciona un marco como victima y la retorna
     #Precondicion:-
     def getVictim(self):
         referenceBit=1
         usedFrame=None
+        for frame in self._usedFrames.list():
+            if frame.getReferenceBit()==0:
+                self._usedFrames.remove(frame)
+                return frame
         while referenceBit!=0:
             usedFrame=self._usedFrames.pop()
             if usedFrame.getReferenceBit()==1:
                 usedFrame.setReferenceBit(0)
-                self.add(usedFrame)
+                self._usedFrames.add(usedFrame)
             else:
                 referenceBit=0
         return usedFrame
 
     #Proposito:actualiza el bit de referencia del frame con el bd<bd>
     #Precondicion:---
-    def updateReferenceBit(self,bd):
+    def updateReferenceBit(self, bd):
         self.searchFrame(bd).setReferenceBit(1)
 
 
-class LeastRecentlyUsedPageReplacementAlgorithm(aaa):
+class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
     def __init__(self):
         self._usedFrames=[]
         self._countTimer=0
@@ -338,9 +344,7 @@ class LeastRecentlyUsedPageReplacementAlgorithm(aaa):
         self.searchFrame(bd).setTimeBit(self._countTimer)
         self._countTimer+=1
 
-    #Proposito:retorna el frame con el bd<bd>
-    #Precondicion:debe existir dicho frame
-    def searchFrame(self,bd):
-        for frameUsed in self._usedFrames:
-            if frameUsed.getBD()==bd:
-                return frameUsed
+    # Proposito:retorna la lista de frames usados
+    # Proposito:-
+    def getUsedFrames(self):
+        return self._usedFrames

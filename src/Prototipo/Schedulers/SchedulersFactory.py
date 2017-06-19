@@ -10,41 +10,27 @@ from Prototipo.timer import Timer
 class SchedulersFactory:
     def __init__(self,pcbTable):
         self._id = int(input("Elegir Scheduler:\n1 SchedulerFCFS\n2 SchedulerPriorityPreemptive\n3 SchedulerPriorityNonPreemptive\n4 SchedulerRoundRobin\n5 SchedulerSJFPreemptive\n6 SchedulerSJFNonPreemptive\n".format()))
+        self._quantum = 3
+        self._aging = None
+
+        if self._id == 2 or self._id == 3:
+            self._aging = int(input("Aging?\n"))
+
         self._schedulers={1:SchedulerFCFS(),
-                          2:SchedulerPriorityPreemptive(pcbTable),
-                          3:SchedulerPriorityNonPreemptive(pcbTable),
+                          2:SchedulerPriorityPreemptive(pcbTable, self._aging),
+                          3:SchedulerPriorityNonPreemptive(pcbTable, self._aging),
                           4:SchedulerRoundRobin(),
                           5:SchedulerSJFPreemptive(),
                           6:SchedulerSJFNonPreemptive()}
 
-        self._quantum = 3
-
-
     def getScheduler(self):
         scheduler=self._schedulers.get(self._id)
-        scheduler.update()
 
         if scheduler.isSchedulerRoundRobin():
 
             self._quantum=input("Quantum?\n")
 
         return scheduler
-        #if self._id == 1:
-        #    self._scheduler = SchedulerFCFS()
-        #elif self._id == 2:
-        #    aging = input("Aging?\n")
-        #    self._scheduler = SchedulerPriorityPreemptive(pcbTable, int(aging))
-        #elif self._id == 3:
-        #    aging = input("Aging?\n")
-        #    self._scheduler = SchedulerPriorityNonPreemptive(pcbTable, int(aging))
-        #elif self._id == 4:
-        #    self._quantum = input("Quantum?\n")
-        #    self._scheduler = SchedulerRoundRobin()
-        #elif self._id == 5:
-        #    self._scheduler = SchedulerSJFPreemptive()
-        #elif self._id == 6:
-        #    self._scheduler = SchedulerSJFNonPreemptive()
-        #return self._scheduler
 
 
     def getTimer(self, intManager):

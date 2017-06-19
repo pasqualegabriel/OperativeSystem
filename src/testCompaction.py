@@ -66,7 +66,7 @@ class MyTestCase(unittest.TestCase):
         self._memoryManager = MemoryManagerContinuousAssignmentFirstFit(self._memory, self._pcbTable, self._intmanager, 2)
         self._loader = LoaderBlocks(self._memory, Mmu(self._memory), self._disk, self._memoryManager, mock.Mock())
         self._intmanager.setInterruptions(self._loader, mock.Mock(), mock.Mock(), self._pcbTable,
-                                          mock.Mock(), self._memoryManager, mock.Mock())
+                                          mock.Mock(), self._memoryManager, mock.Mock(), mock.Mock())
 
         # Se cargan cinco programas a memoria
         self._loader.load(self._PCBProgram1, self._program1.name())
