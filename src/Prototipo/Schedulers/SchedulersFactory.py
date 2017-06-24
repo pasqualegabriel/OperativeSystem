@@ -9,7 +9,7 @@ from Prototipo.timer import Timer
 
 class SchedulersFactory:
     def __init__(self,pcbTable):
-        self._id = int(input("Elegir Scheduler:\n1 SchedulerFCFS\n2 SchedulerPriorityPreemptive\n3 SchedulerPriorityNonPreemptive\n4 SchedulerRoundRobin\n5 SchedulerSJFPreemptive\n6 SchedulerSJFNonPreemptive\n".format()))
+        self._id = int(input("Choise Scheduler:\n1 First Come First Served\n2 Priority Preemptive\n3 Priority Non Preemptive\n4 Round Robin\n5 Shortest Job First Preemptive\n6 Shortest Job First Non Preemptive\n".format()))
         self._quantum = 3
         self._aging = None
 

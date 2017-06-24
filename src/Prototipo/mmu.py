@@ -59,7 +59,7 @@ class MmuPages:
 
         page = self._usedPages.getPage(pageNumber)
 
-        if page.isInSwapOrDisk():
+        if not page.isInPhysicalMemory():
             self._intmanager.handle(Irq.PAGE_FAULT, page)
             log.printPageFalut()
         else:
@@ -70,6 +70,3 @@ class MmuPages:
 
     def setPosition(self, pcb):
         self._usedPages = pcb.getPageTable()
-
-    def setPosition2(self, pageTablet):
-        self._usedPages = pageTablet
