@@ -9,12 +9,13 @@ from Prototipo.intManager import Irq
 
 
 class MemoryManagerPaging:
-    def __init__(self, memory, sizeFrame, PCBTable, swap, pageReplacementAlgorithm, intManager):
+    def __init__(self, memory, sizeFrame, PCBTable, swap, pageReplacementAlgorithm, intManager, loader):
         self._memory                       = memory
         self._sizeFrame                    = sizeFrame
         self._pcbTable                     = PCBTable
         self._swap                         = swap
         self._intManager                   = intManager
+        self._loader                       = loader
         ##MARCOS DEL LA MEMORIA FISICA
         self._freeFramesPhysicalMemory     = self.calculateFreeFrames(self._memory.size())
         self._usedFramesPhysicalMemory     = pageReplacementAlgorithm
