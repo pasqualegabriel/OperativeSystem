@@ -4,6 +4,7 @@ class Page:
         self._bdVirtualMemory  = -1
         self._physicalMemory   = False
         self._swap             = False
+        self._referenceBit = 0
 
     def getBDPhysicalMemory(self):
         return self._bdPhysicalMemory
@@ -11,8 +12,16 @@ class Page:
     def getBDVirtualMemory(self):
         return self._bdVirtualMemory
 
+
+    def getReferenceBit(self):
+        return self._referenceBit
+
+    def setReferenceBit(self,bit):
+        self._referenceBit=bit
+
     def setBDVirtualMemory(self, bd):
         self._bdVirtualMemory = bd
+
 
     def setBDPhysicalMemory(self, bd):
         self._bdPhysicalMemory = bd
@@ -23,16 +32,20 @@ class Page:
     def setPhysicalMemory(self, valid):
         self._physicalMemory=valid
 
+
+
     def isInPhysicalMemory(self):
         return self._physicalMemory
 
     def inSwap(self):
         return self._swap
 
+
     def isInSwapOrDisk(self):
         return self.inSwap() or not self.isInPhysicalMemory()
 
         # return self.inSwap() or self._bdPhysicalMemory == -1
+
 
     #Proposito:cambia los estados de swap al contrario visebersa para estado de physicalMemory.
     #Precondicion:-

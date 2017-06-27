@@ -34,7 +34,9 @@ class MemoryManagerPaging:
             return self.assignFramePhysicalMemory(pid, pageNumber)
 
         elif self.thereIsSpaceInSwap():
-
+            pcb=self._pcbTable.lookUpPCB(pid)
+            pages=pcb.getPageTable().getPagesPhysical()
+            self._usedFramesPhysicalMemory.updateFrame(pages)
             return self.victimSelection(pid, pageNumber)
 
         else:
@@ -275,6 +277,12 @@ class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
     #Precondicion:---
     def updateReferenceBit(self, bd):
         self.searchFrame(bd).setReferenceBit(1)
+
+    def updateFrame(self,pages):
+        for onePage in pages:
+            frame=self.searchFrame(onePage.getBDPhysicalMemory())
+            frame.setReferenceBit(onePage.getReferenceBit())
+
 
 
 class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
