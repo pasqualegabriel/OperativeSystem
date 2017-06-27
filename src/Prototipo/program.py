@@ -9,17 +9,23 @@ class Program:
         self._instructions = self.expand(instructions)
         self._priority = prioridad
 
-    # Getter de _name
+    #Proposito:Retorna el name.
+    #Precondicion:
     def name(self):
         return self._name
 
-    # Getter de _instructions
+    #Proposito:retorna la intruccion
+    #Precondicion:-
     def instructions(self):
         return self._instructions
 
-    def getLista(self):
+    #Proposito:retorna las intrucciones.
+    #Precondicion:
+    def getInstructions(self):
         return self._instructions
 
+    #Proposito:retorna la prioridad
+    #Precondicion:--
     def get_priority(self):
         return self._priority
 
@@ -33,13 +39,19 @@ class Program:
             expanded.append(EXIT(0))
         return expanded
 
+    #Proposito:Retorna la longitud de las intrucciones
+    #Precondicion:-
     def longitud(self):
         return len(self._instructions)
 
+    #Proposito:Retonra true, sirve de indentificador.
+    #Precondicion:-
     @staticmethod
     def isProgram():
         return True
 
+    #Proposito:Retorna una sub lista dependiendo indexLimit y el index.
+    #Precondicion:-
     def getSubInstructions(self,index,indexLimit):
         if indexLimit > self.longitud():
             return self._instructions[index:]

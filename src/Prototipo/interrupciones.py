@@ -7,7 +7,7 @@ class Interrupcion:
     #Proposito:Retorna el pcb que esta actualmente corriendo en el cpu.
     #Precondicion:Debe de haber un pcb cargado.
     def getPCBInCPU(self):
-        return self._pcbTable.lookUpPCB(self._dispatcher.getPidActual())
+        return self._pcbTable.lookUpPCB(self._dispatcher.getPidInCpu())
 
     #Propositon:Retorna el pcb q pertenece al <pid>
     #Precondicion:Debe existir dicho pcb.
@@ -15,7 +15,7 @@ class Interrupcion:
         return self._pcbTable.lookUpPCB(pid)
 
     def getPIDInCPU(self):
-        return self._dispatcher.getPidActual()
+        return self._dispatcher.getPidInCpu()
 
 
 class ChangePCBofCPU(Interrupcion):
@@ -90,7 +90,7 @@ class Kill(ContextSwitch):
         self._memoryManager = memoryManager
 
     def execute(self, p):
-        pid = self._dispatcher.getPidActual()
+        pid = self._dispatcher.getPidInCpu()
         self._memoryManager.freeMemory(pid)
         self._pcbTable.removePCB(pid)
         self._dispatcher.idlePc()

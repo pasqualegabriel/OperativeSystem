@@ -3,12 +3,14 @@
 
 class Clock:
     def __init__(self, cpu, deviceManager, timer, newProgram):
-        self._cpu = cpu
-        self._deviceManager = deviceManager
-        self._timer = timer
-        self._newProgram = newProgram
-        self._estate = True
+        self._cpu               = cpu
+        self._deviceManager     = deviceManager
+        self._timer             = timer
+        self._newProgram        = newProgram
+        self._estate            = True
 
+    #Proposito:Enciende el Reloj
+    #Precondicion:-
     def runCpu(self, log):
         count = 0
         while self._estate:
@@ -23,5 +25,7 @@ class Clock:
             if count > 100:
                 self.offClock()
 
+    #Proposito:apaga el Reloj
+    #Precondicion:-
     def offClock(self):
         self._estate = False

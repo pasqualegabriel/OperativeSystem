@@ -1,36 +1,36 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-s
 
-# Representa al PCNTable del sistema, con un colabordor interno map.
-# La PCBTable se encarga de almacenar el pid y el pcb de dicho pid.
 
 class PCBTable:
     def __init__(self):
-        self._pcbs = {}
+        self._pcb = {}
 
-    # Proposito:Inserta un elemento en el mapa de clave:valor.
-    # Precondiccion: la clave no debe existir en el mapa.
+    # Proposito:Inserta un elemento en la clave<pid> con valor <pcb>
+    # Precondiccion: la clave no debe existir.
     def addPCB(self, pcb):
-        self._pcbs[pcb.get_pid()] = pcb
+        self._pcb[pcb.get_pid()] = pcb
 
     # Proposito:devuelve el valor dado una clave.
     # Precondiccion:debe existir dicha clave.
     def lookUpPCB(self, pid):
         try:
-            return self._pcbs.get(pid)
+            return self._pcb.get(pid)
         except:
-            raise ValueError("El PCBTable esta vacio")
+            raise ValueError("The PCBTable is empty")
 
 
-    # Proposito:remueve del mapa la clave y valor.
+    # Proposito:Remueve la clave<pid> y el valor que almacena.
     # Precondiccion:debe existir dicha clave.
     def removePCB(self, pid):
-        del self._pcbs[pid]
+        del self._pcb[pid]
 
-    # Proposito:verifica que el map este vacio, si lo esta devuelve true caso contrario false
+    # Proposito:Denota true si hay al menos un elemento.
     # Precondiccion: -
-    def pcbTabletIsNill(self):
-        return self._pcbs == {}
+    def pcbTabletIsEmpty(self):
+        return self._pcb == {}
 
-    def getPcbs(self):
-        return self._pcbs
+    #Proposito:retorna el diccionario de pcb
+    #Precondicion:-
+    def getPCB(self):
+        return self._pcb

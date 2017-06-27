@@ -35,6 +35,7 @@ class MemoryManagerPaging:
             return self.assignFramePhysicalMemory(pid, pageNumber)
 
         elif self.thereIsSpaceInSwap():
+            #Para actualizar todos los frame antes de seleccionar una victima
             self._usedFramesPhysicalMemory.updateFrame(self._pcbTable)
             return self.victimSelection(pid, pageNumber)
 

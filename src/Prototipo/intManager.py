@@ -6,8 +6,10 @@ from Prototipo.interrupciones import *
 
 class IntManager:
     def __init__(self):
-        self._irq = {}
+        self._irq       = {}
 
+    #Proposito:Setea todoas las interrupciones con sus respectivos atributos
+    #Precondicion:-
     def setInterruptions(self, loader, dispatcher, scheduler, pcbTable, deviceManager, memoryManager, timer):
         self.register(Irq.NEW, New(loader, dispatcher, scheduler, pcbTable))
         self.register(Irq.IO_IN, IoIn(dispatcher, pcbTable, deviceManager, scheduler, timer))
@@ -19,9 +21,13 @@ class IntManager:
         #self.register(Irq.IN_SWAP, InSwap(loader, scheduler, pcbTable, dispatcher))
         #self.register(Irq.UPDATE_ReferenceBit, UpdateReferenceBit(memoryManager))
 
+    #Proposito:
+    #Precondicion:
     def register(self, instructionName, routine):
         self._irq[instructionName] = routine
 
+    #Proposito:
+    #Precondicion:
     def handle(self, instructionName, parameter):
         self._irq.get(instructionName).execute(parameter)
 

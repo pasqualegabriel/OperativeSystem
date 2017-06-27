@@ -20,7 +20,7 @@ class tester(unittest.TestCase):
     def test_2(self):
         pcbt.removePCB(1)
         pcbt.removePCB(2)
-        self.assertEqual(True, pcbt.pcbTabletIsNill())
+        self.assertEqual(True, pcbt.pcbTabletIsEmpty())
 
 
 if __name__ == "__main__":

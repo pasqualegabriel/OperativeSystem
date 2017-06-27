@@ -3,10 +3,10 @@
 
 class Frame:
     def __init__(self, bd):
-        self._bd   = bd
-        self._pid  = -1
-        self._pageNumber = -1
-        self._referenceBit=1
+        self._bd            = bd
+        self._pid           = -1
+        self._pageNumber    = -1
+        self._referenceBit  =  1
 
 
     #Proposito:Retorna el bd
@@ -44,9 +44,13 @@ class Frame:
     def setReferenceBit(self,referenceBit):
         self._referenceBit=referenceBit
 
+    #Proposito:setea el timeBIt <timeBit>
+    #Precondicion:-
     def setTimeBit(self,timeBit):
         self._TimeBit=timeBit
 
+    #Proposito:Retorna el timeBit
+    #Precondicion:-
     def getTimeBit(self):
         return self._TimeBit
 

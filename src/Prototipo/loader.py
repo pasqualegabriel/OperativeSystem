@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-s
 
 class Loader:
-    #Proposito: Busca un programa en el disco
+    #Proposito: Retorna un programa en el disco con el name<name> en caso q no lo encuetre no hace nada.
     #Precondicion:-
     def searchProgram(self, name):
         for p in self._disco.files():
@@ -13,9 +13,13 @@ class Loader:
                 pass
 
 
+    #Proposito:Retorna el memoryManager
+    #Precondicion:-
     def getMemoryManager(self):
         return self._memoryManager
 
+    #Proposito:Retorna el swap          ##MIRARA ESTE MSJ SI SIVER
+    #Precondicion:-
     def getSwapManager(self):
         return self._swap
 
@@ -33,7 +37,7 @@ class LoaderBlocks(Loader):
         self._disco = disco
         self._memoryManager = memoryManager
 
-    # Proposito:
+    # Proposito:Carga el programa a la memoria.
     # Precondicion:-
     def load(self, pcb, nameProgram):
         program = self.searchProgram(nameProgram)
@@ -43,11 +47,11 @@ class LoaderBlocks(Loader):
         block = self._memoryManager.getFreeBlock(pcb.get_pid(), program.longitud())
         pcb.set_bd_limit(block.get_Bd(), block.get_Limit())
         pos = pcb.get_bd()
-        for i in program.getLista():
+        for i in program.getInstructions():
             self._memory.setPos(pos, i)
             pos += 1
 
-    # Proposito: Dependiendo el memoryManager libera la memoria que ocupa el pcb.
+    # Proposito: libera memoria del memoryManager.
     # Precondiccion:-
     def freeMemory(self, pcb):
         self._memoryManager.freeMemory(pcb.get_pid())
@@ -61,7 +65,8 @@ class LoaderPages(Loader):
         self._memoryManager = memoryManager
         self._swap=swap
 
-    #Proposito:solicita un marco para un pagina, luego la carga en la memoria, tambien actualiza el pcb.
+    ##MIRAR QUE PROPOSITO Y CONDICION DEBE TENER.
+    #Proposito:
     #Precondicion:
     def load(self, pcb, nameProgram):
         program = self.searchProgram(nameProgram)
@@ -69,7 +74,7 @@ class LoaderPages(Loader):
         self.setPCB(pcb, program,requiredPages)
 
     
-    # Proposito:Retorna la cantidad de paginas que nesesita el programa
+    # Proposito:Retorna la cantidad de paginas que nesesita el programa segun su tamaño<sizeProgram>.
     # Precondicion:-
     def requiredPages(self, sizeProgram):
         number = divmod(sizeProgram, self.getMemoryManager().sizeFrame())
@@ -79,7 +84,7 @@ class LoaderPages(Loader):
         return requiredPages
 
 
-    #Proposito:Carga las intrucciones en la memoria fisica
+    #Proposito:Carga intrucciones<instructions> en la memoria fisica segun la pagina<page> dada.
     #Precondicion:-
     def loadInPhysicalMemory(self, instructions, page):
         positionInstruction = page.getBDPhysicalMemory()
@@ -87,15 +92,17 @@ class LoaderPages(Loader):
             self._memory.setPos(positionInstruction, instruction)
             positionInstruction += 1
 
-
-    def swapIN(self, bdPhysicalMemory, keySwap):
+    #Proposito:carga intruccciones en la
+    #Precondicion:-
+    def swapIN(self, indexPhysicalMemory, indexSwap):
         instruction = []
-        for index in range(bdPhysicalMemory, bdPhysicalMemory + self.getMemoryManager().sizeFrame()):
+        for index in range(indexPhysicalMemory, indexPhysicalMemory + self.getMemoryManager().sizeFrame()):
             instruction.append(self._memory.get(index))
-        self._swap.setPos(keySwap, instruction)
+        self._swap.setPos(indexSwap, instruction)
 
-
-    def swapOut(self, keySwap):
-        return self._swap.get(keySwap)
+    #Proposito:Retorna las intrucciones que hay en la posicion<position>
+    #Precondicion:Debe haber un valor en dicha posicion<position>.
+    def swapOut(self, position):
+        return self._swap.get(position)
 
 

@@ -15,8 +15,8 @@ class PageTable:
             pageTable.append(Page())
         return pageTable
 
-    #Proposito:retorno la pagina que corresponde al bd enviado por parametro
-    #Precondicion:-
+    #Proposito:retorno una pagina que esta en pyshicalMemory, la pagina que corresponde al bd enviado por parametro de
+    #Precondicion:debe de haber al menos una pagina con ese bd
     def searchPage(self,bd):
         for page in self._pages:
             if page.getBDPhysicalMemory()==bd:
@@ -27,7 +27,7 @@ class PageTable:
     def getPages(self):
         return self._pages
 
-    # Proposito:
+    # Proposito:Retorna las paginas que esten el pyshicalMemory
     # Precondicion:-
     def getPagesPhysical(self):
         res=[]
@@ -36,7 +36,7 @@ class PageTable:
                 res.append(page)
         return res
 
-    # Proposito:
+    # Proposito:retorna las paginas que estan el el swap
     # Precondicion:-
     def getPagesVirtual(self):
         res=[]

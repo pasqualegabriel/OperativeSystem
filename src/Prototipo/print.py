@@ -42,14 +42,14 @@ class Print:
         self._log.debug(self)
 
     def setPidEjecutado(self):
-        self._pidEjecutado = self._dispatcher.getPidActual()
+        self._pidEjecutado = self._dispatcher.getPidInCpu()
         self._waitTimeAndAverageReturn.update(self._scheduler.list())
 
     def getPidEjecutado(self):
         return self._pidEjecutado
 
     def getPidActual(self):
-        return self._dispatcher.getPidActual()
+        return self._dispatcher.getPidInCpu()
 
     def printMemoryManager(self):
         self._log.debug(self)
@@ -78,7 +78,7 @@ class Print:
             self._log.debug("\nNumber of page faults: {cpf}".format(cpf=self._cantPageFault))
 
     def printPcbTable(self):
-        for k, v in self._pcbTable.getPcbs().items():
+        for k, v in self._pcbTable.getPCB().items():
             self._log.debug(v)
         self._log.debug("")
 

@@ -5,17 +5,23 @@ class Instr:
     def __init__(self, count):
         self._count = count
 
-    # Retorna False
+
+    #Proposito:Retorna false, uso de identificador
+    #Precondicion:-
     def isExit(self):
         return False
-
+    #Proposito:Retorna false, uso de identificador
+    #Precondicion:
     def isIO(self):
         return False
 
+    #Proposito:Retorna false, uso de identificador
+    #Precondicion:-
     def isCPU(self):
         return False 
 
-    # Getter del colaborador interno _count
+    #Proposito:Retorna el count
+    #Precondicion:-
     @property
     def count(self):
         return self._count
@@ -33,6 +39,8 @@ class Instr:
 # CPU, subclase de Instr
 class CPU(Instr):
 
+    #Proposito:Retorna true, uso de identificador
+    #Precondicion:
     def isCPU(self):
         return True
 
@@ -44,9 +52,13 @@ class CPU(Instr):
             return "CPU "
 
 class IO(Instr):
+
+    #Proposito:Retorna el id
+    #Precondicion:-
     def getId(self):
         return 1
-    
+    #Proposito:Retorna true, uso de identifiador.
+    #Precondicion:-
     def isIO(self):
         return True
 
@@ -65,6 +77,9 @@ class IO_1(IO):
             return "IO_1"
 
 class IO_2(IO):
+
+    #Proposito:Retorna el id.
+    #Precondicion:-
     def getId(self):
         return 2
     
@@ -75,6 +90,9 @@ class IO_2(IO):
             return "IO_2"
 
 class IO_3(IO):
+
+    #Proposito:Retorna el id.
+    #Precondicion:-
     def getId(self):
         return 3
 
@@ -87,7 +105,8 @@ class IO_3(IO):
 
 class EXIT(Instr):
 
-    # Retorna False
+    #Proposito:Retorna true, uso de identificador.
+    #Precondicion:-
     def isExit(self):
         return True   
 

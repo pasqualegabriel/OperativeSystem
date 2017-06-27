@@ -6,13 +6,13 @@ from Prototipo.intManager import Irq
 
 class MemoryManagerContinuousAssignment:
     def __init__(self, memory, pcbTable, intManager, moreSpace):
-        self._memory     = memory
-        self._free       = self._memory.size()
-        self._bl         = [Block(0, self._free - 1, -1)]
-        self._bu         = []
-        self._pcbTable   = pcbTable
-        self._intManager = intManager
-        self._moreSpace  = moreSpace
+        self._memory            = memory
+        self._free              = self._memory.size()
+        self._bl                = [Block(0, self._free - 1, -1)]
+        self._bu                = []
+        self._pcbTable          = pcbTable
+        self._intManager        = intManager
+        self._moreSpace         = moreSpace
 
     def isMemoryManagerPaging(self):
         return False
@@ -197,7 +197,7 @@ class MemoryManagerContinuousAssignment:
 
 
 class MemoryManagerContinuousAssignmentFirstFit(MemoryManagerContinuousAssignment):
-    # Proposito:
+    # Proposito:Retorna un bloque
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
         for block in self._bl:
@@ -206,18 +206,18 @@ class MemoryManagerContinuousAssignmentFirstFit(MemoryManagerContinuousAssignmen
 
 
 class MemoryManagerContinuousAssignmentBestFit(MemoryManagerContinuousAssignment):
-    # Proposito:
+    # Proposito:retorna un bloque
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
         blockBest = self._bl[0]
-        for bloque in self._bl:
-            if bloque.get_Size() >= sizeProgram and blockBest.get_Size() > bloque.get_Size():
-                blockBest = bloque
+        for block in self._bl:
+            if block.get_Size() >= sizeProgram and blockBest.get_Size() > block.get_Size():
+                blockBest = block
         return blockBest
 
 
 class MemoryManagerContinuousAssignmentWorstFit(MemoryManagerContinuousAssignment):
-    # Proposito:
+    # Proposito:retorna un bloque
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
         blockWort = self._bl[0]

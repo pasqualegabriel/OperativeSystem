@@ -9,16 +9,16 @@ from Prototipo.swap import Swap
 
 
 class MemoryFactory:
-    def __init__(self, pcbTable, intmanager, disco):
-        self._pcbTable   = pcbTable
-        self._intmanager = intmanager
+    def __init__(self, pcbTable, intManager, disco):
+        self._pcbTable                                      = pcbTable
+        self._intManager                                    = intManager
         self.initializePageReplacementAlgorithms()
-        self._idMemory = int(input("Choise Memory:\n1 Continuous Assignment\n2 Paging\n".format()))
-        self._sizeMemory = int(input("Size Memory:\n".format()))
-        self._memory = Memory(self._sizeMemory)
-        self._swap = Swap(self._memory.size())
-        self._loaderPages = None
-        self._sizeFrame = 4
+        self._idMemory                                      = int(input("Choise Memory:\n1 Continuous Assignment\n2 Paging\n".format()))
+        self._sizeMemory                                    = int(input("Size Memory:\n".format()))
+        self._memory                                        = Memory(self._sizeMemory)
+        self._swap                                          = Swap(self._memory.size())
+        self._loaderPages                                   = None
+        self._sizeFrame                                     = 4
         self.initializeMemoryManagerContinuousAssignment()
         self.initializeMemoryManagerPaging()
         self.initializeMmu()
@@ -31,7 +31,7 @@ class MemoryFactory:
 
     def initializeMmu(self):
         self._mmu = {1: Mmu(self._memory),
-                     2: MmuPages(self._memory, self._sizeFrame, self._intmanager)}
+                     2: MmuPages(self._memory, self._sizeFrame, self._intManager)}
 
     def initializeMemoryManagerPaging(self):
         if self._idMemory == 2:
@@ -39,16 +39,16 @@ class MemoryFactory:
                 "Choise Page Replacement Algorithm:\n1 First In First Out Page Replacement Algorithm\n2 Second Chance Page Replacement Algorithm\n".format()))
             self._memoryManager = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable, self._swap,
                                                       self._pageReplacementAlgorithm.get(
-                                                          self._idPageReplacementAlgorithm), self._intmanager, self._loaderPages)
+                                                          self._idPageReplacementAlgorithm), self._intManager, self._loaderPages)
 
     def initializeMemoryManagerContinuousAssignment(self):
         if self._idMemory == 1:
             self.idMemoryManager = int(input(
                 "Choise Memory Manager:\n1 Continuous Assignment First Fit\n2 Continuous Assignment Best Fit\n3 Continuous Assignment Worst Fit\n".format()))
             self._memoryManagerContinuousAssignment = {
-                1: MemoryManagerContinuousAssignmentFirstFit(self._memory, self._pcbTable, self._intmanager, 1),
-                2: MemoryManagerContinuousAssignmentBestFit( self._memory, self._pcbTable, self._intmanager, 1),
-                3: MemoryManagerContinuousAssignmentWorstFit(self._memory, self._pcbTable, self._intmanager, 1)}
+                1: MemoryManagerContinuousAssignmentFirstFit(self._memory, self._pcbTable, self._intManager, 1),
+                2: MemoryManagerContinuousAssignmentBestFit(self._memory, self._pcbTable, self._intManager, 1),
+                3: MemoryManagerContinuousAssignmentWorstFit(self._memory, self._pcbTable, self._intManager, 1)}
             self._memoryManager = self._memoryManagerContinuousAssignment.get(self.idMemoryManager)
 
     def initializePageReplacementAlgorithms(self):

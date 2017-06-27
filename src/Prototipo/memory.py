@@ -4,8 +4,8 @@ from tabulate import tabulate
 
 class Memory:
     def __init__(self, size):
-        self._memory = {}
-        self._size = size
+        self._memory        = {}
+        self._size          = size
 
     # Proposito:En la key<position> setea el value<value>.
     # precondiccion:-

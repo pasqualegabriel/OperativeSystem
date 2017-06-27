@@ -9,21 +9,18 @@ from Prototipo.frame import Frame
 class Swap:
     def __init__(self, size):
         self._virtualMemory    = {}
-        self._lenVirtualMemory = 0
-        self._size = size
+        self._size             = size
 
-    # Proposito:seatea el valor<valor> en la posicion<pos> de la memoria
-    # precondiccion: Debe existir pos en la memoria
+    # Proposito:seatea el valor<valor> en la posicion<position> de la memoria
+    # precondiccion:-
     def setPos(self, position, valor):
         self._virtualMemory[position] = valor
 
-    # Proposito: Retorna la instruccion del pc recibido como argumento.
-    # Precondiccion: Debe existir dicha posicion en la memoria
+    # Proposito: Retorna el elemento que se encuentra en dicha posicion<position>
+    # Precondiccion: Debe existir dicha posicion en la memoria.
     def get(self, position):
         return self._virtualMemory.get(position)
 
-    def lenVirtualMemory(self):
-        return self._lenVirtualMemory
 
     #Proposito:Retorna el tamaño del swap
     #Proposito:-

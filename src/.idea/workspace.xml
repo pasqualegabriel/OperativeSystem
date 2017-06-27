@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b38f783-ad61-4da6-b8f0-2c181a94c5df" name="Default" comment="" />
+    <list default="true" id="3b38f783-ad61-4da6-b8f0-2c181a94c5df" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/block.py" afterPath="$PROJECT_DIR$/Prototipo/block.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/clock.py" afterPath="$PROJECT_DIR$/Prototipo/clock.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/cpu.py" afterPath="$PROJECT_DIR$/Prototipo/cpu.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/deviceManager.py" afterPath="$PROJECT_DIR$/Prototipo/deviceManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/disco.py" afterPath="$PROJECT_DIR$/Prototipo/disco.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/dispatcher.py" afterPath="$PROJECT_DIR$/Prototipo/dispatcher.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/frame.py" afterPath="$PROJECT_DIR$/Prototipo/frame.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/instructions.py" afterPath="$PROJECT_DIR$/Prototipo/instructions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/intManager.py" afterPath="$PROJECT_DIR$/Prototipo/intManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/interrupciones.py" afterPath="$PROJECT_DIR$/Prototipo/interrupciones.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/kernel.py" afterPath="$PROJECT_DIR$/Prototipo/kernel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/loader.py" afterPath="$PROJECT_DIR$/Prototipo/loader.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/memory.py" afterPath="$PROJECT_DIR$/Prototipo/memory.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/memoryFactory.py" afterPath="$PROJECT_DIR$/Prototipo/memoryFactory.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py" afterPath="$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/memoryManagerPaging.py" afterPath="$PROJECT_DIR$/Prototipo/memoryManagerPaging.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/mmu.py" afterPath="$PROJECT_DIR$/Prototipo/mmu.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/page.py" afterPath="$PROJECT_DIR$/Prototipo/page.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/pageTable.py" afterPath="$PROJECT_DIR$/Prototipo/pageTable.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/pcb.py" afterPath="$PROJECT_DIR$/Prototipo/pcb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/pcbTable.py" afterPath="$PROJECT_DIR$/Prototipo/pcbTable.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/print.py" afterPath="$PROJECT_DIR$/Prototipo/print.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/program.py" afterPath="$PROJECT_DIR$/Prototipo/program.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/swap.py" afterPath="$PROJECT_DIR$/Prototipo/swap.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Prototipo/timer.py" afterPath="$PROJECT_DIR$/Prototipo/timer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testPcbTable.py" afterPath="$PROJECT_DIR$/testPcbTable.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,103 +44,101 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+            <state relative-caret-position="-186">
+              <caret line="12" column="15" lean-forward="true" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="memoryFactory.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/memoryFactory.py">
+      <file leaf-file-name="kernel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-              <folding>
-                <element signature="e#47#101#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="memoryManagerPaging.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerPaging.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
-              <folding>
-                <element signature="e#49#78#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pageTable.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/pageTable.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="19" column="18" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="425">
+              <caret line="40" column="15" lean-forward="true" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pcbTable.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/pcbTable.py">
+      <file leaf-file-name="loader.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="17" />
+            <state relative-caret-position="-148">
+              <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frame.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/frame.py">
+      <file leaf-file-name="mmu.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/mmu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+            <state relative-caret-position="849">
+              <caret line="73" column="19" lean-forward="false" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="swap.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/swap.py">
+      <file leaf-file-name="NewProgram.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/NewProgram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-101">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="memory.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/memory.py">
+      <file leaf-file-name="newProgram.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/newProgram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+            <state relative-caret-position="-51">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interrupciones.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/interrupciones.py">
+      <file leaf-file-name="page.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/page.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="218" column="1" lean-forward="false" selection-start-line="218" selection-start-column="1" selection-end-line="218" selection-end-column="1" />
+            <state relative-caret-position="342">
+              <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="intManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prototipo/intManager.py">
+      <file leaf-file-name="pcb.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/pcb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+            <state relative-caret-position="1852">
+              <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="program.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Prototipo/program.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="901">
+              <caret line="53" column="19" lean-forward="false" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Prototipo/timer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <marker date="1498580883813" expanded="true" signature="97:859" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -140,6 +167,9 @@
       <find>self._loader</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -151,27 +181,38 @@
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/queues.py" />
         <option value="$PROJECT_DIR$/testSecondChancePageReplacementAlgorithm.py" />
         <option value="$PROJECT_DIR$/testLeastRecentlyUsedPageReplacementAlgorithm.py" />
-        <option value="$PROJECT_DIR$/Prototipo/dispatcher.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/scheduler.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerRoundRobin.py" />
         <option value="$PROJECT_DIR$/testDeviceManager.py" />
-        <option value="$PROJECT_DIR$/Prototipo/deviceManager.py" />
-        <option value="$PROJECT_DIR$/Prototipo/loader.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerFCFS.py" />
-        <option value="$PROJECT_DIR$/Prototipo/timer.py" />
-        <option value="$PROJECT_DIR$/Prototipo/cpu.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriority.py" />
-        <option value="$PROJECT_DIR$/Prototipo/swap.py" />
         <option value="$PROJECT_DIR$/Prototipo/print.py" />
         <option value="$PROJECT_DIR$/Prototipo/Schedulers/SchedulersFactory.py" />
-        <option value="$PROJECT_DIR$/Prototipo/kernel.py" />
-        <option value="$PROJECT_DIR$/Prototipo/page.py" />
-        <option value="$PROJECT_DIR$/Prototipo/mmu.py" />
-        <option value="$PROJECT_DIR$/Prototipo/memoryFactory.py" />
         <option value="$PROJECT_DIR$/Prototipo/interrupciones.py" />
-        <option value="$PROJECT_DIR$/Prototipo/intManager.py" />
         <option value="$PROJECT_DIR$/Prototipo/memoryManagerPaging.py" />
+        <option value="$PROJECT_DIR$/Prototipo/pageTable.py" />
+        <option value="$PROJECT_DIR$/Prototipo/pcbTable.py" />
+        <option value="$PROJECT_DIR$/Prototipo/frame.py" />
+        <option value="$PROJECT_DIR$/Prototipo/swap.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memory.py" />
+        <option value="$PROJECT_DIR$/Prototipo/intManager.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memoryFactory.py" />
+        <option value="$PROJECT_DIR$/Prototipo/block.py" />
+        <option value="$PROJECT_DIR$/Prototipo/clock.py" />
+        <option value="$PROJECT_DIR$/Prototipo/cpu.py" />
+        <option value="$PROJECT_DIR$/Prototipo/deviceManager.py" />
+        <option value="$PROJECT_DIR$/Prototipo/disco.py" />
+        <option value="$PROJECT_DIR$/Prototipo/dispatcher.py" />
+        <option value="$PROJECT_DIR$/Prototipo/instructions.py" />
+        <option value="$PROJECT_DIR$/Prototipo/kernel.py" />
+        <option value="$PROJECT_DIR$/Prototipo/loader.py" />
+        <option value="$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py" />
+        <option value="$PROJECT_DIR$/Prototipo/mmu.py" />
+        <option value="$PROJECT_DIR$/Prototipo/page.py" />
+        <option value="$PROJECT_DIR$/Prototipo/pcb.py" />
+        <option value="$PROJECT_DIR$/Prototipo/program.py" />
+        <option value="$PROJECT_DIR$/Prototipo/timer.py" />
       </list>
     </option>
   </component>
@@ -180,6 +221,7 @@
     <option name="width" value="1602" />
     <option name="height" value="873" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -195,8 +237,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -455,8 +497,9 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.175625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.042525772" sideWeight="0.50275105" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06056701" sideWeight="0.49724898" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7858065" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.032258064" sideWeight="0.49724898" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -468,7 +511,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7859008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -477,24 +519,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Prototipo/print.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerPaging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2071">
-          <caret line="113" column="42" lean-forward="true" selection-start-line="113" selection-start-column="42" selection-end-line="113" selection-end-column="42" />
-          <folding>
-            <element signature="e#49#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/queues.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py" />
     <entry file="file://$PROJECT_DIR$/testBursts.py" />
     <entry file="file://$PROJECT_DIR$/testCompaction.py" />
     <entry file="file://$PROJECT_DIR$/testLoader.py" />
@@ -506,119 +535,237 @@
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/queues.py" />
     <entry file="file://$PROJECT_DIR$/testLeastRecentlyUsedPageReplacementAlgorithm.py" />
     <entry file="file://$PROJECT_DIR$/testFirstInFirstOutPageReplacementAlgorithm.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/dispatcher.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/deviceManager.py" />
     <entry file="file://$PROJECT_DIR$/testDeviceManager.py" />
     <entry file="file://$PROJECT_DIR$/testSchedulerPriority.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerSJF.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/scheduler.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/timer.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerRoundRobin.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/cpu.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerFCFS.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulerPriority.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/clock.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/Schedulers/SchedulersFactory.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/print.py" />
     <entry file="file://$PROJECT_DIR$/Prototipo/newProgram.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/pcb.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/page.py" />
     <entry file="file://$PROJECT_DIR$/testSecondChancePageReplacementAlgorithm.py" />
     <entry file="file://$PROJECT_DIR$/testShedulerSJF.py" />
     <entry file="file://$PROJECT_DIR$/testShedulerSJF.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/loader.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/mmu.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/newProgram.py" />
-    <entry file="file://$PROJECT_DIR$/Prototipo/instructions.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerPaging.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="357">
+          <caret line="30" column="22" lean-forward="true" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+          <folding>
+            <element signature="e#49#78#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/interrupciones.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/pageTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="218" column="1" lean-forward="false" selection-start-line="218" selection-start-column="1" selection-end-line="218" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/intManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/swap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/memory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        <state relative-caret-position="289">
+          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/pcbTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/pageTable.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="19" column="18" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="18" />
+        <state relative-caret-position="289">
+          <caret line="17" column="37" lean-forward="true" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/frame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/swap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+        <state relative-caret-position="357">
+          <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/memory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prototipo/memoryFactory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="408">
+          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
           <folding>
             <element signature="e#47#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerPaging.py">
+    <entry file="file://$PROJECT_DIR$/Prototipo/interrupciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
+        <state relative-caret-position="3519">
+          <caret line="207" column="35" lean-forward="true" selection-start-line="207" selection-start-column="35" selection-end-line="207" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="36" lean-forward="true" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/clock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/cpu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="41" column="82" lean-forward="false" selection-start-line="41" selection-start-column="82" selection-end-line="41" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/deviceManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="38" column="47" lean-forward="false" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/disco.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="76" lean-forward="false" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/intManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-205">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/dispatcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-86">
+          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/instructions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1716">
+          <caret line="107" column="50" lean-forward="false" selection-start-line="107" selection-start-column="50" selection-end-line="107" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/memoryManagerContinuousAssignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2531">
+          <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/mmu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="849">
+          <caret line="73" column="19" lean-forward="false" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/newProgram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/pcb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1852">
+          <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-148">
+          <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-186">
+          <caret line="12" column="15" lean-forward="true" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/kernel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="40" column="15" lean-forward="true" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/NewProgram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-101">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/program.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" column="19" lean-forward="false" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Prototipo/timer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="e#49#78#0" expanded="true" />
+            <marker date="1498580883813" expanded="true" signature="97:859" ph="..." />
           </folding>
         </state>
       </provider>
