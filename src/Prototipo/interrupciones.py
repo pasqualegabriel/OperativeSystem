@@ -197,24 +197,24 @@ class PageFault(Interrupcion):
         self._dispatcher.load(pcbInCpu)
 
 
-class InSwap(Interrupcion):
-    def __init__(self, loader, scheduler, pcbTable, dispatcher):
-        self._loader     = loader
-        self._scheduler  = scheduler
-        self._pcbTable   = pcbTable
-        self._dispatcher = dispatcher
+#class InSwap(Interrupcion):
+#    def __init__(self, loader, scheduler, pcbTable, dispatcher):
+#        self._loader     = loader
+#        self._scheduler  = scheduler
+#        self._pcbTable   = pcbTable
+#        self._dispatcher = dispatcher
 
 
-    def execute(self, pageInSwap):
-        self._loader.swapIN(pageInSwap.getBDPhysicalMemory(), pageInSwap.getBDVirtualMemory())
-        pageInSwap.setBDPhysicalMemory(-1)
-        pageInSwap.change()
+#    def execute(self, pageInSwap):
+#        self._loader.swapIN(pageInSwap.getBDPhysicalMemory(), pageInSwap.getBDVirtualMemory())
+#        pageInSwap.setBDPhysicalMemory(-1)
+#        pageInSwap.change()
 
-class UpdateReferenceBit(Interrupcion):
-    def __init__(self, memoryManager):
-        self._memoryManager = memoryManager
-
-    def execute(self,page):
-        pageReplacementAlgorithm = self._memoryManager.getUsedFramesPhysicalMemory()
-        pageReplacementAlgorithm.updateReferenceBit(page.getBDPhysicalMemory())
+#class UpdateReferenceBit(Interrupcion):
+#    def __init__(self, memoryManager):
+#        self._memoryManager = memoryManager
+#
+#    def execute(self,page):
+#        pageReplacementAlgorithm = self._memoryManager.getUsedFramesPhysicalMemory()
+#        pageReplacementAlgorithm.updateReferenceBit(page.getBDPhysicalMemory())
 

@@ -16,8 +16,8 @@ class IntManager:
         self.register(Irq.TIME_OUT, TimeOut(dispatcher, scheduler, pcbTable))
         self.register(Irq.COMPACT_MEMORY, CompactMemory(dispatcher, pcbTable, memoryManager))
         self.register(Irq.PAGE_FAULT, PageFault(loader, scheduler, pcbTable, dispatcher, memoryManager))
-        self.register(Irq.IN_SWAP, InSwap(loader, scheduler, pcbTable, dispatcher))
-        self.register(Irq.UPDATE_ReferenceBit, UpdateReferenceBit(memoryManager))
+        #self.register(Irq.IN_SWAP, InSwap(loader, scheduler, pcbTable, dispatcher))
+        #self.register(Irq.UPDATE_ReferenceBit, UpdateReferenceBit(memoryManager))
 
     def register(self, instructionName, routine):
         self._irq[instructionName] = routine
@@ -34,8 +34,8 @@ class Irq(Enum):
     TIME_OUT            = 5
     COMPACT_MEMORY      = 6
     PAGE_FAULT          = 7
-    IN_SWAP             = 8
-    UPDATE_ReferenceBit = 9
+    #IN_SWAP             = 8
+    #UPDATE_ReferenceBit = 9
 
                 
     

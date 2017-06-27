@@ -35,9 +35,7 @@ class MemoryManagerPaging:
             return self.assignFramePhysicalMemory(pid, pageNumber)
 
         elif self.thereIsSpaceInSwap():
-            pcb=self._pcbTable.lookUpPCB(pid)
-            pages=pcb.getPageTable().getPagesPhysical()
-            self._usedFramesPhysicalMemory.updateFrame(pages)
+            self._usedFramesPhysicalMemory.updateFrame(self._pcbTable)
             return self.victimSelection(pid, pageNumber)
 
         else:
@@ -58,18 +56,29 @@ class MemoryManagerPaging:
     # Proposito:te asigna un marco libre del swap.
     # Precondicion: hay al menos un frame en self._freeFramesVirtualMemory
     def assignFrameSwap(self, victimFrame):
+        #busco la pagina de la del frame que seleccione como victima
         pidVictimFrame=victimFrame.getPId()
         pcb = self._pcbTable.lookUpPCB(pidVictimFrame)
         page = pcb.getPageTable().searchPage(victimFrame.getBD())
+
+        #verifico si ya habia sido cargada la pagina en el swap para no volver a cargar.
         if self.isPageInSwap(page, pidVictimFrame):
             return
+
+        #En caso que no este pido un frame en el swap
         newUsedFrame = self._freeFramesSwap.pop(0)
         newUsedFrame.setPid(victimFrame.getPId())
         newUsedFrame.setPageNumber(victimFrame.getPageNumber())
         self._usedFramesSwap.append(newUsedFrame)
         page.setBDVirtualMemory(newUsedFrame.getBD())
         self._cantFreeFramesSwap -= 1
-        self._intManager.handle(Irq.IN_SWAP, page)
+
+        #Carga de intrucciones en el swap
+        self._loader.swapIN(page.getBDPhysicalMemory(), page.getBDVirtualMemory())
+        page.setBDPhysicalMemory(-1)
+        page.change()
+
+        #self._intManager.handle(Irq.IN_SWAP, page)
 
     #Proposito:selecciona un marco usuado y le asigna un nuevo pid.
     #Precondicion: hay al menos un frame en self._freeFramesVirtualMemory
@@ -123,7 +132,6 @@ class MemoryManagerPaging:
         frameUsed = self.getFrameUsedMemory(pid)
         for frame in frameUsed:
             frame.setPid(-1)
-            #frame.setUsed(False)
             frame.setPageNumber(-1)
             self._usedFramesPhysicalMemory.removeFrame(frame)
             self._freeFramesPhysicalMemory.append(frame)
@@ -135,7 +143,6 @@ class MemoryManagerPaging:
         frameUsed = self.getFrameUsedSwap(pid)
         for frame in frameUsed:
             frame.setPid(-1)
-            #frame.setUsed(False)
             frame.setPageNumber(-1)
             self._usedFramesSwap.remove(frame)
             self._freeFramesSwap.append(frame)
@@ -279,10 +286,16 @@ class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
     def updateReferenceBit(self, bd):
         self.searchFrame(bd).setReferenceBit(1)
 
-    def updateFrame(self,pages):
-        for onePage in pages:
-            frame=self.searchFrame(onePage.getBDPhysicalMemory())
-            frame.setReferenceBit(onePage.getReferenceBit())
+    #proposito:Actualiza bit de referencia de las frame que fueron asignados a las pages<pages>
+    #Precondicion:-
+    def updateFrame(self,pcbTablet):
+        for unFrame in self._usedFrames:
+            pcb=pcbTablet.lookUpPCB(unFrame.getPId())
+            page=pcb.getPageTable().searchPage(unFrame.getBD())
+            if page.getReferenceBit()==1:
+                unFrame.setReferenceBit(1)
+                page.setReferenceBit(0)
+
 
 
 
