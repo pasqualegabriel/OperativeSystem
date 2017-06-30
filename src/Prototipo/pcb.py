@@ -60,7 +60,7 @@ class PCB:
 
     #Proposito:setea el pageTablet<pages>
     #Precondicion:
-    def setPages(self,pages):
+    def setPages(self, pages):
         self._pageTable = pages
 
     #Proposito: agrega paginas al pageTablet
@@ -142,4 +142,4 @@ class PCB:
             res.append(["Page: " + str(pageNumber) + "  {p}".format(p=page)])
             pageNumber += 1
         return tabulate(res, headers=["PCB  Pid={nro:2d}  Page Table:".format(nro=self._pid)], tablefmt='psql')
-        #return "{pageTable}\n".format(pageTable=self._pageTable)
+

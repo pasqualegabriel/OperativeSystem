@@ -17,9 +17,8 @@ class Dispatcher:
     def save(self, pcb):
         pcb.set_pc(self._cpu.get_pc())
 
-
-    # Proposito:Guarda el pid actual en cpu, pone el program conter del cpu en 0, envia el pcb al mmm
-    #           para que sepa donde fechear.
+    # Proposito: Guarda el pid actual en cpu, actualiza el program counter del cpu en 0, envia el pcb al
+    #            memory manager para que sepa donde fechear.
     # Precondiccion:-
     def load(self, pcb):
         self.setCurrent(pcb.get_pid())

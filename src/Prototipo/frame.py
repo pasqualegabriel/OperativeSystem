@@ -8,7 +8,6 @@ class Frame:
         self._pageNumber    = -1
         self._referenceBit  =  1
 
-
     #Proposito:Retorna el bd
     #Pecondicion:-
     def getBD(self):

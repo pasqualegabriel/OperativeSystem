@@ -4,7 +4,7 @@ class Page:
         self._bdVirtualMemory  = -1
         self._physicalMemory   = False
         self._swap             = False
-        self._referenceBit = 0
+        self._referenceBit     = 0
 
     #Proposito:Retorna el bd en memoria fisica
     #Precondicion:-
@@ -23,8 +23,8 @@ class Page:
 
     #Proposito: setea el bit<bit> de referencia
     #Precondicion:-
-    def setReferenceBit(self,bit):
-        self._referenceBit=bit
+    def setReferenceBit(self, bit):
+        self._referenceBit = bit
 
     #Proposito:setea el bd<bd> del swap
     #Precondicion:-

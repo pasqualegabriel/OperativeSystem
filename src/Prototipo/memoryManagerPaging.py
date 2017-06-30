@@ -5,17 +5,13 @@ from tabulate import tabulate
 
 from Prototipo.Schedulers.queues import QueueFIFO
 from Prototipo.frame import Frame
-from Prototipo.intManager import Irq
-
 
 class MemoryManagerPaging:
-    def __init__(self, memory, sizeFrame, PCBTable, swap, pageReplacementAlgorithm, intManager, loader):
+    def __init__(self, memory, sizeFrame, PCBTable, swap, pageReplacementAlgorithm):
         self._memory                       = memory
         self._sizeFrame                    = sizeFrame
         self._pcbTable                     = PCBTable
         self._swap                         = swap
-        self._intManager                   = intManager
-        self._loader                       = loader
         ##MARCOS DEL LA MEMORIA FISICA
         self._freeFramesPhysicalMemory     = self.calculateFreeFrames(self._memory.size())
         self._usedFramesPhysicalMemory     = pageReplacementAlgorithm
@@ -31,16 +27,10 @@ class MemoryManagerPaging:
     # Precondiccion: -
     def assignFrame(self, pid, pageNumber):
         if self.thereIsSpaceInMemory():
-
             return self.assignFramePhysicalMemory(pid, pageNumber)
-
         elif self.thereIsSpaceInSwap():
-            #Para actualizar todos los frame antes de seleccionar una victima
-            self._usedFramesPhysicalMemory.updateFrame(self._pcbTable)
             return self.victimSelection(pid, pageNumber)
-
         else:
-
             raise SystemError("Insufficient memory")
 
 
@@ -79,11 +69,11 @@ class MemoryManagerPaging:
         page.setBDPhysicalMemory(-1)
         page.change()
 
-        #self._intManager.handle(Irq.IN_SWAP, page)
-
     #Proposito:selecciona un marco usuado y le asigna un nuevo pid.
     #Precondicion: hay al menos un frame en self._freeFramesVirtualMemory
     def victimSelection(self, pid, pageNumber):
+        # Para actualizar todos los frame antes de seleccionar una victima
+        self._usedFramesPhysicalMemory.updateFrame(self._pcbTable)
         victimFrame = self._usedFramesPhysicalMemory.getVictim()
         self.assignFrameSwap(victimFrame)
         victimFrame.setPid(pid)
@@ -188,6 +178,10 @@ class MemoryManagerPaging:
     def getSwap(self):
         return self._swap
 
+    # Es para no hacer la interrupcion swapIN (el memoryManager y el loader se conocen mutuamente)
+    def setLoader(self, loader):
+        self._loader = loader
+
     def __repr__(self):
         usedFrames = []
         for uf in self._usedFramesPhysicalMemory.getUsedFrames():
@@ -205,7 +199,6 @@ class MemoryManagerPaging:
 
 
 class PageReplacementAlgorithm:
-
     #Proposito:remueve un marco de la queue
     #precondcion: debe existir <frame> en self._usedFrames
     def removeFrame(self, frame):
@@ -230,17 +223,16 @@ class PageReplacementAlgorithm:
     def getVictim(self):
         return self._usedFrames.pop()
 
-    # Proposito: Actualiza el frame referenciado
-    # precondcion: debe existir el frame con el bd<bd> en self._usedFrames
-    def updateReferenceBit(self,bd):
-        pass
-
     #Proposito:retorna el frame con el bd<bd>
     #Precondicion:debe existir dicho frame
     def searchFrame(self, bd):
         for frameUsed in self.getUsedFrames():
             if frameUsed.getBD() == bd:
                 return frameUsed
+
+    # proposito:Actualiza bit de referencia de las frame que fueron asignados a las pages<pages>
+    def updateFrame(self, pcbTable):
+        pass
 
 
 class FirstInFirstOutPageReplacementAlgorithm(PageReplacementAlgorithm):
@@ -282,22 +274,15 @@ class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
                 referenceBit = 0
         return usedFrame
 
-    #Proposito:actualiza el bit de referencia del frame con el bd<bd>
-    #Precondicion:---
-    def updateReferenceBit(self, bd):
-        self.searchFrame(bd).setReferenceBit(1)
-
     #proposito:Actualiza bit de referencia de las frame que fueron asignados a las pages<pages>
     #Precondicion:-
-    def updateFrame(self,pcbTablet):
-        for unFrame in self._usedFrames:
-            pcb=pcbTablet.lookUpPCB(unFrame.getPId())
-            page=pcb.getPageTable().searchPage(unFrame.getBD())
-            if page.getReferenceBit()==1:
+    def updateFrame(self, pcbTable):
+        for unFrame in self._usedFrames.list():
+            pcb = pcbTable.lookUpPCB(unFrame.getPId())
+            page = pcb.getPageTable().searchPage(unFrame.getBD())
+            if page.getReferenceBit() == 1:
                 unFrame.setReferenceBit(1)
                 page.setReferenceBit(0)
-
-
 
 
 class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):

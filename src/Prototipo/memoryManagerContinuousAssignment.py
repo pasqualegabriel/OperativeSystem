@@ -17,42 +17,33 @@ class MemoryManagerContinuousAssignment:
     def isMemoryManagerPaging(self):
         return False
 
-    """Proposito: Retorna el espacio libre de la memoria
-       Precondicion:  -  """
+    # Proposito: Retorna el espacio libre de la memoria
     def get_Free(self):
         return self._free
 
-    """ Proposito: Retorna la lista de bloques libres
-        Precondicion: -                   """
+    # Proposito: Retorna la lista de bloques libres
     def getBl(self):
         return self._bl
 
-    """ Proposito: Retorna la lista de bloques ocupados
-        Precondicion:  -               """
+    # Proposito: Retorna la lista de bloques ocupados
     def getBu(self):
         return self._bu
 
-    """ Proposito: Asigna el bd y el limit al pcb
-        Precondicion: -                 """
+    # Proposito: Asigna el bd y el limit al pcb
     def setPCBAndLoader(self, pcb, bd, limit):
         pcb.set_bd(bd)
         pcb.set_limit(limit)
 
-    """ Proposito: Verifica si hay al menos un bloque con el tamanio nesesario, en caso de no haberlo compacta la memoria,
-        designa al programa a un bloque.
-        Precondicion: -                    """
+    # Proposito: Verifica si hay al menos un bloque con el tamanio nesesario, en caso de no haberlo compacta la memoria,
+    # designa al programa a un bloque.
     def getFreeBlock(self, pid, sizeProgram):
         if not self.thereIsBlockForProgram(sizeProgram):
             self._intManager.handle(Irq.COMPACT_MEMORY, None)
         return self.addProgram(pid, sizeProgram)
 
-    """ Proposito: Busca un bloque libre (FirstFit, BestFit, WorstFit),
-        en caso que el bloque le quede <self._moreSpace>
-        mas de lo que requiera el procedimiento se le
-        otorga dicho espacio,caso contrario ocupa el bloque
-        nesesario, en los dos asigna el bd y el limit correspondiente al bloque
-        con su respectivo pid.
-        Precondicion:  -                   """
+    # Proposito: Busca un bloque libre (FirstFit, BestFit, WorstFit), en caso que el bloque le quede <self._moreSpace>
+    # mas de lo que requiera el procedimiento se le otorga dicho espacio,caso contrario ocupa el bloque
+    # nesesario, en los dos asigna el bd y el limit correspondiente al bloque con su respectivo pid.
     def addProgram(self, pid, sizeProgram):
         block = self.getBlock(sizeProgram)
         bd = block.get_Bd()
@@ -62,9 +53,8 @@ class MemoryManagerContinuousAssignment:
         limit = bd + sizeProgram - 1
         return self.set_Block(block,pid, bd, limit, moreSpace, sizeProgram)
 
-    """Proposito: asigna valores al pcb, creo un nuevo bloque usado asignando su bd, limit y pid,; lo agrega a
-       la lista bloques usuados, y por ultimo acomoda ese bloque, y modifica el espacio libre.
-       Precondicion: -                  """
+    # Proposito: asigna valores al pcb, creo un nuevo bloque usado asignando su bd, limit y pid,; lo agrega a
+    # la lista bloques usuados, y por ultimo acomoda ese bloque, y modifica el espacio libre.
     def set_Block(self, bloque, pid, bd, limit, moreSpace, sizeProgram):
         newBlock = Block(bd, limit + moreSpace, pid)
         newBlock.set_moreSpace(moreSpace)
@@ -72,11 +62,10 @@ class MemoryManagerContinuousAssignment:
         self.accommodateBl(bloque, limit + moreSpace, sizeProgram, moreSpace)
         self._free -= newBlock.get_Limit() - newBlock.get_Bd() + 1 #+ moreSpace
         return newBlock
-    """Proposito: en caso del que el bloque libre tenga distinto tamanio al del tamanio del programa
-       y no le haya agregado mas espacios que el tamanio del programa,
-       modifica el bloque libre, caso contrario que el tamanio del bloque libre sea igual al tamanio
-       del programa elimina el bloque libre.
-       Precondicion: -                  """
+
+    # Proposito: en caso del que el bloque libre tenga distinto tamanio al del tamanio del programa y no le haya agregado
+    # mas espacios que el tamanio del programa, modifica el bloque libre,
+    # caso contrario que el tamanio del bloque libre sea igual al tamanio del programa elimina el bloque libre.
     def accommodateBl(self, bloque, limit, sizeProgram, moreSpace):
         if bloque.get_Size() != sizeProgram and moreSpace == 0:
             bloque.set_bd(limit + 1)
@@ -84,8 +73,7 @@ class MemoryManagerContinuousAssignment:
         else:
             self._bl.remove(bloque)
 
-    """Proposito: Elimina el bloque usado, y este lo pone en la cola libre, en caso que se pueda unir con otros bloques libres lo hace.
-       Precondiccion: - """
+    # Proposito: Elimina el bloque usado, y este lo pone en la cola libre, en caso que se pueda unir con otros bloques libres lo hace.
     def freeMemory(self, pid):
         block = self.searchBlockBu(pid)
         block.set_moreSpace(0)
@@ -93,23 +81,21 @@ class MemoryManagerContinuousAssignment:
         self.joinBlocks(block)
         self._bu.remove(block)
 
-    """Proposito: Dado un pid, busca el bloque ocupado que pertenece a ese pid y lo retorna
-       Precondiccion: Debe existir al menos un bloque con ese pid """
+    # Proposito: Dado un pid, busca el bloque ocupado que pertenece a ese pid y lo retorna
+    # Precondiccion: Debe existir al menos un bloque con ese pid
     def searchBlockBu(self, pid):
         for block in self._bu:
             if block.get_Pid() == pid:
                 return block
 
-    """Proposito: verifica si el bloque puede unirlo con otros, en caso q no pueda lo encola en la lista.
-       Precondiccion: - """
+    # Proposito: verifica si el bloque puede unirlo con otros, en caso q no pueda lo encola en la lista.
     def joinBlocks(self, block):
         newBlock = self.joinBlocksDawn(self.joinBlocksUp(block))
         if block.get_Pid() == newBlock.get_Pid():
             newBlock.set_pid(-1)
             self._bl.append(newBlock)
 
-    """Proposito: Une el bloque libre con uno que esta arriba y lo retorna, y en caso contrario devuelve el mismo bloque
-       Precondiccion: - """
+    # Proposito: Une el bloque libre con uno que esta arriba y lo retorna, y en caso contrario devuelve el mismo bloque
     def joinBlocksUp(self, block):
         for oneBlock in self._bl:
             if block.get_Bd() - 1 == oneBlock.get_Limit():
@@ -119,8 +105,7 @@ class MemoryManagerContinuousAssignment:
                 return block
         return block
 
-    """Proposito: Une el bloque libre con uno que esta abajo y lo retorna, y en caso contrario devuelve el mismo bloque
-       Precondiccion: - """
+    # Proposito: Une el bloque libre con uno que esta abajo y lo retorna, y en caso contrario devuelve el mismo bloque
     def joinBlocksDawn(self, block):
         for oneBlock in self._bl:
             if oneBlock.get_Bd() == block.get_Limit() + 1:
@@ -130,21 +115,18 @@ class MemoryManagerContinuousAssignment:
                 return block
         return block
 
-    """Proposito: Retorna True si hay espacio en la memoria para el sizeProgram, y False en caso contrario
-       Precondiccion: - """
+    # Proposito: Retorna True si hay espacio en la memoria para el sizeProgram, y False en caso contrario
     def thereIsSpaceInMemoryFor(self, sizeProgram):
         return self._free >= sizeProgram
 
-    """Proposito: Retorna True si hay un bloque para ese sizeProgram, y False en caso contrario
-       Precondiccion: - """
+    # Proposito: Retorna True si hay un bloque para ese sizeProgram, y False en caso contrario
     def thereIsBlockForProgram(self, sizeProgram):
         for oneBlock in self._bl:
             if oneBlock.get_Size() >= sizeProgram:
                 return True
         return False
 
-    """Proposito: Compacta la memoria
-       Precondiccion: - """
+    # Proposito: Compacta la memoria
     def toCompact(self):
         self.orderingBu()
         indexPos = 0
@@ -154,8 +136,7 @@ class MemoryManagerContinuousAssignment:
             indexPos = oneBlockU.get_Limit() + 1
         self.updateBl(indexPos)
 
-    """Proposito: Actualiza blockBl luego de una compactacion
-       Precondiccion: - """
+    # Proposito: Actualiza blockBl luego de una compactacion
     def updateBl(self, indexPos):
         if (indexPos - 1) != self._free:
             blockBl = Block(indexPos, self._memory.size() - 1, -1)
@@ -165,8 +146,7 @@ class MemoryManagerContinuousAssignment:
             self._bl = []
             self._free = 0
 
-    """Proposito: Ordena los bloques usados (el bd mas chico al inicio)
-       Precondiccion: - """
+    # Proposito: Ordena los bloques usados (el bd mas chico al inicio)
     def orderingBu(self):
         for i in range(1, len(self._bu)):
             for j in range(0, len(self._bu) - i):
@@ -175,6 +155,7 @@ class MemoryManagerContinuousAssignment:
                     self._bu[j + 1] = self._bu[j]
                     self._bu[j] = k
 
+    # Proposito: Actualiza <block> en una compactacion
     def updateBlockAndPCB(self, indexPos, block):
         pcb = self._pcbTable.lookUpPCB(block.get_Pid())
         size = block.get_Size()
@@ -186,6 +167,7 @@ class MemoryManagerContinuousAssignment:
         self.setPCBAndLoader(pcb, indexPos, indexPos + size - 1)
         self.setBlock(block, indexPos, indexPos + size - 1)
 
+    # Proposito: Setea el bd, limit, y el moreSpace en 0 al block
     def setBlock(self, block, bd, limit):
         block.set_bd(bd)
         block.set_limit(limit)

@@ -4,6 +4,7 @@ from mock import mock
 
 from Prototipo.page import Page
 from Prototipo.pageTable import PageTable
+from Prototipo.pcb import PCB
 from Prototipo.swap import Swap
 from Prototipo.disco import *
 from Prototipo.instructions import *
@@ -37,9 +38,8 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
 
         self._memory = Memory(64)
-        self._pcbTable = PCBTable()
-        self._swap = Swap()##hacer que conosca el sizeFrame
-        self._memoryManager = MemoryManagerPaging(self._memory, 4, self._pcbTable, self._swap, FirstInFirstOutPageReplacementAlgorithm(), mock.Mock()) # El numero indica el tamanio de un frame
+        self._swap = Swap(128)
+        self._memoryManager = MemoryManagerPaging(self._memory, 4, mock.Mock(), self._swap, FirstInFirstOutPageReplacementAlgorithm()) # El numero indica el tamanio de un frame
         self._mmu = MmuPages(self._memory, self._memoryManager.sizeFrame(),mock.Mock())
         self._loader = LoaderPages(self._memory, self._mmu,disco, self._memoryManager, self._swap )
         self._page  =Page()
@@ -48,7 +48,9 @@ class MyTestCase(unittest.TestCase):
         self._pageTable.getPages()[0].setPhysicalMemory(True)
         self._pageTable.getPages()[1].setBDPhysicalMemory(8)
         self._pageTable.getPages()[1].setPhysicalMemory(True)
-        self._mmu.setPosition2(self._pageTable)
+        pcb = PCB(1)
+        pcb.setPages(self._pageTable)
+        self._mmu.setPosition(pcb)
 
         self._loader.loadInPhysicalMemory(p6.instructions(),self._pageTable.getPages()[0])
         self._loader.loadInPhysicalMemory(p7.instructions(),self._pageTable.getPages()[1])

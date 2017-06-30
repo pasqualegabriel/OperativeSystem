@@ -5,6 +5,10 @@ import unittest
 
 from Prototipo.frame import Frame
 from Prototipo.memoryManagerPaging import SecondChancePageReplacementAlgorithm
+from Prototipo.pageTable import PageTable
+from Prototipo.pcb import PCB
+from Prototipo.pcbTable import PCBTable
+
 
 class tester(unittest.TestCase):
     def setUp(self):
@@ -14,6 +18,33 @@ class tester(unittest.TestCase):
         self._frame3 = Frame(3)
         self._frame4 = Frame(4)
         self._frame5 = Frame(5)
+        self._frame0.setPid(0)
+        self._frame1.setPid(0)
+        self._frame2.setPid(1)
+        self._frame3.setPid(1)
+        self._frame4.setPid(2)
+        self._frame5.setPid(2)
+
+        self._pcb0 = PCB(0)
+        self._pcb1 = PCB(1)
+        self._pcb2 = PCB(2)
+        self._pageTable0 = PageTable(2)
+        self._pageTable1 = PageTable(2)
+        self._pageTable2 = PageTable(2)
+        self._pcb0.setPages(self._pageTable0)
+        self._pcb1.setPages(self._pageTable1)
+        self._pcb2.setPages(self._pageTable2)
+        self._pcbTable = PCBTable()
+        self._pcbTable.addPCB(self._pcb0)
+        self._pcbTable.addPCB(self._pcb1)
+        self._pcbTable.addPCB(self._pcb2)
+        self._pageTable0.getPage(0).setBDPhysicalMemory(self._frame0.getBD())
+        self._pageTable0.getPage(1).setBDPhysicalMemory(self._frame1.getBD())
+        self._pageTable1.getPage(0).setBDPhysicalMemory(self._frame2.getBD())
+        self._pageTable1.getPage(1).setBDPhysicalMemory(self._frame3.getBD())
+        self._pageTable2.getPage(0).setBDPhysicalMemory(self._frame4.getBD())
+        self._pageTable2.getPage(1).setBDPhysicalMemory(self._frame5.getBD())
+
         self._algorithmSecondChance = SecondChancePageReplacementAlgorithm()
 
     def test0001SecondChancePageReplacementAlgorithmWithCounterWithThreeFrames(self):
@@ -38,7 +69,8 @@ class tester(unittest.TestCase):
         self.assertEqual(1, self._frame2.getReferenceBit())
 
         # Se accede al 0
-        self._algorithmSecondChance.updateReferenceBit(self._frame0.getBD())
+        self._pageTable0.getPage(0).setReferenceBit(1)
+        self._algorithmSecondChance.updateFrame(self._pcbTable)
         # usedFrames: 0 1 2
 
         self.assertEqual(1, self._frame0.getReferenceBit())
@@ -64,7 +96,8 @@ class tester(unittest.TestCase):
         self.assertEqual(1, self._frame4.getReferenceBit())
 
         # Se accede al 2
-        self._algorithmSecondChance.updateReferenceBit(self._frame2.getBD())
+        self._pageTable1.getPage(0).setReferenceBit(1)
+        self._algorithmSecondChance.updateFrame(self._pcbTable)
         # usedFrames: 3 2 4
 
         self.assertEqual(1, self._frame3.getReferenceBit())
@@ -72,7 +105,8 @@ class tester(unittest.TestCase):
         self.assertEqual(1, self._frame4.getReferenceBit())
 
         # Se accede al 3
-        self._algorithmSecondChance.updateReferenceBit(self._frame3.getBD())
+        self._pageTable1.getPage(1).setReferenceBit(1)
+        self._algorithmSecondChance.updateFrame(self._pcbTable)
         # usedFrames: 3 2 4
 
         self.assertEqual(1, self._frame3.getReferenceBit())

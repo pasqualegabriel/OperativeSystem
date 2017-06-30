@@ -1,4 +1,3 @@
-from tabulate import tabulate
 
 from Prototipo.page import Page
 
@@ -9,17 +8,17 @@ class PageTable:
 
     #Proposito:Crea la cantidad de paginas que va a nesesitar segun <requiredPages>
     #Proposito:--
-    def createPages(self,requiredPages):
-        pageTable=[]
-        for i in range(0,requiredPages):
+    def createPages(self, requiredPages):
+        pageTable = []
+        for i in range(0, requiredPages):
             pageTable.append(Page())
         return pageTable
 
     #Proposito:retorno una pagina que esta en pyshicalMemory, la pagina que corresponde al bd enviado por parametro de
     #Precondicion:debe de haber al menos una pagina con ese bd
-    def searchPage(self,bd):
+    def searchPage(self, bd):
         for page in self._pages:
-            if page.getBDPhysicalMemory()==bd:
+            if page.getBDPhysicalMemory() == bd:
                 return page
 
     # Proposito:
@@ -30,7 +29,7 @@ class PageTable:
     # Proposito:Retorna las paginas que esten el pyshicalMemory
     # Precondicion:-
     def getPagesPhysical(self):
-        res=[]
+        res = []
         for page in self._pages:
             if page.isInPhysicalMemory():
                 res.append(page)

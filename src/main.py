@@ -3,7 +3,7 @@
 
 from Prototipo.disco import Disco
 from Prototipo.instructions import *
-from Prototipo.kernel import Kernel
+from Prototipo.kernel import Kernel, Kernel2
 from Prototipo.program import Program
 from Prototipo.print import Print
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     log = Print()
 
     ################# Programs ############################
-    p0 = Program("SO.exe",    [CPU(1)], 3)
+    p0 = Program("SO.exe",    [CPU(9)], 3)
     p1 = Program("Word.exe",  [CPU(4)], 2)
     p2 = Program("PC.exe",    [CPU(2)], 4)
     p3 = Program("Text.exe",  [CPU(7)], 5)

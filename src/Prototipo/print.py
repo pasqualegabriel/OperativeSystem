@@ -73,7 +73,7 @@ class Print:
 
     def printWaitTimeAndAverageReturn(self):
         self._log.debug(self._waitTimeAndAverageReturn)
-        self._log.debug("\nAverage Return: {result}".format(result=self._waitTimeAndAverageReturn.calculateAverageReturn()))
+        self._log.debug("\nAverage waiting time: {result}".format(result=self._waitTimeAndAverageReturn.calculateAverageReturn()))
         if self._memoryManager.isMemoryManagerPaging():
             self._log.debug("\nNumber of page faults: {cpf}".format(cpf=self._cantPageFault))
 
