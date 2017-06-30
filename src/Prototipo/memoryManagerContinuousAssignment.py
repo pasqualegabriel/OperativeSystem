@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-s
 from tabulate import tabulate
 
 from Prototipo.block import Block

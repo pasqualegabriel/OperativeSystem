@@ -90,3 +90,7 @@ class MyTestCase(unittest.TestCase):
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
         self.assertEquals(0, len(self._memoryManager.getBu()))
         self.assertEquals(1, len(self._memoryManager.getBl()))
+
+
+if __name__ == '__main__':
+    unittest.main()

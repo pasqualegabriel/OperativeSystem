@@ -3,7 +3,7 @@
 
 from Prototipo.pcb import PCB
 
-class Interrupcion:
+class interruption:
     #Proposito:Retorna el pcb que esta actualmente corriendo en el cpu.
     #Precondicion:Debe de haber un pcb cargado.
     def getPCBInCPU(self):
@@ -17,8 +17,6 @@ class Interrupcion:
     def getPIDInCPU(self):
         return self._dispatcher.getPidInCpu()
 
-
-class ChangePCBofCPU(Interrupcion):
     # Proposito:actualiza el PRograma conter del pcb en cpu, verifica si es preventivo
     # y si hay q cabiar de prosedimiento.
     # Precondicion:-
@@ -52,8 +50,6 @@ class ChangePCBofCPU(Interrupcion):
             pcb.set_status("ready")
             self._scheduler.add(pcb)
 
-
-class ContextSwitch(Interrupcion):
     #Proposito:Verifica si hay pid por encolar, en caso que haya pide uno y busca el pcb y setea estado a running y lo carga.
     #Precondcion:-
     def contextSwitch(self):
@@ -64,7 +60,7 @@ class ContextSwitch(Interrupcion):
             self._dispatcher.load(pcb)
 
 
-class New(ChangePCBofCPU):
+class New(interruption):
     def __init__(self, loader, dispatcher, scheduler, pcbTable):
         self._nexPid     = 0
         self._loader     = loader
@@ -80,7 +76,7 @@ class New(ChangePCBofCPU):
         self.isLoadOrChangeOrTail(pcb)
 
 
-class Kill(ContextSwitch):
+class Kill(interruption):
     def __init__(self, loader, dispatcher, scheduler, pcbTable, timer, memoryManager):
         self._loader        = loader
         self._dispatcher    = dispatcher
@@ -99,7 +95,7 @@ class Kill(ContextSwitch):
             self._timer.resetTimer()
 
 
-class IoIn(ContextSwitch):
+class IoIn(interruption):
     def __init__(self, dispatcher, pcbTable, deviceManager, scheduler, timer):
         self._dispatcher    = dispatcher
         self._pcbTable      = pcbTable
@@ -117,7 +113,7 @@ class IoIn(ContextSwitch):
         if not self._timer is None:
             self._timer.resetTimer()
 
-class IoOut(ChangePCBofCPU):
+class IoOut(interruption):
     def __init__(self, dispatcher, scheduler, pcbTable):
         self._dispatcher = dispatcher
         self._pcbTable   = pcbTable
@@ -128,7 +124,7 @@ class IoOut(ChangePCBofCPU):
         self.isLoadOrChangeOrTail(pcb)
 
 
-class TimeOut(Interrupcion):
+class TimeOut(interruption):
     def __init__(self, dispatcher, scheduler, pcbTable):
         self._dispatcher = dispatcher
         self._pcbTable = pcbTable
@@ -148,7 +144,7 @@ class TimeOut(Interrupcion):
         self._dispatcher.load(pcbForAdd)
 
 
-class CompactMemory(Interrupcion):
+class CompactMemory(interruption):
     def __init__(self, dispatcher, pcbTable, memoryManager):
         self._dispatcher    = dispatcher
         self._pcbTable      = pcbTable
@@ -163,7 +159,7 @@ class CompactMemory(Interrupcion):
 
 
 
-class PageFault(Interrupcion):
+class PageFault(interruption):
     def __init__(self, loader, scheduler, pcbTable, dispatcher,memoryManager):
         self._loader        = loader
         self._scheduler     = scheduler
@@ -195,26 +191,4 @@ class PageFault(Interrupcion):
             self._loader.loadInPhysicalMemory(instructions, pageForPageFault)
 
         self._dispatcher.load(pcbInCpu)
-
-
-#class InSwap(Interrupcion):
-#    def __init__(self, loader, scheduler, pcbTable, dispatcher):
-#        self._loader     = loader
-#        self._scheduler  = scheduler
-#        self._pcbTable   = pcbTable
-#        self._dispatcher = dispatcher
-
-
-#    def execute(self, pageInSwap):
-#        self._loader.swapIN(pageInSwap.getBDPhysicalMemory(), pageInSwap.getBDVirtualMemory())
-#        pageInSwap.setBDPhysicalMemory(-1)
-#        pageInSwap.change()
-
-#class UpdateReferenceBit(Interrupcion):
-#    def __init__(self, memoryManager):
-#        self._memoryManager = memoryManager
-#
-#    def execute(self,page):
-#        pageReplacementAlgorithm = self._memoryManager.getUsedFramesPhysicalMemory()
-#        pageReplacementAlgorithm.updateReferenceBit(page.getBDPhysicalMemory())
 

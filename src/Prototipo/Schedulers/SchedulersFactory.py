@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-s
 from Prototipo.Schedulers.SchedulerFCFS import SchedulerFCFS
 from Prototipo.Schedulers.SchedulerPriority import SchedulerPriorityPreemptive, SchedulerPriorityNonPreemptive
-from Prototipo.Schedulers.SchedulerRoundRobin import SchedulerRoundRobin
 from Prototipo.Schedulers.SchedulerSJF import SchedulerSJFPreemptive, SchedulerSJFNonPreemptive
 from Prototipo.timer import Timer
 
@@ -15,11 +14,11 @@ class SchedulersFactory:
 
         if self._id == 2 or self._id == 3:
             self._aging = int(input("Aging?\n"))
-
-        self._schedulers={1:SchedulerFCFS(),
+        self._schedulerFCFS = SchedulerFCFS()
+        self._schedulers={1:self._schedulerFCFS,
                           2:SchedulerPriorityPreemptive(pcbTable, self._aging),
                           3:SchedulerPriorityNonPreemptive(pcbTable, self._aging),
-                          4:SchedulerRoundRobin(),
+                          4:self._schedulerFCFS,
                           5:SchedulerSJFPreemptive(),
                           6:SchedulerSJFNonPreemptive()}
 
