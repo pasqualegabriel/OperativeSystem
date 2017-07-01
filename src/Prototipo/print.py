@@ -89,6 +89,51 @@ class Print:
         else:
             return "\n{mm}\n".format(mm=self._memoryManager)
 
+class PrintOnlySchedulers(Print):
+    def set(self, memoryManager, memory, dispatcher, intManager, pcbTable, scheduler, waitTimeAndAverageReturn):
+        self._tick = 0
+        self._memoryManager = memoryManager
+        self._memory = memory
+        self._dispatcher = dispatcher
+        self._intManager = intManager
+        self._pidEjecutado = None
+        self._pcbTable = pcbTable
+        self._scheduler = scheduler
+        self._cantPageFault = 0
+        self._waitTimeAndAverageReturn = waitTimeAndAverageReturn
+
+    def printExecuteCPU(self, ir, pc):
+        self._log.debug("{t:2d} Exec:  {op}  PidExec={pe:2}   PC={npc:2d}   Pid={pid:2d}   {s}".format(t=self._tick,pe=self.getPidEjecutado(), op=ir, npc=pc, pid=self.getPidActual(), s=self._scheduler))
+        self._tick += 1
+
+    def printNameProgram(self, nameProgram):
+        pass
+
+    def printMemoryAndMemoryManager(self):
+        pass
+
+    def printMemoryManager(self):
+        pass
+
+    def printNewMemoryAndMemoryManager(self, nameProgram):
+        pass
+
+    def printCpu(self, cpu):
+        pass
+
+    def printPageFalut(self):
+        pass
+
+    def forPrint(self, forPrint):
+        pass
+
+    def printWaitTimeAndAverageReturn(self):
+        self._log.debug(self._waitTimeAndAverageReturn)
+        self._log.debug("\nAverage waiting time: {result}".format(result=self._waitTimeAndAverageReturn.calculateAverageReturn()))
+
+    def printPcbTable(self):
+        pass
+
 
 class WaitTimeAndAverageReturn:
     def __init__(self):

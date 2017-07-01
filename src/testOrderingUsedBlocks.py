@@ -17,15 +17,15 @@ class MyTestCase(unittest.TestCase):
         self._block4 = Block(45, 54, 3)
         self._block5 = Block(55, 64, 4)
 
-        self._mm.getBu().append(self._block4)
-        self._mm.getBu().append(self._block3)
-        self._mm.getBu().append(self._block1)
-        self._mm.getBu().append(self._block5)
-        self._mm.getBu().append(self._block2)
-        self._mm.orderingBu()
+        self._mm.getUsedBlocks().append(self._block4)
+        self._mm.getUsedBlocks().append(self._block3)
+        self._mm.getUsedBlocks().append(self._block1)
+        self._mm.getUsedBlocks().append(self._block5)
+        self._mm.getUsedBlocks().append(self._block2)
+        self._mm.orderingUsedBlocks()
 
     def testMemory(self):
-        self.assertEquals([self._block1, self._block2, self._block3, self._block4, self._block5], self._mm.getBu())
+        self.assertEquals([self._block1, self._block2, self._block3, self._block4, self._block5], self._mm.getUsedBlocks())
 
 if __name__ == "__main__":
     unittest.main()

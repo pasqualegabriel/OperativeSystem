@@ -27,7 +27,7 @@ class MemoryFactory:
         self._loaderPages = LoaderPages( self._memory, self.getMmu(), disco, self.getMemoryManager(), self._swap)
         if self._idMemory == 2:
             self._memoryManager.setLoader(self._loaderPages)
-        self._loaders = {1: LoaderBlocks(self._memory, self.getMmu(), disco, self.getMemoryManager(), None),
+        self._loaders = {1: LoaderBlocks(self._memory, self.getMmu(), disco, self.getMemoryManager()),
                          2: self._loaderPages}
 
     def initializeMmu(self):

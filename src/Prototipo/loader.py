@@ -31,7 +31,7 @@ class Loader:
 
 
 class LoaderBlocks(Loader):
-    def __init__(self, memory, mmu, disco, memoryManager, swap):
+    def __init__(self, memory, mmu, disco, memoryManager):
         self._memory = memory
         self._mmu = mmu
         self._disco = disco
@@ -45,7 +45,7 @@ class LoaderBlocks(Loader):
         if not self._memoryManager.thereIsSpaceInMemoryFor(program.longitud()):
             raise SystemError("Memoria insuficiente")
         block = self._memoryManager.getFreeBlock(pcb.get_pid(), program.longitud())
-        pcb.set_bd_limit(block.get_Bd(), block.get_Limit())
+        pcb.set_bd_limit(block.getBd(), block.getLimit())
         pos = pcb.get_bd()
         for i in program.getInstructions():
             self._memory.setPos(pos, i)

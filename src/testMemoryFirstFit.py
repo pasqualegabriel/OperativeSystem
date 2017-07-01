@@ -46,50 +46,50 @@ class MyTestCase(unittest.TestCase):
         self._memoryManager.addProgram(self._PCBProgram4.get_pid(), self._program4.longitud())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(4, len(self._memoryManager.getBu()))
-        self.assertEquals(1, len(self._memoryManager.getBl()))
+        self.assertEquals(4, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(1, len(self._memoryManager.getFreeBlocks()))
 
         # Se elimina un programa
         self._memoryManager.freeMemory(self._PCBProgram1.get_pid())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(3, len(self._memoryManager.getBu()))
-        self.assertEquals(2, len(self._memoryManager.getBl()))
+        self.assertEquals(3, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(2, len(self._memoryManager.getFreeBlocks()))
 
         # Se elimina un programa
         self._memoryManager.freeMemory(self._PCBProgram3.get_pid())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(2, len(self._memoryManager.getBu()))
-        self.assertEquals(3, len(self._memoryManager.getBl()))
+        self.assertEquals(2, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(3, len(self._memoryManager.getFreeBlocks()))
 
         # Se elimina un programa
         self._memoryManager.freeMemory(self._PCBProgram2.get_pid())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(1, len(self._memoryManager.getBu()))
-        self.assertEquals(2, len(self._memoryManager.getBl()))
+        self.assertEquals(1, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(2, len(self._memoryManager.getFreeBlocks()))
 
         # Se carga un quinto programa a memoria
         self._memoryManager.addProgram(self._PCBProgram5.get_pid(), self._program5.longitud())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(2, len(self._memoryManager.getBu()))
-        self.assertEquals(2, len(self._memoryManager.getBl()))
+        self.assertEquals(2, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(2, len(self._memoryManager.getFreeBlocks()))
 
         # Se elimina un programa
         self._memoryManager.freeMemory(self._PCBProgram4.get_pid())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(1, len(self._memoryManager.getBu()))
-        self.assertEquals(2, len(self._memoryManager.getBl()))
+        self.assertEquals(1, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(2, len(self._memoryManager.getFreeBlocks()))
 
         # Se elimina un programa
         self._memoryManager.freeMemory(self._PCBProgram5.get_pid())
 
         # Se verifica que el memoryManager tenga la cantidad correcta de bloques en cada lista
-        self.assertEquals(0, len(self._memoryManager.getBu()))
-        self.assertEquals(1, len(self._memoryManager.getBl()))
+        self.assertEquals(0, len(self._memoryManager.getUsedBlocks()))
+        self.assertEquals(1, len(self._memoryManager.getFreeBlocks()))
 
 
 if __name__ == '__main__':

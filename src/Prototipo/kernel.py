@@ -40,7 +40,7 @@ class Kernel:
 
     #Proposito:
     #Precondicion:
-    def execPrograms(self, programs, log):
+    def initialize(self, programs, log):
         # Imprime la memoria y el memoryManager, y setea para porteriores impresiones
         self._waitTimeAndAverageReturn = WaitTimeAndAverageReturn()
         log.set(self._memoryManager, self._memory, self._dispatcher, self._intManager, self._pcbTable, self._scheduler, self._waitTimeAndAverageReturn)
@@ -50,7 +50,7 @@ class Kernel:
         log.printWaitTimeAndAverageReturn()
 
 
-class Kernel2(Kernel):
+class KernelSchedulerRoundRobinQuantum3MemoryPagingSize8SecondChancePageReplacementAlgorithm(Kernel):
     def __init__(self, disco):
         self._disco = disco
         self._memory = Memory(8)
@@ -63,6 +63,46 @@ class Kernel2(Kernel):
         self._mmu = MmuPages(self._memory, sizeFrame, self._intManager)
         self._loader = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
         self._memoryManager.setLoader(self._loader)  # Es para no hacer la interrupcion swapIN (el memoryManager y el loader se conocen mutuamente)
+        self._scheduler = SchedulerFCFS()
+        self._timer = Timer(self._intManager, 3)
+        self._cpu = Cpu(self._mmu, self._intManager)
+        self._dispatcher = Dispatcher(self._mmu, self._cpu)
+        self._deviceManager = DeviceManager(self._intManager)
+        self._intManager.setInterruptions(self._loader, self._dispatcher, self._scheduler, self._pcbTable, self._deviceManager, self._memoryManager, self._timer)
+        self._newPrograms = NewPrograms(self._intManager)
+        self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
+
+class KernelSchedulerPriorityMemoryPagingSize8SecondChancePageReplacementAlgorithm(Kernel):
+    def __init__(self, disco):
+        self._disco = disco
+        self._memory = Memory(8)
+        self._pcbTable = PCBTable()
+        self._intManager = IntManager()
+        sizeFrame = 4
+        pageReplacementAlgorithm = SecondChancePageReplacementAlgorithm()
+        self._swap = Swap(sizeFrame)
+        self._memoryManager = MemoryManagerPaging(self._memory, sizeFrame, self._pcbTable, self._swap, pageReplacementAlgorithm)
+        self._mmu = MmuPages(self._memory, sizeFrame, self._intManager)
+        self._loader = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
+        self._memoryManager.setLoader(self._loader)  # Es para no hacer la interrupcion swapIN (el memoryManager y el loader se conocen mutuamente)
+        self._scheduler = SchedulerPriorityPreemptive(self._pcbTable, 80)
+        self._timer = None
+        self._cpu = Cpu(self._mmu, self._intManager)
+        self._dispatcher = Dispatcher(self._mmu, self._cpu)
+        self._deviceManager = DeviceManager(self._intManager)
+        self._intManager.setInterruptions(self._loader, self._dispatcher, self._scheduler, self._pcbTable, self._deviceManager, self._memoryManager, self._timer)
+        self._newPrograms = NewPrograms(self._intManager)
+        self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
+
+class KernelSchedulerSJFMemoryContinuousAssignmentBestFitSize32(Kernel):
+    def __init__(self, disco):
+        self._disco = disco
+        self._memory = Memory(32)
+        self._pcbTable = PCBTable()
+        self._intManager = IntManager()
+        self._memoryManager = MemoryManagerContinuousAssignmentBestFit(self._memory, self._pcbTable, self._intManager, 1)
+        self._mmu = Mmu(self._memory)
+        self._loader = LoaderBlocks(self._memory, self._mmu, disco, self._memoryManager)
         self._scheduler = SchedulerSJFPreemptive()
         self._timer = None
         self._cpu = Cpu(self._mmu, self._intManager)
@@ -71,3 +111,18 @@ class Kernel2(Kernel):
         self._intManager.setInterruptions(self._loader, self._dispatcher, self._scheduler, self._pcbTable, self._deviceManager, self._memoryManager, self._timer)
         self._newPrograms = NewPrograms(self._intManager)
         self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
+
+class KernelFactoty:
+    def __init__(self, disco):
+        self._idKernel = int(input("Choise Kernel: \n1 Memory: Paging, Second Chance Page Replacement Algorithm, SizeMemory =  8, Scheduler: Priority\n2 Memory: Paging, Second Chance Page Replacement Algorithm, SizeMemory =  8, Scheduler: Round Robin, Quantum = 3\n3 Memory: Continuous Assignment Best Fit,                   SizeMemory = 32, Scheduler: Shortest Job First\n4 Configure\n"))
+        if self._idKernel == 4:
+            self._kernelConfiguration = Kernel(disco)
+        else:
+            self._kernelConfiguration = None
+        self._kernel = {1: KernelSchedulerPriorityMemoryPagingSize8SecondChancePageReplacementAlgorithm(disco),
+                        2: KernelSchedulerRoundRobinQuantum3MemoryPagingSize8SecondChancePageReplacementAlgorithm(disco),
+                        3: KernelSchedulerSJFMemoryContinuousAssignmentBestFitSize32(disco),
+                        4: self._kernelConfiguration}
+
+    def initialize(self):
+        return self._kernel.get(self._idKernel)
