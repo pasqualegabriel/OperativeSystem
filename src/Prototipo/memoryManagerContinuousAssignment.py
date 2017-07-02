@@ -28,11 +28,6 @@ class MemoryManagerContinuousAssignment:
     def getUsedBlocks(self):
         return self._usedBlocks
 
-    # Proposito: Asigna el bd y el limit al pcb
-    def setPCBAndLoader(self, pcb, bd, limit):
-        pcb.set_bd(bd)
-        pcb.set_limit(limit)
-
     # Proposito: Verifica si hay al menos un bloque con el tamanio nesesario, en caso de no haberlo compacta la memoria,
     # designa al programa a un bloque.
     # Precondicion: self._free >= sizeProgram
@@ -136,6 +131,29 @@ class MemoryManagerContinuousAssignment:
             indexPos = oneBlockU.getLimit() + 1
         self.updateUsedBlocks(indexPos)
 
+    # Proposito: Actualiza <block> en una compactacion
+    def updateBlockAndPCB(self, indexPos, block):
+        pcb = self._pcbTable.lookUpPCB(block.getPid())
+        size = block.getSize()
+        oldPos = pcb.get_bd()
+        for i in range(indexPos, indexPos + size):
+            ir = self._memory.get(oldPos)
+            self._memory.setPos(i, ir)
+            oldPos += 1
+        self.setPCBAndLoader(pcb, indexPos, indexPos + size - 1)
+        self.setBlock(block, indexPos, indexPos + size - 1)
+
+    # Proposito: Asigna el bd y el limit al pcb
+    def setPCBAndLoader(self, pcb, bd, limit):
+        pcb.set_bd(bd)
+        pcb.set_limit(limit)
+
+    # Proposito: Setea el bd, limit, y el moreSpace en 0 al block
+    def setBlock(self, block, bd, limit):
+        block.set_bd(bd)
+        block.set_limit(limit)
+        block.set_moreSpace(0)
+
     # Proposito: Actualiza los bloques libres luego de una compactacion
     def updateUsedBlocks(self, indexPos):
         if (indexPos - 1) != self._free:
@@ -154,24 +172,6 @@ class MemoryManagerContinuousAssignment:
                     k = self._usedBlocks[j + 1]
                     self._usedBlocks[j + 1] = self._usedBlocks[j]
                     self._usedBlocks[j] = k
-
-    # Proposito: Actualiza <block> en una compactacion
-    def updateBlockAndPCB(self, indexPos, block):
-        pcb = self._pcbTable.lookUpPCB(block.getPid())
-        size = block.getSize()
-        oldPos = pcb.get_bd()
-        for i in range(indexPos, indexPos + size):
-            ir = self._memory.get(oldPos)
-            self._memory.setPos(i, ir)
-            oldPos += 1
-        self.setPCBAndLoader(pcb, indexPos, indexPos + size - 1)
-        self.setBlock(block, indexPos, indexPos + size - 1)
-
-    # Proposito: Setea el bd, limit, y el moreSpace en 0 al block
-    def setBlock(self, block, bd, limit):
-        block.set_bd(bd)
-        block.set_limit(limit)
-        block.set_moreSpace(0)
 
     # Solo se utiliza para la impresion
     def isMemoryManagerPaging(self):

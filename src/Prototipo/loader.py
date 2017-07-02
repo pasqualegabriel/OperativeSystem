@@ -12,13 +12,12 @@ class Loader:
             except:
                 pass
 
-
     #Proposito:Retorna el memoryManager
     #Precondicion:-
     def getMemoryManager(self):
         return self._memoryManager
 
-    #Proposito:Retorna el swap          ##MIRARA ESTE MSJ SI SIVER
+    #Proposito:Retorna el swap
     #Precondicion:-
     def getSwapManager(self):
         return self._swap

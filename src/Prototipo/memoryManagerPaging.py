@@ -284,50 +284,35 @@ class SecondChancePageReplacementAlgorithm(PageReplacementAlgorithm):
                 unFrame.setReferenceBit(1)
                 page.setReferenceBit(0)
 
-
-class LeastRecentlyUsedPageReplacementAlgorithm(PageReplacementAlgorithm):
+class ClockPageReplacementAlgorithm(PageReplacementAlgorithm):
     def __init__(self):
         self._usedFrames = []
-        self._countTimer = 0
+        self._target     = 0
 
-    #Proposito:Agrega un marco a la queue
-    #Precondicion:---
+    # Proposito:
+    # Precondicion: -
     def add(self, frame):
-        frame.setTimeBit(self._countTimer)
-        self._usedFrames.append(frame)
-        self._countTimer+=1
+        pass
 
-    #Proposito:selecciona una victima y la retorna
-    #Precondicion:la lista de usedFrame debe de haber al menos uno
+    # Proposito:
+    # Precondicion:-
     def getVictim(self):
-        minFrame = self._usedFrames[0]
-        lenUsedFrames = len(self._usedFrames)
-        if lenUsedFrames > 1:
-            for index in range(1, lenUsedFrames):
-                compare = self._usedFrames[index]
-                if minFrame.getTimeBit() > compare.getTimeBit():
-                    minFrame = compare
-        self._usedFrames.remove(minFrame)
-        return minFrame
+        return
 
-    #Proposito:actualiza el bit de tiempo del frame con el bd<bd>
-    #Precondicion:---
-    def updateReferenceBit(self, bd):
-        self.searchFrame(bd).setTimeBit(self._countTimer)
-        self._countTimer+=1
+    #proposito:
+    #Precondicion:-
+    def updateFrame(self, pcbTable):
+        pass
 
-    # Proposito:retorna la lista de frames usados
-    # Proposito:-
-    def getUsedFrames(self):
-        return self._usedFrames
+    # Proposito:
+    # Precondicion: -
+    def nextTarget(self):
+        return
+
+    # Proposito:
+    # Precondicion: -
+    def clockTarget(self):
+        return self._target
 
 
-class LeastRecentlyUsedPageReplacementAlgorithmWithQueue(FirstInFirstOutPageReplacementAlgorithm):
-
-    #Proposito:actualiza el bit de tiempo del frame con el bd<bd>
-    #Precondicion:---
-    def updateReferenceBit(self, bd):
-        frameReferenced = self.searchFrame(bd)
-        self._usedFrames.remove(frameReferenced)
-        self.add(frameReferenced)
 

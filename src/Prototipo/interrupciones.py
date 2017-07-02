@@ -42,10 +42,8 @@ class interruption:
             pcb.set_status("running")
             self._dispatcher.load(pcb)
 
-
         elif self.isPreemptiveAndIsChange(pcb):
             self.changeOfPCBInCPU(pcb)
-
         else:
             pcb.set_status("ready")
             self._scheduler.add(pcb)
@@ -187,7 +185,7 @@ class PageFault(interruption):
             pageForPageFault.setBDPhysicalMemory(bdPyshicalMemory)
             pageForPageFault.setPhysicalMemory(True)
             program = self._loader.searchProgram(pcbInCpu.get_name())
-            instructions = program.getSubInstructions(pc, pc + self._memoryManager.sizeFrame())  ##PARA CREAR LA SUBLISTA QUE VAMOS A CARGAR EN MEMORIA
+            instructions = program.getSubInstructions(pc, pc + self._memoryManager.sizeFrame())
             self._loader.loadInPhysicalMemory(instructions, pageForPageFault)
 
         self._dispatcher.load(pcbInCpu)

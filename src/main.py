@@ -3,8 +3,7 @@
 
 from Prototipo.disco import Disco
 from Prototipo.instructions import *
-from Prototipo.kernel import Kernel, KernelSchedulerSJFMemoryContinuousAssignmentBestFitSize32, KernelFactoty, \
-    PrintOnlySchedulers
+from Prototipo.kernel import *
 from Prototipo.program import Program
 from Prototipo.print import Print
 
@@ -13,19 +12,19 @@ if __name__ == '__main__':
     log = Print()
 
     ################# Programs ############################
-    p0 = Program("SO.exe",    [CPU(7)], 3)
-    p1 = Program("Word.exe",  [CPU(4)], 2)
-    p2 = Program("PC.exe",    [CPU(2)], 4)
-    p3 = Program("Text.exe",  [CPU(7)], 5)
-    p4 = Program("Paint.exe", [CPU(3)], 1)
+    p0 = Program("SO.exe",    [CPU(3)], 5)
+    p1 = Program("Word.exe",  [CPU(2)], 2)
+    p2 = Program("PC.exe",    [CPU(2)], 3)
+    p3 = Program("Text.exe",  [CPU(1)], 1)
+    p4 = Program("Paint.exe", [CPU(4)], 4)
     #######################################################
 
     disco = Disco()
-    ls = [p0, p1, p2, "so.pdf", p3, p4]
+    ls = [p0, p1, p2, "historiaSO.pdf", p3, p4]
 
     disco.add_files(ls)
 
-    programs = [(0, "SO.exe"), (1, "Word.exe"), (3, "PC.exe"), (5, "Text.exe"), (7, "Paint.exe")]
+    programs = [(0, "SO.exe"), (1, "Word.exe"), (3, "PC.exe"), (4, "Text.exe"), (7, "Paint.exe")]
 
     kernelFactoty = KernelFactoty(disco)
     kernel = kernelFactoty.initialize()
