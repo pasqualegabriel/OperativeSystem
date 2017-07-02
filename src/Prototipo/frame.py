@@ -3,10 +3,12 @@
 
 class Frame:
     def __init__(self, bd):
-        self._bd            = bd
-        self._pid           = -1
-        self._pageNumber    = -1
-        self._referenceBit  =  1
+        self._bd                    = bd
+        self._pid                   = -1
+        self._pageNumber            = -1
+        self._referenceBit          =  1
+        self._nextFrameClock        = -1
+        self._previousFrameClock    = -1
 
     #Proposito:Retorna el bd
     #Pecondicion:-
@@ -53,6 +55,21 @@ class Frame:
     def getTimeBit(self):
         return self._TimeBit
 
+
+######Para algoritmo de remplazo reloj
+        ##Geterrs
+    def getNextFrameClock(self):
+        return self._nextFrameClock
+
+    def getPreviousFrameClock(self):
+        return self._previousFrameClock
+
+        ##Setters
+    def updateNextFrameClock(self, oneFrameClock):
+        self._nextFrameClock = oneFrameClock
+
+    def updatePreviousFrameClock(self, oneFrameClock):
+        self._previousFrameClock = oneFrameClock
 
     def __repr__(self):
         return "Pid={pid:2d}   Bd={bd:2d}   pageNumber={pn:2d}".format(pid=self._pid, bd=self._bd, pn=self._pageNumber)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-s
 from Prototipo.intManager import Irq
-
+"""
 class NewPrograms:
     def __init__(self, intManager):
         self._intManager = intManager
@@ -35,7 +35,7 @@ class NewPrograms:
     def getProxStart(self):
         return self._proxStart
 
-
+"""
 
 
 

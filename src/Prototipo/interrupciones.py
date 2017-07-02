@@ -35,8 +35,7 @@ class interruption:
         self._dispatcher.load(pcb)
 
     # Proposito:Carga un procedimiento o cambia el procedimiento actual por otro; o encola pid del pcb.
-    #
-    def isLoadOrChangeOrTail(self, pcb):
+    def isLoadOrChangeOrToReady(self, pcb):
 
         if self._dispatcher.isIdle():
             pcb.set_status("running")
@@ -66,12 +65,14 @@ class New(interruption):
         self._dispatcher = dispatcher
         self._pcbTable   = pcbTable
 
+    #Proposioto:Crear un proceso y ve si tiene q cargarlo en el cpu o encolarlo.
+    #Precondicion:-
     def execute(self, nameProgram):
         pcb = PCB(self._nexPid)
         self._loader.load(pcb, nameProgram)
         self._pcbTable.addPCB(pcb)
         self._nexPid += 1
-        self.isLoadOrChangeOrTail(pcb)
+        self.isLoadOrChangeOrToReady(pcb)
 
 
 class Kill(interruption):
@@ -83,6 +84,9 @@ class Kill(interruption):
         self._timer         = timer
         self._memoryManager = memoryManager
 
+    #Proposito:libera todos los marcos o blockes(segun el mm) usados por el proceso actual en el pcu,y despues lo borra pcbtablet,
+    #carga otro procedimiento de la cola de ready si lo hay.
+    #Precondicion:-
     def execute(self, p):
         pid = self._dispatcher.getPidInCpu()
         self._memoryManager.freeMemory(pid)
@@ -101,6 +105,10 @@ class IoIn(interruption):
         self._scheduler     = scheduler
         self._timer         = timer
 
+
+    #Proposito:Manda el proceso actual al a la cola del deviceManager,
+    #carga otro procedimiento de la cola de ready si lo hay.
+    #Precondicion:
     def execute(self, io):
         pcbEnCPU = self.getPCBInCPU()
         self._dispatcher.save(pcbEnCPU)
@@ -117,9 +125,10 @@ class IoOut(interruption):
         self._pcbTable   = pcbTable
         self._scheduler  = scheduler
 
+    #Proposito:El proceso Que acaba de salir de la cola de deviceManager, lo pone en running o en ready.
     def execute(self, pid):
         pcb = self._pcbTable.lookUpPCB(pid)
-        self.isLoadOrChangeOrTail(pcb)
+        self.isLoadOrChangeOrToReady(pcb)
 
 
 class TimeOut(interruption):
@@ -128,6 +137,7 @@ class TimeOut(interruption):
         self._pcbTable = pcbTable
         self._scheduler = scheduler
 
+    #Proposito:Saca un proceso de la cpu y cambia por otro si es que lo hay
     def execute(self, p):
         if not self._scheduler.notIsEmpty():
             return
@@ -148,6 +158,7 @@ class CompactMemory(interruption):
         self._pcbTable      = pcbTable
         self._memoryManager = memoryManager
 
+    #Proposito:Frena el cpu, guarda el ultimo program contact en el respectivo Proceso, compacta la memoria, y vuelve a cargar ese proceso
     def execute(self, p):
         pcbInCpu = self.getPCBInCPU()
         self._dispatcher.save(pcbInCpu)
@@ -165,6 +176,7 @@ class PageFault(interruption):
         self._dispatcher    = dispatcher
         self._memoryManager = memoryManager
 
+    #Proposito:actualiza el mmu y carga una pagina que le assigno el mm a la memoria.
     def execute(self, pageForPageFault):
         pcbInCpu = self.getPCBInCPU()
         self._dispatcher.save(pcbInCpu)

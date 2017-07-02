@@ -26,8 +26,8 @@ if __name__ == '__main__':
 
     programs = [(0, "SO.exe"), (1, "Word.exe"), (3, "PC.exe"), (4, "Text.exe"), (7, "Paint.exe")]
 
-    kernelFactoty = KernelFactoty(disco)
-    kernel = kernelFactoty.initialize()
+    kernelFactory = KernelFactoty(disco)
+    kernel = kernelFactory.initialize()
     kernel.initialize(programs, log)
 
 
