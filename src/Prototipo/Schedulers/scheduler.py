@@ -8,7 +8,7 @@ class Scheduler:
     def isChange(self, pcbInCPU, newPCB):
         return False
 
-    def set_burstPCBInCPU(self,burst):
+    def set_burstPCBInCPU(self, burst):
         pass
 
     def getTimer(self):

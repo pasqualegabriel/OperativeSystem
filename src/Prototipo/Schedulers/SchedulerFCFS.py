@@ -9,7 +9,7 @@ class SchedulerFCFS(Scheduler):
     def __init__(self):
         self._ready = QueueFIFO()
 
-    # Proposito: encola el pid del <pcb>
+    # Proposito: Encola el pid del <pcb>
     def add(self, pcb):
         pid = pcb.get_pid()
         self._ready.add(pid)

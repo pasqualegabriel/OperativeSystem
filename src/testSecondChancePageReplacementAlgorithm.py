@@ -48,7 +48,7 @@ class tester(unittest.TestCase):
         self._algorithmSecondChance = SecondChancePageReplacementAlgorithm()
 
     def test0001SecondChancePageReplacementAlgorithmWithCounterWithThreeFrames(self):
-        # mismo ejemplo del pdf
+
         self._algorithmSecondChance.add(self._frame5)
         self._algorithmSecondChance.add(self._frame0)
         self._algorithmSecondChance.add(self._frame1)

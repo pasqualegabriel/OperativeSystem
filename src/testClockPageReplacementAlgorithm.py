@@ -50,13 +50,18 @@ class tester(unittest.TestCase):
     def test000SeAgregaUnFrameAAlAlgoritmoReloj(self):
         self._algorithmClock.add(self._frame0)
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
+        self.assertEqual(self._frame0, self._frame0.getNextFrameClock())
+        self.assertEqual(self._frame0, self._frame0.getPreviousFrameClock())
+        self.assertEqual(self._frame0, self._algorithmClock.getTarget())
 
     def test001SeAgregaDosElementosYSePreguntaDondeApuntaElSegundoElemento(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
 
-        self.assertEqual(self._frame0,self._frame1.getNextFrameClock())
+        self.assertEqual(self._frame0, self._frame1.getNextFrameClock())
         self.assertEqual(self._frame0, self._frame1.getPreviousFrameClock())
+        self.assertEqual(self._frame1, self._frame0.getNextFrameClock())
+        self.assertEqual(self._frame1, self._frame0.getPreviousFrameClock())
         self.assertEqual(2, self._algorithmClock.getSizeFrameClock())
 
     def test002SeAgreganDosElemntosYLuegoSeBorraUnoQuedandoSOloUNo(self):
@@ -68,7 +73,9 @@ class tester(unittest.TestCase):
 
     def test003SeAgreganDosElementosYLuegoDeBorrarUnoQuedaComoTargetElFrame1(self):
         self._algorithmClock.add(self._frame0)
+        self.assertEqual(self._frame0.getNextFrameClock(), self._frame0.getPreviousFrameClock())
         self._algorithmClock.add(self._frame1)
+        self.assertEqual(self._frame0.getNextFrameClock(), self._frame0.getPreviousFrameClock())
         self._algorithmClock.removeFrame(self._frame0)
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
         self.assertEqual(self._frame1, self._algorithmClock.getTarget())
@@ -115,34 +122,58 @@ class tester(unittest.TestCase):
         self.assertEqual(2, len(self._algorithmClock.getUsedFrames()))
         self.assertListEqual(listTest, self._algorithmClock.getUsedFrames())
 
-    def test008ElAlgoritmoSabeBuscarElFrameConBD1(self):
+    def test008ElAlgoritmoSabeBuscarUnFrame(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
+        self._algorithmClock.add(self._frame2)
 
         self.assertEqual(self._frame0, self._algorithmClock.searchFrame(0))
-        self.assertEqual(2, self._algorithmClock.getSizeFrameClock())
+        self.assertEqual(3, self._algorithmClock.getSizeFrameClock())
         self.assertEqual(self._frame0, self._algorithmClock.getTarget())
 
-    def test009ElAlgoritmoTenia2FrameConBitDeReferenciaEn0DespuesDelUpdateFrameQuedaronen1SuBitReferencia(self):
+        self.assertEqual(self._frame1, self._algorithmClock.searchFrame(1))
+        self.assertEqual(3, self._algorithmClock.getSizeFrameClock())
+        self.assertEqual(self._frame0, self._algorithmClock.getTarget())
+
+        self.assertEqual(self._frame2, self._algorithmClock.searchFrame(2))
+        self.assertEqual(3, self._algorithmClock.getSizeFrameClock())
+        self.assertEqual(self._frame0, self._algorithmClock.getTarget())
+
+    def test009ElAlgoritmoTenia3FrameConBitDeReferenciaEn0DespuesDelUpdateFrameQuedaronen1SuBitReferencia(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
+        self._algorithmClock.add(self._frame2)
         self._frame0.setReferenceBit(0)
         self._frame1.setReferenceBit(0)
+        self._frame2.setReferenceBit(0)
+
         self._pageTable0.getPage(0).setReferenceBit(1)
         self._pageTable0.getPage(1).setReferenceBit(1)
+        self._pageTable1.getPage(0).setReferenceBit(1)
 
         self._algorithmClock.updateFrame(self._pcbTable)
         self.assertEqual(1,self._frame0.getReferenceBit())
         self.assertEqual(1,self._frame1.getReferenceBit())
 
-    def test010ClockPageReplacementAlgorithmWithCounterWithThreeFrames(self):
-        # mismo ejemplo del pdf
+    def test010SeCompruebaAgregandoTresFrames(self):
+        self._algorithmClock.add(self._frame5)
+        self._algorithmClock.add(self._frame0)
+        self._algorithmClock.add(self._frame1)
+        self.assertEqual(3, self._algorithmClock.getSizeFrameClock())
+        self.assertEqual(self._frame0.getNextFrameClock(), self._frame1)
+        self.assertEqual(self._frame0.getPreviousFrameClock(), self._frame5)
+        self.assertEqual(self._frame5.getNextFrameClock(), self._frame0)
+        self.assertEqual(self._frame5.getPreviousFrameClock(), self._frame1)
+        self.assertEqual(self._frame1.getNextFrameClock(), self._frame5)
+        self.assertEqual(self._frame1.getPreviousFrameClock(), self._frame0)
+
+    def test011ClockPageReplacementAlgorithmWithCounterWithThreeFrames(self):
+
         self._algorithmClock.add(self._frame5)
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
         # Se lleno la memoria
         # usedFrames: 5 0 1
-
 
         self.assertEqual(1, self._frame5.getReferenceBit())
         self.assertEqual(1, self._frame0.getReferenceBit())

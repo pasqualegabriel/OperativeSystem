@@ -9,12 +9,12 @@ class SchedulerPriorityPreemptive(Scheduler):
     # el pcbTable, el aging y el contador
     # Aclaracion: La prioridad 1 es mejor que la 2
     def __init__(self, pcbTable, aging):
-        self._priority = {1: QueueFIFO(), 2: QueueFIFO(), 3: QueueFIFO(), 4: QueueFIFO(), 5: QueueFIFO()}
+        self._priority   = {1: QueueFIFO(), 2: QueueFIFO(), 3: QueueFIFO(), 4: QueueFIFO(), 5: QueueFIFO()}
         self._accountant = 0
-        self._PCBTable = pcbTable
-        self._aging = aging
+        self._PCBTable   = pcbTable
+        self._aging      = aging
 
-    # Proposito: Se encola en la queue de la prioridad del <pcb>, una tupla con el pid y el tiempo de mejora de prioridad
+    # Proposito: Se encola en la queue de la prioridad del <pcb> una tupla con el pid y el tiempo de mejora de prioridad
     def add(self, pcb):
         tupleWithPidAndWaitingTime = (pcb.get_pid(), self._accountant + self._aging)
         self._priority.get(pcb.get_priority()).add(tupleWithPidAndWaitingTime)
@@ -60,14 +60,14 @@ class SchedulerPriorityPreemptive(Scheduler):
                 res.append(q[0])
         return res
 
-    # Proposito: Retorna True
+    # Proposito: Retorna si es preemptivo
     def isPreemptive(self):
         return True
 
 
 
 class SchedulerPriorityNonPreemptive(SchedulerPriorityPreemptive):
-    # Proposito: Retorna False
+    # Proposito: Retorna si es preemptivo
     def isPreemptive(self):
         return False
 

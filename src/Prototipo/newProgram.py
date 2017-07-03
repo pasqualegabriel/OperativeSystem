@@ -4,11 +4,11 @@ from Prototipo.intManager import Irq
 
 class NewPrograms:
     def __init__(self, intManager):
-        self._intManager = intManager
-        self._nextPid = 0
-        self._programs = None
+        self._intManager  = intManager
+        self._nextPid     = 0
+        self._programs    = None
         self._proxProgram = None
-        self._proxStart = None
+        self._proxStart   = None
 
     def tick(self, count, log):
         if count == self._proxStart:

@@ -183,7 +183,7 @@ class MemoryManagerContinuousAssignment:
 
 
 class MemoryManagerContinuousAssignmentFirstFit(MemoryManagerContinuousAssignment):
-    # Proposito:Retorna un bloque
+    # Proposito: Retorna un bloque
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
         for block in self._freeBlocks:
@@ -192,7 +192,7 @@ class MemoryManagerContinuousAssignmentFirstFit(MemoryManagerContinuousAssignmen
 
 
 class MemoryManagerContinuousAssignmentBestFit(MemoryManagerContinuousAssignment):
-    # Proposito:retorna un bloque
+    # Proposito: Retorna un bloque
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
         blockBest = self._freeBlocks[0]
@@ -203,7 +203,7 @@ class MemoryManagerContinuousAssignmentBestFit(MemoryManagerContinuousAssignment
 
 
 class MemoryManagerContinuousAssignmentWorstFit(MemoryManagerContinuousAssignment):
-    # Proposito:retorna un bloque
+    # Proposito: Retorna un bloque
     # Precondicion: Hay al menos un bloque en self._bl
     def getBlock(self, sizeProgram):
         blockWort = self._freeBlocks[0]

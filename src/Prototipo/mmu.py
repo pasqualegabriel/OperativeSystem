@@ -50,10 +50,8 @@ class MmuPages:
         self._memory     = memory
         self._sizeFrame  = sizeFrame
         self._intManager = intmanager
-        #self._usedPages = None
 
-    #Proposito:Retorna una intruccion de la position sacada por bd memoria fisica<bdPhysicalMemory> + pageOffSet<pageOffSet>
-    #Precondicion:-
+    # Proposito: Retorna una intruccion de la position sacada por bd memoria fisica<bdPhysicalMemory> + pageOffSet<pageOffSet>
     def fetch(self, pc, log):
 
         pageNumber = divmod(pc, self._sizeFrame)[0]
@@ -65,12 +63,10 @@ class MmuPages:
             self._intManager.handle(Irq.PAGE_FAULT, page)
             log.printPageFalut()
         else:
-            #self._intmanager.handle(Irq.UPDATE_ReferenceBit,page)
             page.setReferenceBit(1)
 
         return self._memory.get(page.getBDPhysicalMemory() + pageOffset)
 
-    #Proposito:Setea el usedPage con page tablet <pageTablet>
-    #Precondicion:-
+    #Proposito: Setea el usedPage con page tablet <pageTablet>
     def setPosition(self, pcb):
         self._usedPages = pcb.getPageTable()

@@ -9,8 +9,8 @@ class Clock:
         self._newProgram        = newProgram
         self._estate            = True
 
-    #Proposito:Enciende el Reloj
-    #Precondicion:-
+    # Proposito: Enciende el Reloj
+    # Precondicion:-
     def runCpu(self, log):
         count = 0
         while self._estate:
@@ -25,7 +25,7 @@ class Clock:
             if count > 100:
                 self.offClock()
 
-    #Proposito:apaga el Reloj
-    #Precondicion:-
+    #Proposito: Apaga el Reloj
+    #Precondicion: -
     def offClock(self):
         self._estate = False
