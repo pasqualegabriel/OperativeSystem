@@ -50,12 +50,3 @@ class PageTable:
         return self._pages[page]
 
 
-    #def __repr__(self):
-        #return tabulate(enumerate(self._pages), tablefmt='psql')
-        #res = []
-        #pageNumber = 0
-        #for page in self._pages:
-        #    res.append(["Page: " + str(pageNumber) + "  {p}".format(p=page)])
-        #    pageNumber += 1
-        #return tabulate(res, tablefmt='psql')
-

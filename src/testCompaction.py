@@ -64,7 +64,7 @@ class MyTestCase(unittest.TestCase):
         # Se inicializa el intManager, memoryManager, y el Loader
         self._intmanager = IntManager()
         self._memoryManager = MemoryManagerContinuousAssignmentFirstFit(self._memory, self._pcbTable, self._intmanager, 2)
-        self._loader = LoaderBlocks(self._memory, Mmu(self._memory), self._disk, self._memoryManager, mock.Mock())
+        self._loader = LoaderBlocks(self._memory, Mmu(self._memory), self._disk, self._memoryManager)
         self._intmanager.setInterruptions(self._loader, mock.Mock(), mock.Mock(), self._pcbTable,
                                           mock.Mock(), self._memoryManager, mock.Mock())
 

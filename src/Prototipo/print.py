@@ -9,8 +9,8 @@ class Print:
     def __init__(self):
         logger = logging.getLogger()
         handler = logging.StreamHandler()
-        # tail -f /tmp/myapp.log
-        #handler = logging.FileHandler('C:\log\myapp.log')
+        #tail -f /tmp/myapp.log
+        #handler = logging.FileHandler('/tmp/myapp.log')
         formatter = logging.Formatter('%(message)s')
         handler.setFormatter(formatter)
         logger.addHandler(handler)

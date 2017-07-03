@@ -37,7 +37,7 @@ class MemoryFactory:
     def initializeMemoryManagerPaging(self):
         if self._idMemory == 2:
             self._idPageReplacementAlgorithm = int(input(
-                "Choise Page Replacement Algorithm:\n1 First In First Out\n2 Second Chance\n".format()))
+                "Choise Page Replacement Algorithm:\n1 First In First Out\n2 Second Chance\n3 Clock\n".format()))
             self._memoryManager = MemoryManagerPaging(self._memory, self._sizeFrame, self._pcbTable, self._swap,
                                                       self._pageReplacementAlgorithm.get(self._idPageReplacementAlgorithm))
 
@@ -53,7 +53,8 @@ class MemoryFactory:
 
     def initializePageReplacementAlgorithms(self):
         self._pageReplacementAlgorithm = {1: FirstInFirstOutPageReplacementAlgorithm(),
-                                          2: SecondChancePageReplacementAlgorithm()}
+                                          2: SecondChancePageReplacementAlgorithm(),
+                                          3: ClockPageReplacementAlgorithm()}
 
 
     def getMemoryManager(self):

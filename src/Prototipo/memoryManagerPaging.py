@@ -289,54 +289,46 @@ class ClockPageReplacementAlgorithm(PageReplacementAlgorithm):
         self._target                = -1
         self._sizeFrameClock        =  0
 
-
     def getSizeFrameClock(self):
         return self._sizeFrameClock
+
     def getTarget(self):
         return self._target
+
     def setTarget(self, target):
         self._target= target
-    # Proposito:
-    # Precondicion: -
+
     def add(self, oneFrame):
         oneFrame.setReferenceBit(1)
         self._sizeFrameClock += 1
         if self._target == -1:
-            self._target                = oneFrame
+            self._target = oneFrame
             self._target.updatePreviousFrameClock(self._target)
             self._target.updateNextFrameClock(self._target)
-
-
         else:
             oneFrame.updatePreviousFrameClock(self._target.getPreviousFrameClock())
             oneFrame.updateNextFrameClock(self._target)
             self._target.updatePreviousFrameClock(oneFrame)
 
-
-    # Proposito:
-    # Precondicion:-
     def getVictim(self):
-        while self._target.getReferenceBit()!=0:
+        while self._target.getReferenceBit() != 0:
             self._target.setReferenceBit(0)
-            self._target=self._target.getNextFrameClock()
+            self._target = self._target.getNextFrameClock()
 
-        victim=self._target
-        newTarget=self._target.getNextFrameClock()
+        victim = self._target
+        newTarget = self._target.getNextFrameClock()
         newTarget.updatePreviousFrameClock(self._target.getPreviousFrameClock())
-        self._target=newTarget
-        self._sizeFrameClock-=1
+        self._target = newTarget
+        self._sizeFrameClock -= 1
         return victim
 
     def searchFrame(self, bd):
-        searchFrame=self._target
+        searchFrame = self._target
         while searchFrame.getBD() != bd:
             searchFrame = searchFrame.getNextFrameClock()
 
         return searchFrame
 
-
-    #proposito:
-    #Precondicion:-
     def updateFrame(self, pcbTable):
         frameTravel = self._target
         for index in range(0, self.getSizeFrameClock()):
@@ -347,28 +339,16 @@ class ClockPageReplacementAlgorithm(PageReplacementAlgorithm):
                 page.setReferenceBit(0)
             frameTravel = frameTravel.getNextFrameClock()
 
-    # bdFrame     = self._target.getBD()
-    # frameTravel = self._target.getNextFrameClock()
-    # while frameTravel.getBD() != bdFrame:
-    #    pcb = pcbTable.lookUpPCB(frameTravel.getPId())
-    #    page = pcb.getPageTable().searchPage(frameTravel.getBD())
-    #    if page.getReferenceBit() == 1:
-    #        frameTravel.setReferenceBit(1)
-    #        page.setReferenceBit(0)
-    #    frameTravel=frameTravel.getNextFrameClock()
-
-
     def removeFrame(self, frame):
         self._sizeFrameClock -= 1
         nextFrame = frame.getNextFrameClock()
         previousFrame = frame.getPreviousFrameClock()
         nextFrame.updatePreviousFrameClock(previousFrame)
         previousFrame.updateNextFrameClock(nextFrame)
-        if frame == self.getTarget() and self.getSizeFrameClock()!=1:
+        if frame == self.getTarget() and self.getSizeFrameClock() != 0:
             self.setTarget(nextFrame)
         else:
             self.setTarget(-1)
-
 
     def getUsedFrames(self):
         collectionFrame=[]

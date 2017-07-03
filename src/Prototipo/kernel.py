@@ -72,7 +72,7 @@ class KernelSchedulerRoundRobinQuantum3MemoryPagingSize8SecondChancePageReplacem
         self._newPrograms = NewPrograms(self._intManager)
         self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
 
-class KernelSchedulerPriorityMemoryPagingSize8SecondChancePageReplacementAlgorithm(Kernel):
+class KernelSchedulerPriorityMemoryPagingSize8ClockPageReplacementAlgorithm(Kernel):
     def __init__(self, disco):
         self._disco = disco
         self._memory = Memory(8)
@@ -134,19 +134,46 @@ class KernelSchedulerSJFMemoryPagingSize8ClockPageReplacementAlgorithm(Kernel):
         self._newPrograms = NewPrograms(self._intManager)
         self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
 
+class KernelSchedulerFCFSMemoryPagingSize8FIFOPageReplacementAlgorithm(Kernel):
+    def __init__(self, disco):
+        self._disco = disco
+        self._memory = Memory(8)
+        self._pcbTable = PCBTable()
+        self._intManager = IntManager()
+        sizeFrame = 4
+        pageReplacementAlgorithm = FirstInFirstOutPageReplacementAlgorithm()
+        self._swap = Swap(sizeFrame)
+        self._memoryManager = MemoryManagerPaging(self._memory, sizeFrame, self._pcbTable, self._swap, pageReplacementAlgorithm)
+        self._mmu = MmuPages(self._memory, sizeFrame, self._intManager)
+        self._loader = LoaderPages(self._memory, self._mmu, self._disco, self._memoryManager, self._swap)
+        self._memoryManager.setLoader(self._loader)  # Es para no hacer la interrupcion swapIN (el memoryManager y el loader se conocen mutuamente)
+        self._scheduler = SchedulerFCFS()
+        self._timer = None
+        self._cpu = Cpu(self._mmu, self._intManager)
+        self._dispatcher = Dispatcher(self._mmu, self._cpu)
+        self._deviceManager = DeviceManager(self._intManager)
+        self._intManager.setInterruptions(self._loader, self._dispatcher, self._scheduler, self._pcbTable, self._deviceManager, self._memoryManager, self._timer)
+        self._newPrograms = NewPrograms(self._intManager)
+        self._clock = Clock(self._cpu, self._deviceManager, self._timer, self._newPrograms)
 
 class KernelFactoty:
     def __init__(self, disco):
-        self._idKernel = int(input("Choise Kernel: \n1 Memory: Paging, Second Chance Page Replacement Algorithm, SizeMemory =  8, Scheduler: Priority\n2 Memory: Paging, Second Chance Page Replacement Algorithm, SizeMemory =  8, Scheduler: Round Robin, Quantum = 3\n3 Memory: Continuous Assignment Best Fit,                   SizeMemory = 32, Scheduler: Shortest Job First\n 4 Memory: Paging, Clock Page Replacement Algorithm, SizeMemory =  8, Scheduler:  Shortest Job First \n5 Configure\n"))
-        if self._idKernel == 5:
+        self._idKernel = int(input("Choise Kernel: \n1 Memory: Continuous Assignment Best Fit,                    SizeMemory = 32, Scheduler: Shortest Job First\n"
+                                   "2 Memory: Paging, Page Replacement Algorithm: FIFO,          SizeMemory =  8, Scheduler: First Come First Served\n"
+                                   "3 Memory: Paging, Page Replacement Algorithm: Second Chance, SizeMemory =  8, Scheduler: Round Robin, Quantum = 3\n"
+                                   "4 Memory: Paging, Page Replacement Algorithm: Clock,         SizeMemory =  8, Scheduler: Priority\n"
+                                   "5 Memory: Paging, Page Replacement Algorithm: Clock,         SizeMemory =  8, Scheduler: Shortest Job First \n"
+                                   "6 Configure\n"))
+        if self._idKernel == 6:
             self._kernelConfiguration = Kernel(disco)
         else:
             self._kernelConfiguration = None
-        self._kernel = {1: KernelSchedulerPriorityMemoryPagingSize8SecondChancePageReplacementAlgorithm(disco),
-                        2: KernelSchedulerRoundRobinQuantum3MemoryPagingSize8SecondChancePageReplacementAlgorithm(disco),
-                        3: KernelSchedulerSJFMemoryContinuousAssignmentBestFitSize32(disco),
-                        4: KernelSchedulerSJFMemoryPagingSize8ClockPageReplacementAlgorithm(disco),
-                        5: self._kernelConfiguration}
+        self._kernel = {1: KernelSchedulerSJFMemoryContinuousAssignmentBestFitSize32(disco),
+                        2: KernelSchedulerFCFSMemoryPagingSize8FIFOPageReplacementAlgorithm(disco),
+                        3: KernelSchedulerRoundRobinQuantum3MemoryPagingSize8SecondChancePageReplacementAlgorithm(disco),
+                        4: KernelSchedulerPriorityMemoryPagingSize8ClockPageReplacementAlgorithm(disco),
+                        5: KernelSchedulerSJFMemoryPagingSize8ClockPageReplacementAlgorithm(disco),
+                        6: self._kernelConfiguration}
 
     def initialize(self):
         return self._kernel.get(self._idKernel)

@@ -47,10 +47,11 @@ class tester(unittest.TestCase):
 
         self._algorithmClock = ClockPageReplacementAlgorithm()
 
-    def test000v2SeAgregaUnFrameAAlAlgoritmoReloj(self):
+    def test000SeAgregaUnFrameAAlAlgoritmoReloj(self):
         self._algorithmClock.add(self._frame0)
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
-    def test001v2SeAgregaDosElementosYSePreguntaDondeApuntaElSegundoElemento(self):
+
+    def test001SeAgregaDosElementosYSePreguntaDondeApuntaElSegundoElemento(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
 
@@ -58,21 +59,21 @@ class tester(unittest.TestCase):
         self.assertEqual(self._frame0, self._frame1.getPreviousFrameClock())
         self.assertEqual(2, self._algorithmClock.getSizeFrameClock())
 
-    def test001V2SeAgreganDosElemntosYLuegoSeBorraUnoQuedandoSOloUNo(self):
+    def test002SeAgreganDosElemntosYLuegoSeBorraUnoQuedandoSOloUNo(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
         self._algorithmClock.removeFrame(self._frame0)
 
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
 
-    def test002v2SeAgreganDosElementosYLuegoDeBorrarUnoQuedaComoTargetElFrame1(self):
+    def test003SeAgreganDosElementosYLuegoDeBorrarUnoQuedaComoTargetElFrame1(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
         self._algorithmClock.removeFrame(self._frame0)
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
         self.assertEqual(self._frame1, self._algorithmClock.getTarget())
 
-    def test003v2DespuesDeAgregarDosElementoElTargetQuedoEnMenosUno(self):
+    def test004DespuesDeAgregarDosElementoElTargetQuedoEnMenosUno(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
         self._algorithmClock.removeFrame(self._frame0)
@@ -81,18 +82,19 @@ class tester(unittest.TestCase):
         self.assertEqual(-1, self._algorithmClock.getTarget())
 
 
-    def test004v2EntreDosMarcosVictimasSeleccionaAlMarcoUnoPorTenerBitReferenciaEn0(self):
+    def test005EntreDosMarcosVictimasSeleccionaAlMarcoUnoPorTenerBitReferenciaEn0(self):
         self._algorithmClock.add(self._frame0)
         self._frame0.setReferenceBit(1)
 
         self._algorithmClock.add(self._frame1)
         self._frame1.setReferenceBit(0)
+
         victim=self._algorithmClock.getVictim()
 
-        self.assertEqual(self._frame1,victim)
+        self.assertEqual(self._frame1, victim)
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
 
-    def test005v2EntreDosMarcosVictimasSeleccionaAlMarcoCeroPorqueLosDosFrameTenianBitReferenciaEn1YAlDarLaVueltaSeleccionaALcero(self):
+    def test006EntreDosMarcosVictimasSeleccionaAlMarcoCeroPorqueLosDosFrameTenianBitReferenciaEn1YAlDarLaVueltaSeleccionaALcero(self):
         self._algorithmClock.add(self._frame0)
         self._frame0.setReferenceBit(1)
 
@@ -102,7 +104,7 @@ class tester(unittest.TestCase):
         self.assertEqual(self._frame0,victim)
         self.assertEqual(1, self._algorithmClock.getSizeFrameClock())
 
-    def test0006v2ElAlgoritmoRetornaUnaListaDeLosDosFrameQueFormanPArteDelReloj(self):
+    def test007ElAlgoritmoRetornaUnaListaDeLosDosFrameQueFormanPArteDelReloj(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
 
@@ -110,20 +112,18 @@ class tester(unittest.TestCase):
         listTest.append(self._frame0)
         listTest.append(self._frame1)
 
+        self.assertEqual(2, len(self._algorithmClock.getUsedFrames()))
+        self.assertListEqual(listTest, self._algorithmClock.getUsedFrames())
 
-        self.assertEqual(2,len(self._algorithmClock.getUsedFrames()))
-        self.assertListEqual(listTest,self._algorithmClock.getUsedFrames())
-
-    def test0007v2ElAlgoritmoSabeBuscarElFrameConBD1(self):
+    def test008ElAlgoritmoSabeBuscarElFrameConBD1(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
 
-
-        self.assertEqual(self._frame1,self._algorithmClock.searchFrame(1))
+        self.assertEqual(self._frame0, self._algorithmClock.searchFrame(0))
         self.assertEqual(2, self._algorithmClock.getSizeFrameClock())
         self.assertEqual(self._frame0, self._algorithmClock.getTarget())
 
-    def test0008V2ElAlgoritmoTenia2FrameConBitDeReferenciaEn0DespuesDelUpdateFrameQuedaronen1SuBitReferencia(self):
+    def test009ElAlgoritmoTenia2FrameConBitDeReferenciaEn0DespuesDelUpdateFrameQuedaronen1SuBitReferencia(self):
         self._algorithmClock.add(self._frame0)
         self._algorithmClock.add(self._frame1)
         self._frame0.setReferenceBit(0)
@@ -131,15 +131,11 @@ class tester(unittest.TestCase):
         self._pageTable0.getPage(0).setReferenceBit(1)
         self._pageTable0.getPage(1).setReferenceBit(1)
 
-
         self._algorithmClock.updateFrame(self._pcbTable)
         self.assertEqual(1,self._frame0.getReferenceBit())
         self.assertEqual(1,self._frame1.getReferenceBit())
 
-
-
-
-    def test0001SecondChancePageReplacementAlgorithmWithCounterWithThreeFrames(self):
+    def test010ClockPageReplacementAlgorithmWithCounterWithThreeFrames(self):
         # mismo ejemplo del pdf
         self._algorithmClock.add(self._frame5)
         self._algorithmClock.add(self._frame0)
