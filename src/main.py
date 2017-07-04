@@ -31,7 +31,6 @@ if __name__ == '__main__':
     kernel.initialize(programs, log)
 
 
-
     '''
     #ejemplo: compactacion con scheduler sjf preemptive, tamanio de la memoria = 32
 
@@ -57,3 +56,4 @@ if __name__ == '__main__':
     kernel = kernelFactoty.initialize()
     kernel.initialize(programs, log)
     '''
+
