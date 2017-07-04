@@ -2,14 +2,14 @@
 import sys
 
 class calculator:
-    #La calculadora solo acepta numeros enteros
+    # La calculadora solo acepta numeros enteros
     def __init__(self, primerNumero, operador, segundoNumero):
         self.firstNumber=int(primerNumero)
         self.secondNumber=int(segundoNumero)
         self.operator=operador
         self.validOperators=["+","-","*","/"]
 
-    #Retorna true si es una operacion valida, sino false
+    # Retorna true si es una operacion valida, sino false
     def isValidOperation(self):
         for i in self.validOperators:
             if i==self.operator:
